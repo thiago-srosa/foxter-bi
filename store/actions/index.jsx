@@ -1,0 +1,7 @@
+// *** USER ***
+export const SET_USER_AUTHENTICATION = "SET_USER_AUTHENTICATION";
+export const SET_USER_PHOTO_URL = "SET_PHOTO_URL";
+export const USER_RESET = "USER_RESET";
+export const SET_USER_IS_ADMIN = "SET_USER_IS_ADMIN";
+
+export const SET_GLOBAL_TITLE = "SET_GLOBAL_TITLE";
