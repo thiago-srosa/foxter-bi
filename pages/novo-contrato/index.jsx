@@ -1,4 +1,4 @@
-import { useStyles } from './styles'
+import useStyles from './styles'
 import TextField from '@material-ui/core/TextField';
 
 import { useState } from 'react';
@@ -41,7 +41,7 @@ const solicitarContrato = () => {
         <Head>
           <title>Novo contrato</title>
         </Head>
-        
+
 
         <button onClick={() => clickaction(inputNomeComprador, inputCPFComprador)} >CLICK MEx</button>
         <button onClick={() => createGroceryList()} >CLICK MEx</button>
