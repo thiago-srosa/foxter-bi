@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
       },
       [theme.breakpoints.between('md', 'xl')]: {
         width: '50%',
-      },      
+      },
     },
   },
   textField: {
@@ -28,3 +28,5 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
 }));
+
+export default useStyles;
