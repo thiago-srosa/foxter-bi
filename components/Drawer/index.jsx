@@ -19,6 +19,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Link from 'next/link'
 
+import Container from '@material-ui/core/Container';
+
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import GoogleButton from 'react-google-button'
@@ -155,7 +157,7 @@ function CustomDrawer(props) {
             </StyledA>
           </Link>
 
-          <Link href="/solicitar-contrato" passHref >
+          <Link href="/novo-contrato" passHref >
             <StyledA >
               <ListItem >
                 <ListItemIcon>
@@ -165,6 +167,18 @@ function CustomDrawer(props) {
               </ListItem>
             </StyledA>
           </Link>
+
+          <Link href="/novo-resumo-documentacao" passHref >
+            <StyledA >
+              <ListItem >
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Novo Resumo" />
+              </ListItem>
+            </StyledA>
+          </Link>
+
         </List>
       </Drawer>
 
@@ -174,7 +188,9 @@ function CustomDrawer(props) {
         })}
       >
         <div className={classes.drawerHeader} />
-        {props.children}
+        <Container maxWidth="lg">
+          {props.children}
+        </Container>
       </main>
     </div>
 

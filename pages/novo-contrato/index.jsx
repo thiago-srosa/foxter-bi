@@ -1,31 +1,52 @@
-import { useState } from 'react';
-import { Auth } from '../../components/Auth'
+import { useStyles } from './styles'
+import TextField from '@material-ui/core/TextField';
 
-import firebase from 'firebase/app';
+import { useState } from 'react';
+import { Auth } from '../../components/Auth';
+
+import SimpleModal from './modalNovoClienteCPF';
+
 import 'firebase/auth';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 import Head from 'next/head'
 
+const db = firebase.firestore();
+
+const createGroceryList = () => {
+  return db.collection('contratos')
+    .add({
+      created: firebase.firestore.FieldValue.serverTimestamp(),
+      email: firebase.auth().currentUser.email,
+      user: firebase.auth().currentUser.displayName,
+    });
+};
+
 const solicitarContrato = () => {
+
+  const classes = useStyles();
+
   Auth();
 
   var content = null;
 
-  const [inputNomeComprador, setInputNomeComprador] = useState("");
-  const [inputCPFComprador, setInputCPFComprador] = useState("");
+
 
   const [compradores, setCompradores] = useState([]);
 
   if (firebase.auth().currentUser !== null) {
     content = (
       <>
-      <Head>
-        <title>My page title</title>        
-      </Head>
-        <input value={inputNomeComprador} onChange={e => setInputNomeComprador(e.target.value)} type="text" />
-        <input value={inputCPFComprador} onChange={e => setInputCPFComprador(e.target.value)} type="text" />
+        <Head>
+          <title>Novo contrato</title>
+        </Head>
+        
 
         <button onClick={() => clickaction(inputNomeComprador, inputCPFComprador)} >CLICK MEx</button>
+        <button onClick={() => createGroceryList()} >CLICK MEx</button>
+        <SimpleModal />
+
 
         { compradores.map((item, index) => (<p key={index}>Nome: {item.nomecomprador} - CPF: {item.cpfcomprador}</p>))}
       </>

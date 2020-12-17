@@ -4,7 +4,6 @@ import { storeWrapper } from "../store";
 import CustomDrawer from '../components/Drawer/index'
 
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
 
 if (!firebase.apps.length) {
