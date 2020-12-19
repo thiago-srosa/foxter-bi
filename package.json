@@ -10,10 +10,12 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "cpf-cnpj-validator": "^1.0.3",
     "firebase": "^8.1.2",
     "next": "10.0.3",
     "next-redux-wrapper": "^6.0.2",
-    "react": "17.0.1",
+    "react": "^17.0.1",
     "react-dom": "17.0.1",
     "react-firebase-hooks": "^2.2.0",
     "react-google-button": "^0.7.1",

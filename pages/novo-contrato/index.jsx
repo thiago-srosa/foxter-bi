@@ -1,13 +1,12 @@
-import useStyles from '../../components/test/styles'
-
-import { useState } from 'react';
 import { Auth } from '../../components/Auth';
 
-import SimpleModal from '../../components/test/modalNovoClienteCPF';
+//Import COMPONENTS
+import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
+import NovoClientePF from '../../components/novo-contrato/ModalNovoClientePF/modalNovoClientePF';
 
 import 'firebase/auth';
-import firebase from 'firebase/app';
 import 'firebase/firestore';
+import firebase from 'firebase/app';
 
 import Head from 'next/head'
 
@@ -38,15 +37,9 @@ const createGroceryList = () => {
 
 const solicitarContrato = () => {
 
-  const classes = useStyles();
-
   Auth();
 
   var content = null;
-
-
-
-  const [compradores, setCompradores] = useState([]);
 
   if (firebase.auth().currentUser !== null) {
     content = (
@@ -55,26 +48,15 @@ const solicitarContrato = () => {
           <title>Novo contrato</title>
         </Head>
 
+        <NovoClientePF />
 
-        <button onClick={() => clickaction(inputNomeComprador, inputCPFComprador)} >CLICK MEx</button>
-        <button onClick={() => createGroceryList()} >CLICK MEx</button>
-        <SimpleModal />
+        <TabelaVendedores />
 
-
-        { compradores.map((item, index) => (<p key={index}>Nome: {item.nomecomprador} - CPF: {item.cpfcomprador}</p>))}
       </>
     )
   }
 
-  const clickaction = () => {
-    setCompradores([
-      ...compradores,
-      {
-        nomecomprador: inputNomeComprador,
-        cpfcomprador: inputCPFComprador,
-      }
-    ])
-  }
+
 
   return (
     <>

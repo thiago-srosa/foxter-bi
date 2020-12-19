@@ -21,7 +21,8 @@ import Link from 'next/link'
 
 import Container from '@material-ui/core/Container';
 
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+//Import Material UI
+import Button from '@material-ui/core/Button';
 
 import GoogleButton from 'react-google-button'
 
@@ -132,9 +133,10 @@ function CustomDrawer(props) {
         {userAuthentication ?
           <>
             <CustomAvatar />
-            <StyledLogoutButton>
-              <button onClick={logout}>Sair</button>
-            </StyledLogoutButton>
+            <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{width: '200px', placeSelf: 'center'}}>
+              Sair
+             </Button>
+
           </>
           : <StyledGoogleLoginContainer>
             <GoogleButton
