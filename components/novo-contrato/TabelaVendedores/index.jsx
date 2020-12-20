@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -13,6 +13,9 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+//Import React Redux
+import { useSelector, useDispatch } from "react-redux";
+
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -20,17 +23,23 @@ const useRowStyles = makeStyles({
     },
   },
   column: {
-    width: '200px',
+    width: '170px',
     textAlign: 'right',
   }
 });
 
-function Row(props) {
-  const [open, setOpen] = React.useState(false);
+function unique(index) {
+  const uniqueID = (Math.random() + index * Math.random() + index)
+  return uniqueID;
+}
+
+
+function CollapseableRow({ vendedor, index }) {
+  const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
   return (
-    <React.Fragment>
+    <>
       <TableRow className={classes.root}>
         <TableCell style={{ width: '2rem' }}>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -38,32 +47,36 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {'teste'}
+          {vendedor.novoVendedorNomeCompleto}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow >
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
+
               <Typography variant="h6" gutterBottom component="div">
-                Dados do cliente
-              </Typography>
+                Dados do vendedor
+                  </Typography>
+
               <Table size="small" aria-label="purchases">
-                <TableBody>
+                <TableBody >
+
                   <TableRow >
                     <TableCell className={classes.column} component="th" scope="row">
                       {'CPF:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorCPF}
                     </TableCell>
                   </TableRow>
+
                   <TableRow >
                     <TableCell className={classes.column} component="th" scope="row">
                       {'RG:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorRG}
                     </TableCell>
                   </TableRow>
 
@@ -72,16 +85,16 @@ function Row(props) {
                       {'Email:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorEmail}
                     </TableCell>
                   </TableRow>
 
-                  <TableRow >
+                  <TableRow>
                     <TableCell className={classes.column} component="th" scope="row">
                       {'Telefone:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorTelefone}
                     </TableCell>
                   </TableRow>
 
@@ -90,7 +103,7 @@ function Row(props) {
                       {'Profissão:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorProfissao}
                     </TableCell>
                   </TableRow>
 
@@ -99,16 +112,16 @@ function Row(props) {
                       {'Estado civil:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorEstadoCivil}
                     </TableCell>
                   </TableRow>
 
-                  <TableRow >
+                  <TableRow>
                     <TableCell className={classes.column} component="th" scope="row">
                       {'Regime de bens:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorRegimedeBens}
                     </TableCell>
                   </TableRow>
 
@@ -117,16 +130,16 @@ function Row(props) {
                       {'Endereço:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorEndereco}
                     </TableCell>
                   </TableRow>
 
-                  <TableRow >
+                  <TableRow>
                     <TableCell className={classes.column} component="th" scope="row">
                       {'Bairro:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorBairro}
                     </TableCell>
                   </TableRow>
 
@@ -135,7 +148,7 @@ function Row(props) {
                       {'Cidade:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorMunicipio}
                     </TableCell>
                   </TableRow>
 
@@ -144,7 +157,7 @@ function Row(props) {
                       {'CEP:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorCEP}
                     </TableCell>
                   </TableRow>
 
@@ -153,7 +166,7 @@ function Row(props) {
                       {'Observações:'}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {'teste'}
+                      {vendedor.novoVendedorObservacao}
                     </TableCell>
                   </TableRow>
 
@@ -163,7 +176,22 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
+  )
+}
+
+function Row() {
+
+  const { novoContratoVendedores } = useSelector((state) => state.novoContrato);
+
+  console.log(novoContratoVendedores)
+
+  return (
+    <TableBody>
+      {novoContratoVendedores.map((vendedor, index) => (
+        <CollapseableRow key={index} vendedor={vendedor} index={index} />
+      ))}
+    </TableBody>
   );
 }
 
@@ -171,9 +199,9 @@ export default function CollapsibleTable() {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
-        <TableBody>
-          <Row />
-        </TableBody>
+
+        <Row />
+
       </Table>
     </TableContainer>
   );

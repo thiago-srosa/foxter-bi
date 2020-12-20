@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import globalReducer from "./global";
 import userReducer from "./user";
-import novoClientePFReducer from "./novoClientePF";
+import novoContratoReducer from "./novoContrato";
+import novoVendedorPFReducer from "./novoVendedorPF";
 
 export default combineReducers({
   global: globalReducer,
   user: userReducer,  
-  novoClientePF: novoClientePFReducer,
+  novoContrato: novoContratoReducer, 
+  novoVendedorPF: novoVendedorPFReducer,
 });

@@ -2,7 +2,7 @@ import { Auth } from '../../components/Auth';
 
 //Import COMPONENTS
 import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
-import NovoClientePF from '../../components/novo-contrato/ModalNovoClientePF/modalNovoClientePF';
+import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
 
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -48,7 +48,7 @@ const solicitarContrato = () => {
           <title>Novo contrato</title>
         </Head>
 
-        <NovoClientePF />
+        <NovoVendedorPF />
 
         <TabelaVendedores />
 
