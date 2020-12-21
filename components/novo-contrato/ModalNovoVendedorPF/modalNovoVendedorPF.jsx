@@ -84,6 +84,16 @@ const NovoVendedorPF = () => {
     { title: 'Separação total de bens' },
   ]
 
+  function handleClickChangeEstadoCivil(newValue) {
+    newValue !== null ? dispatch(setNovoVendedorEstadoCivil(newValue.title)) : dispatch(setNovoVendedorEstadoCivil(null))
+  }
+
+  function handleClickChangeRegimeBens(newValue) {
+    newValue !== null ? dispatch(setNovoVendedorRegimeBens(newValue.title)) : dispatch(setNovoVendedorRegimeBens(null))
+  }
+
+
+
   function handleClickAddVendedorPF() {
     dispatch(addNovoContratoVendedores({
       novoVendedorNomeCompleto: novoVendedorNomeCompleto,
@@ -114,6 +124,7 @@ const NovoVendedorPF = () => {
           label="Nome completo do vendedor"
           id="nomeCompleto"
           fullWidth
+          required
           value={novoVendedorNomeCompleto}
           onChange={e => dispatch(setNovoVendedorNomeCompleto(e.target.value))}
         />
@@ -123,6 +134,7 @@ const NovoVendedorPF = () => {
           id="CPFVendedor"
           label="CPF do vendedor"
           fullWidth
+          required
           error={novoVendedorCPF == "" ? false : (cpf.isValid(novoVendedorCPF) ? false : true)}
           value={novoVendedorCPF}
           helperText={novoVendedorCPF == "" ? false : (cpf.isValid(novoVendedorCPF) ? null : "CPF Inválido")}
@@ -134,6 +146,7 @@ const NovoVendedorPF = () => {
           id="RGVendedor"
           label="RG do vendedor"
           fullWidth
+          required
           value={novoVendedorRG}
           onChange={e => dispatch(setNovoVendedorRG(e.target.value))}
         />
@@ -143,6 +156,7 @@ const NovoVendedorPF = () => {
           id="EmailVendedor"
           label="Email"
           fullWidth
+          required
           value={novoVendedorEmail}
           onChange={e => dispatch(setNovoVendedorEmail(e.target.value))}
         />
@@ -160,6 +174,7 @@ const NovoVendedorPF = () => {
           className={classes.textField}
           id="ProfissaoVendedor"
           label="Profissão"
+          required
           fullWidth
           value={novoVendedorProfissao}
           onChange={e => dispatch(setNovoVendedorProfissao(e.target.value))}
@@ -171,40 +186,44 @@ const NovoVendedorPF = () => {
             fullWidth
             options={estadoCivil}
             getOptionLabel={option => typeof option === 'string' ? option : option.title}
-            getOptionSelected={(option, value) => option.title === value.title}
+            getOptionSelected={(option, value) => option.title === value}
             value={novoVendedorEstadoCivil}
-            onChange={(event, newValue) => dispatch(setNovoVendedorEstadoCivil(newValue))}
+            onChange={(event, newValue) => handleClickChangeEstadoCivil(newValue)}
             renderInput={(params) =>
               <TextField
                 {...params}
+                required
                 autoComplete="off"
                 label="Estado Civil"
               />}
           />
-
-          <Autocomplete
-            className={classes.inputModal50percentRIGHT}
-            fullWidth
-            defaultValue=""
-            options={regimeBens}
-            getOptionLabel={option => typeof option === 'string' ? option : option.title}
-            value={novoVendedorRegimedeBens}
-            getOptionSelected={(option, value) => option.title === value.title}
-            onChange={(event, newValue) => dispatch(setNovoVendedorRegimeBens(newValue))}
-            renderInput={(params) =>
-              <TextField
-                {...params}
-                autoComplete="off"
-                label="Regime de Bens"
-              />}
-          />
+          {novoVendedorEstadoCivil === null || novoVendedorEstadoCivil === "Solteiro" ? null :
+            <Autocomplete
+              className={classes.inputModal50percentRIGHT}
+              fullWidth
+              defaultValue=""
+              options={regimeBens}
+              getOptionLabel={option => typeof option === 'string' ? option : option.title}
+              value={novoVendedorRegimedeBens}
+              getOptionSelected={(option, value) => option.title === value}
+              onChange={(event, newValue) => handleClickChangeRegimeBens(newValue)}
+              renderInput={(params) =>
+                <TextField
+                  {...params}
+                  required
+                  autoComplete="off"
+                  label="Regime de Bens"
+                />}
+            />}
         </AutoCompleteContainer>
+
 
         <TextField
           className={classes.textField}
           id="EnderecoVendedor"
           label="Endereço onde o vendedor reside"
           fullWidth
+          required
           value={novoVendedorEndereco}
           onChange={e => dispatch(setNovoVendedorEndereco(e.target.value))}
         />
@@ -214,6 +233,7 @@ const NovoVendedorPF = () => {
           id="BairroVendedor"
           label="Bairro da residência do vendedor"
           fullWidth
+          required
           value={novoVendedorBairro}
           onChange={e => dispatch(setNovoVendedorBairro(e.target.value))}
         />
@@ -223,6 +243,7 @@ const NovoVendedorPF = () => {
           id="MunicipioVendedor"
           label="Município da residência do vendedor"
           fullWidth
+          required
           value={novoVendedorMunicipio}
           onChange={e => dispatch(setNovoVendedorMunicipio(e.target.value))}
         />
@@ -232,6 +253,7 @@ const NovoVendedorPF = () => {
           id="CEPVendedor"
           label="CEP da residência do vendedor"
           fullWidth
+          required
           value={novoVendedorCEP}
           onChange={e => dispatch(setNovoVendedorCEP(e.target.value))}
         />
