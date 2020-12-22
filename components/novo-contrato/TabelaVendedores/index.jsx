@@ -1,181 +1,155 @@
 import React, { useState } from 'react';
+
+//Import Material UI
+import { FormControl, InputLabel, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import TextField from '@material-ui/core/TextField';
 
 //Import React Redux
 import { useSelector, useDispatch } from "react-redux";
 
-const useRowStyles = makeStyles({
-  root: {
-    '& > *': {
-      borderBottom: 'unset',
-    },
+const useStyles = makeStyles({
+  inputLabel: {
+    fontSize: '12px',
+    marginTop: '8px',
   },
-  column: {
-    width: '170px',
-    textAlign: 'right',
+  input: {
+
   }
 });
-
-function unique(index) {
-  const uniqueID = (Math.random() + index * Math.random() + index)
-  return uniqueID;
-}
 
 
 function CollapseableRow({ vendedor, index }) {
   const [open, setOpen] = useState(false);
-  const classes = useRowStyles();
+
+  const classes = useStyles();
+
+  function handleClickCollapse() {
+    setOpen(!open)
+  }
 
   return (
     <>
-      <TableRow className={classes.root}>
-        <TableCell style={{ width: '2rem' }}>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {vendedor.novoVendedorNomeCompleto}
-        </TableCell>
-      </TableRow>
-      <TableRow >
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
 
-              <Typography variant="h6" gutterBottom component="div">
-                Dados do vendedor
-                  </Typography>
+      <div>
+        <IconButton aria-label="expand row" size="small" onClick={() => handleClickCollapse()}>
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+        {vendedor.novoVendedorNomeCompleto}
+      </div>
 
-              <Table size="small" aria-label="purchases">
-                <TableBody >
+      <Collapse in={open} timeout="auto" unmountOnExit>
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'CPF:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorCPF}
-                    </TableCell>
-                  </TableRow>
+        <form noValidate autoComplete="off">
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'RG:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorRG}
-                    </TableCell>
-                  </TableRow>
+          <Typography variant="h6" gutterBottom component="div">
+            Dados do vendedor
+          </Typography>
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Email:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorEmail}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>CPF</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorCPF}
+          />
 
-                  <TableRow>
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Telefone:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorTelefone}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>RG</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorRG}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Profissão:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorProfissao}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>E-mail</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorEmail}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Estado civil:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorEstadoCivil}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Telefone</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorTelefone}
+          />
 
-                  <TableRow>
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Regime de bens:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorRegimedeBens}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Profissão</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorProfissao}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Endereço:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorEndereco}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Estado civil</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorEstadoCivil}
+          />
 
-                  <TableRow>
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Bairro:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorBairro}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Regime de bens</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorRegimeBens}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Cidade:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorMunicipio}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Endereço</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorEndereco}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'CEP:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorCEP}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Bairro</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorBairro}
+          />
 
-                  <TableRow >
-                    <TableCell className={classes.column} component="th" scope="row">
-                      {'Observações:'}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {vendedor.novoVendedorObservacao}
-                    </TableCell>
-                  </TableRow>
+          <InputLabel className={classes.inputLabel}>Cidade</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorMunicipio}
+          />
 
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+          <InputLabel className={classes.inputLabel}>CEP</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorCEP}
+          />
+
+          <InputLabel className={classes.inputLabel}>Observações</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorObservacao}
+          />
+
+        </form>
+      </Collapse>
+
     </>
   )
 }
@@ -187,22 +161,18 @@ function Row() {
   console.log(novoContratoVendedores)
 
   return (
-    <TableBody>
-      {novoContratoVendedores.map((vendedor, index) => (
-        <CollapseableRow key={index} vendedor={vendedor} index={index} />
-      ))}
-    </TableBody>
+    <>
+      {
+        novoContratoVendedores.map((vendedor, index) => (
+          <CollapseableRow key={index} vendedor={vendedor} index={index} />
+        ))
+      }
+    </>
   );
 }
 
 export default function CollapsibleTable() {
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-
-        <Row />
-
-      </Table>
-    </TableContainer>
+    <Row />
   );
 }

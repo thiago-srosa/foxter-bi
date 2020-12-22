@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //CPF Validator
 import { cpf } from 'cpf-cnpj-validator';
+
+//EMAIL Validor
+import * as EmailValidator from 'email-validator';
+
+//CEP Validator
+import isValidCep from '@brazilian-utils/is-valid-cep';
 
 //Import Material UI
 import Modal from '@material-ui/core/Modal';
@@ -39,7 +45,6 @@ import {
   addNovoContratoVendedores,
 } from "../../../store/actions/novoContrato";
 
-
 const NovoVendedorPF = () => {
   const dispatch = useDispatch();
   const {
@@ -50,7 +55,7 @@ const NovoVendedorPF = () => {
     novoVendedorTelefone,
     novoVendedorProfissao,
     novoVendedorEstadoCivil,
-    novoVendedorRegimedeBens,
+    novoVendedorRegimeBens,
     novoVendedorEndereco,
     novoVendedorBairro,
     novoVendedorMunicipio,
@@ -60,6 +65,7 @@ const NovoVendedorPF = () => {
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [disabledButton, setdisabledButton] = useState(true);
 
   const handleOpen = () => {
     setOpen(true);
@@ -70,11 +76,11 @@ const NovoVendedorPF = () => {
   };
 
   const estadoCivil = [
-    { title: 'Solteiro' },
-    { title: 'Casado' },
-    { title: 'Separado' },
-    { title: 'Divorciado' },
-    { title: 'Viúvo' },
+    { title: 'Solteiro(a)' },
+    { title: 'Casado(a)' },
+    { title: 'Separado(a)' },
+    { title: 'Divorciado(a)' },
+    { title: 'Viúvo(a)' },
     { title: 'União Estável' },
   ]
 
@@ -92,7 +98,43 @@ const NovoVendedorPF = () => {
     newValue !== null ? dispatch(setNovoVendedorRegimeBens(newValue.title)) : dispatch(setNovoVendedorRegimeBens(null))
   }
 
+  useEffect(() => {
+    console.log(novoVendedorNomeCompleto)
+    if (
+      novoVendedorNomeCompleto &&
+      cpf.isValid(novoVendedorCPF) &&
+      novoVendedorRG &&
+      EmailValidator.validate(novoVendedorEmail) &&
+      novoVendedorProfissao &&
+      novoVendedorEstadoCivil &&
+      ((novoVendedorEstadoCivil === "Solteiro(a)" ? true : novoVendedorRegimeBens) ||
+        (novoVendedorEstadoCivil === "Viúvo(a)" ? true : novoVendedorRegimeBens) ||
+        (novoVendedorEstadoCivil === "Divorciado(a)" ? true : novoVendedorRegimeBens) ||
+        (novoVendedorEstadoCivil === "Separado(a)" ? true : novoVendedorRegimeBens)) &&
+      novoVendedorEndereco &&
+      novoVendedorBairro &&
+      novoVendedorMunicipio &&
+      isValidCep(novoVendedorCEP)
 
+    ) {
+      setdisabledButton(false)
+    }
+    else {
+      setdisabledButton(true)
+    }
+  }, [
+    novoVendedorNomeCompleto,
+    novoVendedorCPF,
+    novoVendedorRG,
+    novoVendedorEmail,
+    novoVendedorProfissao,
+    novoVendedorEstadoCivil,
+    novoVendedorRegimeBens,
+    novoVendedorEndereco,
+    novoVendedorBairro,
+    novoVendedorMunicipio,
+    novoVendedorCEP
+  ])
 
   function handleClickAddVendedorPF() {
     dispatch(addNovoContratoVendedores({
@@ -103,7 +145,7 @@ const NovoVendedorPF = () => {
       novoVendedorTelefone: novoVendedorTelefone,
       novoVendedorProfissao: novoVendedorProfissao,
       novoVendedorEstadoCivil: novoVendedorEstadoCivil,
-      novoVendedorRegimedeBens: novoVendedorRegimedeBens,
+      novoVendedorRegimeBens: novoVendedorRegimeBens,
       novoVendedorEndereco: novoVendedorEndereco,
       novoVendedorBairro: novoVendedorBairro,
       novoVendedorMunicipio: novoVendedorMunicipio,
@@ -112,6 +154,7 @@ const NovoVendedorPF = () => {
     }))
 
     dispatch(resetNovoVendedor())
+    handleClose();
   }
 
   const modalBody = (
@@ -154,7 +197,9 @@ const NovoVendedorPF = () => {
         <TextField
           className={classes.inputModal50percentLEFT}
           id="EmailVendedor"
-          label="Email"
+          label="E-mail"
+          error={novoVendedorEmail == "" ? false : (EmailValidator.validate(novoVendedorEmail) ? false : true)}
+          helperText={novoVendedorEmail == "" ? false : (EmailValidator.validate(novoVendedorEmail) ? false : "E-mail Inválido")}
           fullWidth
           required
           value={novoVendedorEmail}
@@ -163,11 +208,11 @@ const NovoVendedorPF = () => {
 
         <TextField
           className={classes.inputModal50percentRIGHT}
-          id="TelefoneVendedor"
-          label="Telefone do vendedor"
-          fullWidth
           value={novoVendedorTelefone}
-          onChange={e => dispatch(setNovoVendedorTelefone(e.target.value))}
+          label="Telefone"
+          id="TelefoneVendedor"
+          fullWidth
+          onChange={e => dispatch(setNovoVendedorTelefone(event.target.value.replace(/\D/g, "")))}
         />
 
         <TextField
@@ -197,14 +242,19 @@ const NovoVendedorPF = () => {
                 label="Estado Civil"
               />}
           />
-          {novoVendedorEstadoCivil === null || novoVendedorEstadoCivil === "Solteiro" ? null :
+          {(novoVendedorEstadoCivil === null ||
+            novoVendedorEstadoCivil === "Solteiro(a)" ||
+            novoVendedorEstadoCivil === "Separado(a)" ||
+            novoVendedorEstadoCivil === "Divorciado(a)" ||
+            novoVendedorEstadoCivil === "Viúvo(a)"
+          ) ? null :
             <Autocomplete
               className={classes.inputModal50percentRIGHT}
               fullWidth
               defaultValue=""
               options={regimeBens}
               getOptionLabel={option => typeof option === 'string' ? option : option.title}
-              value={novoVendedorRegimedeBens}
+              value={novoVendedorRegimeBens}
               getOptionSelected={(option, value) => option.title === value}
               onChange={(event, newValue) => handleClickChangeRegimeBens(newValue)}
               renderInput={(params) =>
@@ -254,6 +304,8 @@ const NovoVendedorPF = () => {
           label="CEP da residência do vendedor"
           fullWidth
           required
+          error={novoVendedorCEP == "" ? false : (isValidCep(novoVendedorCEP) ? false : true)}
+          helperText={novoVendedorCEP == "" ? false : (isValidCep(novoVendedorCEP) ? false : "CEP Inválido")}
           value={novoVendedorCEP}
           onChange={e => dispatch(setNovoVendedorCEP(e.target.value))}
         />
@@ -263,6 +315,7 @@ const NovoVendedorPF = () => {
           id="ObservacoesVendedor"
           label="Observações:"
           fullWidth
+          rows={3}
           multiline={true}
           value={novoVendedorObservacao}
           onChange={e => dispatch(setNovoVendedorObservacao(e.target.value))}
@@ -275,6 +328,7 @@ const NovoVendedorPF = () => {
           variant="contained"
           startIcon={<SaveIcon />}
           size="large"
+          disabled={disabledButton}
           color="primary"
           onClick={() => handleClickAddVendedorPF()}
         >

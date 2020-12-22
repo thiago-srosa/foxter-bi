@@ -24,7 +24,7 @@ const initialState = {
   novoVendedorTelefone: '',
   novoVendedorProfissao: '',
   novoVendedorEstadoCivil: null,
-  novoVendedorRegimedeBens: null,
+  novoVendedorRegimeBens: null,
   novoVendedorEndereco: '',
   novoVendedorBairro: '',
   novoVendedorMunicipio: '',
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
     case SET_NOVO_VENDEDOR_ESTADO_CIVIL:
       return { ...state, novoVendedorEstadoCivil: action.payload };
     case SET_NOVO_VENDEDOR_REGIME_BENS:
-      return { ...state, novoVendedorRegimedeBens: action.payload };
+      return { ...state, novoVendedorRegimeBens: action.payload };
     case SET_NOVO_VENDEDOR_ENDERECO:
       return { ...state, novoVendedorEndereco: action.payload };
     case SET_NOVO_VENDEDOR_BAIRRO:

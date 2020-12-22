@@ -8,10 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@brazilian-utils/is-valid-cep": "^0.1.2",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "cpf-cnpj-validator": "^1.0.3",
+    "email-validator": "^2.0.4",
     "firebase": "^8.1.2",
     "next": "10.0.3",
     "next-redux-wrapper": "^6.0.2",
