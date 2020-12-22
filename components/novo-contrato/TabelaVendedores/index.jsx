@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
 //Import Material UI
-import { FormControl, InputLabel, Input } from '@material-ui/core';
+import { InputLabel, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import TextField from '@material-ui/core/TextField';
 
 //Import React Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   inputLabel: {
@@ -107,12 +106,28 @@ function CollapseableRow({ vendedor, index }) {
             value={vendedor.novoVendedorRegimeBens}
           />
 
-          <InputLabel className={classes.inputLabel}>Endereço</InputLabel>
+          <InputLabel className={classes.inputLabel}>Logradouro</InputLabel>
           <Input
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorEndereco}
+            value={vendedor.novoVendedorLogradouro}
+          />
+
+          <InputLabel className={classes.inputLabel}>Número</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorNumero}
+          />
+
+          <InputLabel className={classes.inputLabel}>Complemento</InputLabel>
+          <Input
+            className={classes.input}
+            fullWidth
+            disabled
+            value={vendedor.novoVendedorComplemento}
           />
 
           <InputLabel className={classes.inputLabel}>Bairro</InputLabel>
@@ -128,7 +143,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorMunicipio}
+            value={vendedor.novoVendedorCidade}
           />
 
           <InputLabel className={classes.inputLabel}>CEP</InputLabel>

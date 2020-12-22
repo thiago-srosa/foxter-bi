@@ -7,7 +7,7 @@ import styled from 'styled-components'
 export const ButtonsContainer = styled.div`
 display: flex;  
 justify-content: space-around;
-padding-top: 10px;
+padding: 20px;
 @media(max-width: 600px) {
   display: block;    
 };
@@ -20,6 +20,29 @@ export const AutoCompleteContainer = styled.div`
   };
 `
 
+export const HeaderContainer = styled.div`
+  display: flex; 
+  background-color: yellow;
+  height: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`
+
+export const H2 = styled.h2`
+  padding: 10px 0 10px 10px;
+  margin: 0px;
+  flex-grow: 1;
+`
+
+export const CloseIconContainer = styled.div`
+  text-align: right;
+  width: 50;
+  padding: 8px;
+  cursor: pointer;
+`
+
 export const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -27,20 +50,21 @@ export const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     width: '800px',
     height: 'auto',
-    maxWidth: '90%',
-    maxHeight: '90%',
+    maxWidth: '95%',
+    maxHeight: '97%',
     backgroundColor: theme.palette.background.paper,
     border: '0px solid #f1f1f1',
     boxShadow: theme.shadows[5],
-    padding: '20px',
+    padding: '0px',
     outline: 'none',
     top: '50% ',
-    left: '50% ',
+    left: '50% ',  
     transform: 'translate(-50%, -50%) ',
   },
   root: {
     marginTop: '5px',
     marginBottom: '5px',
+    padding: '20px',
   },
   textField: {
     marginTop: '10px',

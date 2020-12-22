@@ -8,10 +8,12 @@ import {
   SET_NOVO_VENDEDOR_PROFISSAO,
   SET_NOVO_VENDEDOR_ESTADO_CIVIL,
   SET_NOVO_VENDEDOR_REGIME_BENS,
-  SET_NOVO_VENDEDOR_ENDERECO,
-  SET_NOVO_VENDEDOR_BAIRRO,
-  SET_NOVO_VENDEDOR_MUNICIPIO,
   SET_NOVO_VENDEDOR_CEP,
+  SET_NOVO_VENDEDOR_LOGRADOURO,
+  SET_NOVO_VENDEDOR_NUMERO,
+  SET_NOVO_VENDEDOR_COMPLEMENTO,
+  SET_NOVO_VENDEDOR_BAIRRO,
+  SET_NOVO_VENDEDOR_CIDADE,
   SET_NOVO_VENDEDOR_OBSERVACAO,
   RESET_NOVO_VENDEDOR,
 } from "../../actions";
@@ -25,9 +27,11 @@ const initialState = {
   novoVendedorProfissao: '',
   novoVendedorEstadoCivil: null,
   novoVendedorRegimeBens: null,
-  novoVendedorEndereco: '',
+  novoVendedorLogradouro: '',
+  novoVendedorNumero: '',
+  novoVendedorComplemento: '',
   novoVendedorBairro: '',
-  novoVendedorMunicipio: '',
+  novoVendedorCidade: '',
   novoVendedorCEP: '',
   novoVendedorObservacao: '',
 };
@@ -52,12 +56,16 @@ const reducer = (state = initialState, action) => {
       return { ...state, novoVendedorEstadoCivil: action.payload };
     case SET_NOVO_VENDEDOR_REGIME_BENS:
       return { ...state, novoVendedorRegimeBens: action.payload };
-    case SET_NOVO_VENDEDOR_ENDERECO:
-      return { ...state, novoVendedorEndereco: action.payload };
+    case SET_NOVO_VENDEDOR_LOGRADOURO:
+      return { ...state, novoVendedorLogradouro: action.payload };
+    case SET_NOVO_VENDEDOR_NUMERO:
+      return { ...state, novoVendedorNumero: action.payload };
+    case SET_NOVO_VENDEDOR_COMPLEMENTO:
+      return { ...state, novoVendedorComplemento: action.payload };
     case SET_NOVO_VENDEDOR_BAIRRO:
       return { ...state, novoVendedorBairro: action.payload };
-    case SET_NOVO_VENDEDOR_MUNICIPIO:
-      return { ...state, novoVendedorMunicipio: action.payload };
+    case SET_NOVO_VENDEDOR_CIDADE:
+      return { ...state, novoVendedorCidade: action.payload };
     case SET_NOVO_VENDEDOR_CEP:
       return { ...state, novoVendedorCEP: action.payload };
     case SET_NOVO_VENDEDOR_OBSERVACAO:

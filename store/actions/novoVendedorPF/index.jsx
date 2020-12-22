@@ -7,9 +7,11 @@ import {
   SET_NOVO_VENDEDOR_PROFISSAO,
   SET_NOVO_VENDEDOR_ESTADO_CIVIL,
   SET_NOVO_VENDEDOR_REGIME_BENS,
-  SET_NOVO_VENDEDOR_ENDERECO,
+  SET_NOVO_VENDEDOR_LOGRADOURO,
+  SET_NOVO_VENDEDOR_NUMERO,
+  SET_NOVO_VENDEDOR_COMPLEMENTO,
   SET_NOVO_VENDEDOR_BAIRRO,
-  SET_NOVO_VENDEDOR_MUNICIPIO,
+  SET_NOVO_VENDEDOR_CIDADE,
   SET_NOVO_VENDEDOR_CEP,
   SET_NOVO_VENDEDOR_OBSERVACAO,
   RESET_NOVO_VENDEDOR,
@@ -55,9 +57,19 @@ export const setNovoVendedorRegimeBens = (regimeBens) => ({
   payload: regimeBens,
 })
 
-export const setNovoVendedorEndereco = (endereco) => ({
-  type: SET_NOVO_VENDEDOR_ENDERECO,
-  payload: endereco,
+export const setNovoVendedorLogradouro = (logradouro) => ({
+  type: SET_NOVO_VENDEDOR_LOGRADOURO,
+  payload: logradouro,
+})
+
+export const setNovoVendedorNumero = (numero) => ({
+  type: SET_NOVO_VENDEDOR_NUMERO,
+  payload: numero,
+})
+
+export const setNovoVendedorComplemento = (complemento) => ({
+  type: SET_NOVO_VENDEDOR_COMPLEMENTO,
+  payload: complemento,
 })
 
 export const setNovoVendedorBairro = (bairro) => ({
@@ -65,9 +77,9 @@ export const setNovoVendedorBairro = (bairro) => ({
   payload: bairro,
 })
 
-export const setNovoVendedorMunicipio = (municipio) => ({
-  type: SET_NOVO_VENDEDOR_MUNICIPIO,
-  payload: municipio,
+export const setNovoVendedorCidade = (cidade) => ({
+  type: SET_NOVO_VENDEDOR_CIDADE,
+  payload: cidade,
 })
 
 export const setNovoVendedorCEP = (cep) => ({
