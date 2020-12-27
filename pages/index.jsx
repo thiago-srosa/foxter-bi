@@ -1,13 +1,14 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+//Import NextJS
 import Head from 'next/head'
-import { useDispatch } from "react-redux";
+import Link from 'next/link'
 
-import Link from 'next/link';
+//Import Firebase
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState } from 'react';
+//Import Firebase Hooks
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const ChangeTitle = () => {
   return (
@@ -18,38 +19,22 @@ const ChangeTitle = () => {
 }
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const [user, loading, error] = useAuthState(firebase.auth());
-  const [queryAdmin, setAdmin] = useState([]);
-
-  const Administrador = ({ queryAdmin }) => {
-    if (queryAdmin.length > 0) {
-      return <p>administrador</p>;
-    }
-    else { return null }
-  }
+  const { initialising, user } = useAuthState(firebase.auth());
 
   var content;
 
-  if (loading) {
+  if (initialising) {
     content = (
       <div>
         <p>Initialising User...</p>
       </div>
     );
   }
-  if (error) {
-    content = (
-      <div>
-        <p>Error: {error}</p>
-      </div>
-    );
-  }
+
   if (user) {
     content = (
       <>
         <p>Current User: {user.email}</p>
-        <Administrador queryAdmin={queryAdmin} />
         <Link href="/solicitar-contrato" >
           <a>Home</a>
         </Link>

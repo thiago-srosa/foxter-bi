@@ -1,6 +1,4 @@
-import { Auth } from '../../components/Auth';
-
-//Import COMPONENTS
+//Import Custom Components
 import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
 import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
 
@@ -36,8 +34,6 @@ const createGroceryList = () => {
 };
 
 const solicitarContrato = () => {
-
-  Auth();
 
   var content = null;
 

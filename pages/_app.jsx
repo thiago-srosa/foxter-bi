@@ -1,10 +1,21 @@
-import React from 'react'
-import { storeWrapper } from "../store";
+//import React
+import { useEffect } from 'react'
 
+//import  NextJs
+import { useRouter } from 'next/router'
+
+//Import Redux State
+import { storeWrapper } from "../store"
+
+//Import Firebase Hooks
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+//import Firebase
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
+//import Custom Components
 import CustomDrawer from '../components/Drawer/index'
-
-import firebase from 'firebase/app';
-import 'firebase/auth';
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -21,24 +32,20 @@ if (!firebase.apps.length) {
 }
 
 function MyApp({ Component, pageProps }) {
+  const { user } = useAuthState(firebase.auth());
+  const router = useRouter();
 
-  return (   
-      <CustomDrawer>
-        <Component {...pageProps} />
-      </CustomDrawer>    
+  console.log(router.pathname)
+
+  useEffect(() => {
+    user == null ? router.push("/login") : true;
+  }, [router.pathname, user])
+
+  return (
+    <CustomDrawer>
+      <Component {...pageProps} />
+    </CustomDrawer>
   )
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
-
-export default storeWrapper.withRedux(MyApp);
+export default storeWrapper.withRedux(MyApp)

@@ -24,44 +24,36 @@ import Container from '@material-ui/core/Container';
 //Import Material UI
 import Button from '@material-ui/core/Button';
 
-import GoogleButton from 'react-google-button'
-
 import HomeIcon from '@material-ui/icons/Home';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 import CustomAvatar from './Avatar';
-import { StyledLogoutButton, StyledA, useStyles, StyledGoogleLoginContainer } from './styles';
+import { StyledLogoutButton, StyledA, useStyles } from './styles';
 import { useSelector, useDispatch } from "react-redux";
-import { userReset, setUserAuthentication, setUserIsAdmin } from "../../store/actions/user";
+import { userReset, setUserIsAdmin } from "../../store/actions/user";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function CustomDrawer(props) {
 
   const dispatch = useDispatch();
-  const { userAuthentication, userIsAdmin } = useSelector((state) => state.user);
-  const [queryAdmin, setAdmin] = useState([]);
-  const [user, loading, error] = useAuthState(firebase.auth());
+  const { userIsAdmin } = useSelector((state) => state.user);
+  const { user } = useAuthState(firebase.auth());
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    if (firebase.auth().currentUser !== null && firebase.auth().currentUser !== undefined) {
+    if (user) {
       firebase.firestore().collection("admin")
-        .where("email", "==", firebase.auth().currentUser.email)
+        .where("email", "==", user.email)
         .get()
         .then(querySnapshot => {
           querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin()) : null;
         })
     }
-  }, [userAuthentication])
-
-  useEffect(() => {
-    firebase.auth().currentUser !== null ? dispatch(setUserAuthentication()) : null;
-    console.log(firebase.auth().currentUser)
-  }, [firebase.auth().currentUser])
+  }, [user])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -70,11 +62,6 @@ function CustomDrawer(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  function login() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
-  }
 
   const logout = () => {
     firebase.auth().signOut();
@@ -87,13 +74,15 @@ function CustomDrawer(props) {
 
   return (
 
-    <div className={classes.root}>
+    <div className={classes.root} style={user ? null : { backgroundColor: 'rgb(66, 133, 244)' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
+        style={user ? null : { display: 'none' }}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+
       >
         <Toolbar>
           <IconButton
@@ -110,7 +99,9 @@ function CustomDrawer(props) {
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer
+        style={user ? null : { display: 'none' }}
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -130,20 +121,15 @@ function CustomDrawer(props) {
 
         <Divider />
 
-        {userAuthentication ?
+        {user ?
           <>
             <CustomAvatar />
-            <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{width: '200px', placeSelf: 'center'}}>
+            <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
               Sair
              </Button>
-
           </>
-          : <StyledGoogleLoginContainer>
-            <GoogleButton
-              label='Entrar com Gmail'
-              onClick={login}
-            />
-          </StyledGoogleLoginContainer>}
+          : null
+        }
 
         {userIsAdmin ? <FuncaoNositema funcao="Administrador" /> : null}
 
@@ -190,11 +176,11 @@ function CustomDrawer(props) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" >
           {props.children}
         </Container>
       </main>
-    </div>
+    </div >
 
   )
 }

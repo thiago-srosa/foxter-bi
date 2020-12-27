@@ -81,8 +81,17 @@ const NovoVendedorPF = () => {
   } = useSelector((state) => state.novoVendedorPF);
 
   const classes = useStyles();
+
   const [open, setOpen] = useState(false);
-  const [disabledButton, setdisabledButton] = useState(true);
+  const [erroNovoVendedorNomeCompleto, setErroNovoVendedorNomeCompleto] = useState(false);
+  const [erroNovoVendedorCPF, setErroNovoVendedorCPF] = useState(false);
+  const [erroNovoVendedorRG, setErroNovoVendedorRG] = useState(false);
+  const [erroNovoVendedorEmail, setErroNovoVendedorEmail] = useState(false);
+  const [erroNovoVendedorProfissao, setErroNovoVendedorProfissao] = useState(false);
+  const [erroNovoVendedorEstadoCivil, setErroNovoVendedorEstadoCivil] = useState(false);
+  const [erroNovoVendedorRegimeBens, setErroNovoVendedorRegimeBens] = useState(false);
+  const [erroNovoVendedorNumero, setErroNovoVendedorNumero] = useState(false);
+  const [erroNovoVendedorCEP, setErroNovoVendedorCEP] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -98,11 +107,11 @@ const NovoVendedorPF = () => {
       const cepPromisse = axios.get('https://viacep.com.br/ws/' + postalCode + '/json/')
       cepPromisse.then((result) => {
         if (!result.data.erro) {
-          console.log(result.data)
           dispatch(setNovoVendedorCEP(postalCode))
           dispatch(setNovoVendedorCidade(result.data.localidade))
           dispatch(setNovoVendedorBairro(result.data.bairro))
           dispatch(setNovoVendedorLogradouro(result.data.logradouro))
+          setErroNovoVendedorCEP(false)
         }
         else {
           console.log('CEP error')
@@ -110,6 +119,7 @@ const NovoVendedorPF = () => {
           dispatch(setNovoVendedorCidade(''))
           dispatch(setNovoVendedorBairro(''))
           dispatch(setNovoVendedorLogradouro(''))
+          setErroNovoVendedorCEP(true)
         }
       }).catch(() => console.log('Erro na busca do CEP'))
     }
@@ -119,7 +129,6 @@ const NovoVendedorPF = () => {
       dispatch(setNovoVendedorBairro(''))
       dispatch(setNovoVendedorLogradouro(''))
     }
-
   }
 
   const estadoCivil = [
@@ -145,6 +154,7 @@ const NovoVendedorPF = () => {
     newValue !== null ? dispatch(setNovoVendedorRegimeBens(newValue.title)) : dispatch(setNovoVendedorRegimeBens(null))
   }
 
+  /*
   useEffect(() => {
     console.log(novoVendedorNomeCompleto)
     if (
@@ -185,28 +195,77 @@ const NovoVendedorPF = () => {
     novoVendedorCidade,
     novoVendedorCEP
   ])
+*/
 
   function handleClickAddVendedorPF() {
-    dispatch(addNovoContratoVendedores({
-      novoVendedorNomeCompleto: novoVendedorNomeCompleto,
-      novoVendedorCPF: novoVendedorCPF,
-      novoVendedorRG: novoVendedorRG,
-      novoVendedorEmail: novoVendedorEmail,
-      novoVendedorTelefone: novoVendedorTelefone,
-      novoVendedorProfissao: novoVendedorProfissao,
-      novoVendedorEstadoCivil: novoVendedorEstadoCivil,
-      novoVendedorRegimeBens: novoVendedorRegimeBens,
-      novoVendedorLogradouro: novoVendedorLogradouro,
-      novoVendedorNumero: novoVendedorNumero,
-      novoVendedorComplemento: novoVendedorComplemento,
-      novoVendedorBairro: novoVendedorBairro,
-      novoVendedorCidade: novoVendedorCidade,
-      novoVendedorCEP: novoVendedorCEP,
-      novoVendedorObservacao: novoVendedorObservacao,
-    }))
+    var erro = 0;
 
-    dispatch(resetNovoVendedor())
-    handleClose();
+    if (!novoVendedorNomeCompleto) {
+      erro++
+      setErroNovoVendedorNomeCompleto(true)
+    } else { setErroNovoVendedorNomeCompleto(false) }
+
+    if (!cpf.isValid(novoVendedorCPF)) {
+      erro++
+      setErroNovoVendedorCPF(true)
+    } else { setErroNovoVendedorCPF(false) }
+
+    if (!novoVendedorRG) {
+      erro++
+      setErroNovoVendedorRG(true)
+    } else { setErroNovoVendedorRG(false) }
+
+    if (!EmailValidator.validate(novoVendedorEmail)) {
+      erro++
+      setErroNovoVendedorEmail(true)
+    } else { setErroNovoVendedorEmail(false) }
+
+    if (!novoVendedorProfissao) {
+      erro++
+      setErroNovoVendedorProfissao(true)
+    } else { setErroNovoVendedorProfissao(false) }
+
+    if (!novoVendedorEstadoCivil) {
+      erro++
+      setErroNovoVendedorEstadoCivil(true)
+    } else { setErroNovoVendedorEstadoCivil(false) }
+
+    if (!novoVendedorNumero) {
+      erro++
+      setErroNovoVendedorNumero(true)
+    } else { setErroNovoVendedorNumero(false) }
+
+    if (
+      novoVendedorEstadoCivil === "Casado(a)" ||
+      novoVendedorEstadoCivil === "União Estável"
+    ) {
+      if (!novoVendedorRegimeBens) {
+        erro++
+        setErroNovoVendedorRegimeBens(true)
+      } else { setErroNovoVendedorRegimeBens(false) }
+    }
+
+    if (erro === 0) {
+      dispatch(addNovoContratoVendedores({
+        novoVendedorNomeCompleto: novoVendedorNomeCompleto,
+        novoVendedorCPF: novoVendedorCPF,
+        novoVendedorRG: novoVendedorRG,
+        novoVendedorEmail: novoVendedorEmail,
+        novoVendedorTelefone: novoVendedorTelefone,
+        novoVendedorProfissao: novoVendedorProfissao,
+        novoVendedorEstadoCivil: novoVendedorEstadoCivil,
+        novoVendedorRegimeBens: novoVendedorRegimeBens,
+        novoVendedorLogradouro: novoVendedorLogradouro,
+        novoVendedorNumero: novoVendedorNumero,
+        novoVendedorComplemento: novoVendedorComplemento,
+        novoVendedorBairro: novoVendedorBairro,
+        novoVendedorCidade: novoVendedorCidade,
+        novoVendedorCEP: novoVendedorCEP,
+        novoVendedorObservacao: novoVendedorObservacao,
+      }))
+      dispatch(resetNovoVendedor())
+      handleClose();
+    }
   }
 
   const modalBody = (
@@ -229,6 +288,7 @@ const NovoVendedorPF = () => {
             required
             value={novoVendedorNomeCompleto}
             autoComplete='off'
+            error={erroNovoVendedorNomeCompleto}
             onChange={e => dispatch(setNovoVendedorNomeCompleto(e.target.value))}
           />
 
@@ -239,11 +299,11 @@ const NovoVendedorPF = () => {
             fullWidth
             required
             autoComplete='off'
-            error={novoVendedorCPF == "" ? false : (cpf.isValid(novoVendedorCPF) ? false : true)}
+            error={novoVendedorCPF.length >= 14 ? !cpf.isValid(novoVendedorCPF) : erroNovoVendedorCPF}
             value={novoVendedorCPF}
-            helperText={novoVendedorCPF == "" ? false : (cpf.isValid(novoVendedorCPF) ? null : "CPF Inválido")}
+            helperText={erroNovoVendedorCPF ? 'CPF Inválido' : null}
             onChange={e => dispatch(setNovoVendedorCPF(cpf.format(e.target.value)))}
-          />
+          />          
 
           <TextField
             className={classes.inputModal50percentRIGHT}
@@ -251,6 +311,7 @@ const NovoVendedorPF = () => {
             label="RG do vendedor"
             fullWidth
             required
+            error={erroNovoVendedorRG}
             value={novoVendedorRG}
             autoComplete='off'
             onChange={e => dispatch(setNovoVendedorRG(e.target.value))}
@@ -260,10 +321,11 @@ const NovoVendedorPF = () => {
             className={classes.inputModal50percentLEFT}
             id="EmailVendedor"
             label="E-mail"
-            error={novoVendedorEmail == "" ? false : (EmailValidator.validate(novoVendedorEmail) ? false : true)}
-            helperText={novoVendedorEmail == "" ? false : (EmailValidator.validate(novoVendedorEmail) ? false : "E-mail Inválido")}
+            error={erroNovoVendedorEmail}
+            helperText={erroNovoVendedorEmail ? "E-mail Inválido" : false}
             fullWidth
             required
+            error={erroNovoVendedorEmail}
             autoComplete='off'
             value={novoVendedorEmail}
             onChange={e => dispatch(setNovoVendedorEmail(e.target.value))}
@@ -285,6 +347,7 @@ const NovoVendedorPF = () => {
             label="Profissão"
             required
             fullWidth
+            error={erroNovoVendedorProfissao}
             value={novoVendedorProfissao}
             autoComplete='off'
             onChange={e => dispatch(setNovoVendedorProfissao(e.target.value))}
@@ -303,8 +366,9 @@ const NovoVendedorPF = () => {
                 <TextField
                   {...params}
                   required
+                  error={erroNovoVendedorEstadoCivil}
                   autoComplete='off'
-                  label='Estado Civil'
+                  label='Situação Civil'
                 />}
             />
             {(novoVendedorEstadoCivil === null ||
@@ -320,11 +384,12 @@ const NovoVendedorPF = () => {
                 getOptionLabel={option => typeof option === 'string' ? option : option.title}
                 value={novoVendedorRegimeBens}
                 getOptionSelected={(option, value) => option.title === value}
-                onChange={(_event, newValue) => handleClickChangeRegimeBens(newValue)}
+                onChange={(event, newValue) => dispatch(setNovoVendedorRegimeBens(newValue))}
                 renderInput={(params) =>
                   <TextField
                     {...params}
                     required
+                    error={erroNovoVendedorRegimeBens}
                     autoComplete="off"
                     label="Regime de Bens"
                   />}
@@ -338,8 +403,8 @@ const NovoVendedorPF = () => {
             fullWidth
             required
             autoComplete='off'
-            error={novoVendedorCEP == "" ? false : (isValidCep(novoVendedorCEP) ? false : true)}
-            helperText={novoVendedorCEP == "" ? false : (isValidCep(novoVendedorCEP) ? false : "CEP Inválido")}
+            error={erroNovoVendedorCEP}
+            helperText={erroNovoVendedorCEP ? "CEP Inválido" : null}
             value={novoVendedorCEP}
             onChange={e => handleCEPchange(e.target.value)}
           />
@@ -361,6 +426,7 @@ const NovoVendedorPF = () => {
             fullWidth
             required
             autoComplete='off'
+            error={erroNovoVendedorNumero}
             value={novoVendedorNumero}
             onChange={e => dispatch(setNovoVendedorNumero(e.target.value))}
           />
@@ -414,7 +480,6 @@ const NovoVendedorPF = () => {
             variant="contained"
             startIcon={<SaveIcon />}
             size="large"
-            disabled={disabledButton}
             color="primary"
             onClick={() => handleClickAddVendedorPF()}
           >

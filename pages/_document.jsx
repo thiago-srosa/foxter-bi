@@ -1,7 +1,11 @@
-import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+//Import NextJS
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+//Import Styled-Components
 import { ServerStyleSheet } from 'styled-components'
-import { ServerStyleSheets } from '@material-ui/styles';
+
+//import Material-UI
+import { ServerStyleSheets } from '@material-ui/styles'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -35,12 +39,12 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
-          
+
           {/* PWA primary color */}
           <meta
-            name="theme-color"            
+            name="theme-color"
           />
-          
+
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

@@ -3,29 +3,7 @@ import styled from 'styled-components'
 
 export const StyledA = styled.a`
   text-Decoration: none ;
-  cursor : pointer;
-`
-
-export const StyledGoogleLoginContainer = styled.div`
-  padding-top: 20px;
-  height: 100px;
-  text-align: -webkit-center;
-`
-
-export const StyledLogoutButton = styled.div`
-  text-align: -webkit-center;
-  padding-top: 15px;
-  & * {
-    width: 80px;
-    padding: 10px;
-    background-color : #4286f4;
-    border: 1px;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    cursor : pointer;
-  }  
-`
+  cursor : pointer;`
 
 const drawerWidth = 280;
 
@@ -70,6 +48,10 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   content: {
+    
+    display: 'flex',
+    height: '100vh',
+    paddingTop: 64,
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
