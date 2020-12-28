@@ -154,49 +154,6 @@ const NovoVendedorPF = () => {
     newValue !== null ? dispatch(setNovoVendedorRegimeBens(newValue.title)) : dispatch(setNovoVendedorRegimeBens(null))
   }
 
-  /*
-  useEffect(() => {
-    console.log(novoVendedorNomeCompleto)
-    if (
-      novoVendedorNomeCompleto &&
-      cpf.isValid(novoVendedorCPF) &&
-      novoVendedorRG &&
-      EmailValidator.validate(novoVendedorEmail) &&
-      novoVendedorProfissao &&
-      novoVendedorEstadoCivil &&
-      ((novoVendedorEstadoCivil === "Solteiro(a)" ? true : novoVendedorRegimeBens) ||
-        (novoVendedorEstadoCivil === "Viúvo(a)" ? true : novoVendedorRegimeBens) ||
-        (novoVendedorEstadoCivil === "Divorciado(a)" ? true : novoVendedorRegimeBens) ||
-        (novoVendedorEstadoCivil === "Separado(a)" ? true : novoVendedorRegimeBens)) &&
-      novoVendedorLogradouro &&
-      novoVendedorNumero &&
-      novoVendedorBairro &&
-      novoVendedorCidade &&
-      isValidCep(novoVendedorCEP)
-
-    ) {
-      setdisabledButton(false)
-    }
-    else {
-      setdisabledButton(true)
-    }
-  }, [
-    novoVendedorNomeCompleto,
-    novoVendedorCPF,
-    novoVendedorRG,
-    novoVendedorEmail,
-    novoVendedorProfissao,
-    novoVendedorEstadoCivil,
-    novoVendedorRegimeBens,
-    novoVendedorLogradouro,
-    novoVendedorNumero,
-    novoVendedorComplemento,
-    novoVendedorBairro,
-    novoVendedorCidade,
-    novoVendedorCEP
-  ])
-*/
-
   function handleClickAddVendedorPF() {
     var erro = 0;
 
@@ -234,6 +191,11 @@ const NovoVendedorPF = () => {
       erro++
       setErroNovoVendedorNumero(true)
     } else { setErroNovoVendedorNumero(false) }
+
+    if (novoVendedorCEP.length !== 8) {
+      erro++
+      setErroNovoVendedorCEP(true)
+    } 
 
     if (
       novoVendedorEstadoCivil === "Casado(a)" ||
@@ -303,7 +265,7 @@ const NovoVendedorPF = () => {
             value={novoVendedorCPF}
             helperText={erroNovoVendedorCPF ? 'CPF Inválido' : null}
             onChange={e => dispatch(setNovoVendedorCPF(cpf.format(e.target.value)))}
-          />          
+          />
 
           <TextField
             className={classes.inputModal50percentRIGHT}
@@ -361,7 +323,7 @@ const NovoVendedorPF = () => {
               getOptionLabel={option => typeof option === 'string' ? option : option.title}
               getOptionSelected={(option, value) => option.title === value}
               value={novoVendedorEstadoCivil}
-              onChange={(_event, newValue) => handleClickChangeEstadoCivil(newValue)}
+              onChange={(event, newValue) => handleClickChangeEstadoCivil(newValue)}
               renderInput={(params) =>
                 <TextField
                   {...params}

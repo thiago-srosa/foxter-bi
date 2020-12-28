@@ -1,6 +1,9 @@
 //Import Material UI
 import { makeStyles } from '@material-ui/core/styles';
 
+//Import styled-components
+import styled from 'styled-components'
+
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -27,5 +30,12 @@ export const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  }, 
+  },
 }));
+
+export const SectionDiv = styled.div`
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  border-radius: 5px;
+`

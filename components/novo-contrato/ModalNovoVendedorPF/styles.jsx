@@ -22,12 +22,14 @@ export const AutoCompleteContainer = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex; 
-  background-color: yellow;
+  background-color: white;
   height: 50px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1;
+  text-align: center;
+
 `
 
 export const H2 = styled.h2`

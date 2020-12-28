@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import clsx from 'clsx';
+import Hidden from '@material-ui/core/Hidden';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -36,13 +37,13 @@ import { userReset, setUserIsAdmin } from "../../store/actions/user";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function CustomDrawer(props) {
-
-  const dispatch = useDispatch();
-  const { userIsAdmin } = useSelector((state) => state.user);
-  const { user } = useAuthState(firebase.auth());
+  const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const { user } = useAuthState(firebase.auth());
+  const { userIsAdmin } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (user) {
@@ -55,12 +56,8 @@ function CustomDrawer(props) {
     }
   }, [user])
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   const logout = () => {
@@ -71,6 +68,168 @@ function CustomDrawer(props) {
   const FuncaoNositema = (props) => {
     return <span style={{ textAlign: '-webkit-center', padding: '20px' }}>{props.funcao}</span>
   }
+
+  const drawer = (
+    <div >
+
+      <div className={classes.drawerHeader}>
+        <img src="https://i.ibb.co/B2XpXDB/Logo-3-1.png" alt="Setores-Foxter-PADRA-O" style={{ width: '120px', }} />
+      </div>
+
+      <Divider />
+      <div style={{ textAlign: 'center' }}>
+        {user ?
+          <>
+            <CustomAvatar />
+            <div style={{}}>
+              <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
+                Sair
+          </Button>
+            </div >
+          </>
+          : null
+        }
+        {userIsAdmin ? <FuncaoNositema funcao="Administrador" /> : null}
+      </div >
+
+      <List>
+        <Link href="/" passHref >
+          <StyledA >
+            <ListItem >
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Página Inicial" />
+            </ListItem>
+          </StyledA>
+        </Link>
+
+        <Link href="/novo-contrato" passHref >
+          <StyledA >
+            <ListItem >
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Novo Contrato" />
+            </ListItem>
+          </StyledA>
+        </Link>
+
+        <Link href="/novo-resumo-documentacao" passHref >
+          <StyledA >
+            <ListItem >
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Novo Resumo" />
+            </ListItem>
+          </StyledA>
+        </Link>
+
+      </List>
+    </div>
+  );
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <div className={classes.root} >
+
+      <CssBaseline />
+
+      <AppBar position="fixed" className={classes.appBar} style={user ? null : { display: 'none' }}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Responsive drawer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders" style={user ? null : { display: 'none' }}>
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css" >
+
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            style={user ? null : { display: 'none' }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content} >
+        <div className={classes.toolbar} />
+        {props.children}
+      </main>
+    </div>
+  );
+}
+export default CustomDrawer
+
+/*
+function CustomDrawer(props) {
+
+  const dispatch = useDispatch();
+  const { userIsAdmin } = useSelector((state) => state.user);
+  const { user } = useAuthState(firebase.auth());
+  const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (user) {
+      firebase.firestore().collection("admin")
+        .where("email", "==", user.email)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin()) : null;
+        })
+    }
+  }, [user])
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const logout = () => {
+    firebase.auth().signOut();
+    dispatch(userReset());
+  }
+
+  const FuncaoNositema = (props) => {
+    return <span style={{ textAlign: '-webkit-center', padding: '20px' }}>{props.funcao}</span>
+  }
+
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
 
@@ -84,7 +243,7 @@ function CustomDrawer(props) {
         })}
 
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -94,9 +253,9 @@ function CustomDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <h2>
             {"titulo aqui"}
-          </Typography>
+          </h2>
         </Toolbar>
       </AppBar>
 
@@ -112,7 +271,7 @@ function CustomDrawer(props) {
       >
 
         <div className={classes.drawerHeader}>
-          <img src="https://i.ibb.co/tX797xj/Setores-Foxter-PADRA-O.png" alt="Setores-Foxter-PADRA-O" style={{ marginRight: '35px', width: '120px', }} />
+          <img src="https://i.ibb.co/B2XpXDB/Logo-3-1.png" alt="Setores-Foxter-PADRA-O" style={{ marginRight: '35px', width: '120px', }} />
 
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -174,9 +333,10 @@ function CustomDrawer(props) {
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
+        style={user ? { backgroundColor: '#eaeff1' } : null}
       >
         <div className={classes.drawerHeader} />
-        <Container maxWidth="lg" >
+        <Container className={classes.container} maxWidth="md">
           {props.children}
         </Container>
       </main>
@@ -185,3 +345,5 @@ function CustomDrawer(props) {
   )
 }
 export default CustomDrawer
+
+*/

@@ -1,12 +1,15 @@
 //Import Custom Components
 import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
 import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
+import DadosGerais from '../../components/novo-contrato/DadosGerais'
 
 import 'firebase/auth';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 
 import Head from 'next/head'
+
+import { SectionDiv } from '../../components/novo-contrato/pageStyles'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -44,10 +47,19 @@ const solicitarContrato = () => {
           <title>Novo contrato</title>
         </Head>
 
-        <NovoVendedorPF />
+        <SectionDiv >
+          <DadosGerais />
+        </SectionDiv>
 
-        <TabelaVendedores />
+        <SectionDiv style={{ marginTop: 10 }}>
+          <NovoVendedorPF />
+          <TabelaVendedores />
+        </SectionDiv>
 
+        <SectionDiv style={{ marginTop: 10 }}>
+          <NovoVendedorPF />
+          <TabelaVendedores />
+        </SectionDiv>
       </>
     )
   }
