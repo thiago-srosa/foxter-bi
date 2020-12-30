@@ -18,6 +18,7 @@
     "email-validator": "^2.0.4",
     "firebase": "^8.1.2",
     "next": "10.0.3",
+    "next-pwa": "^5.0.1",
     "next-redux-wrapper": "^6.0.2",
     "react": "^16.14.0",
     "react-dom": "17.0.1",
