@@ -1,5 +1,5 @@
-import withPWA from 'next-pwa';
-import runtimeCaching from 'next-pwa/cache'
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPWA({
   pwa: {
