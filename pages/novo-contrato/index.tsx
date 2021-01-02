@@ -1,14 +1,17 @@
+//Import NextJS
+import Head from 'next/head'
+
 //Import Custom Components
 import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
 import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
 import DadosGerais from '../../components/novo-contrato/DadosGerais'
 
+//Import Firebase
 import 'firebase/auth';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 
-import Head from 'next/head'
-
+//Import Custom Styles
 import { SectionDiv } from '../../components/novo-contrato/pageStyles'
 
 if (!firebase.apps.length) {
@@ -24,17 +27,6 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); // if already initialized, use that one
 }
-
-const db = firebase.firestore();
-
-const createGroceryList = () => {
-  return db.collection('contratos')
-    .add({
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-      email: firebase.auth().currentUser.email,
-      user: firebase.auth().currentUser.displayName,
-    });
-};
 
 const solicitarContrato = () => {
 
@@ -63,8 +55,6 @@ const solicitarContrato = () => {
       </>
     )
   }
-
-
 
   return (
     <>
