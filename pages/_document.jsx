@@ -44,7 +44,6 @@ class MyDocument extends Document {
           <link rel='mask-icon' href='/assets/images/icons/logo-icon.png' color='#5bbad5' />
           <link rel='shortcut icon' href='/assets/images/icons/logo-icon.png' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' />
-          <link rel="stylesheet" href="/assets/styles/style.css" />
         </Head>
         <body >
           <Main />
