@@ -34,6 +34,9 @@ if (!firebase.apps.length) {
 
 function MyApp({ Component, pageProps }) {
 
+  const { user } = useAuthState(firebase.auth());
+  const router = useRouter();
+
   useEffect(() => {
     if ("serviceWorker" in navigator) {      
       window.addEventListener("load", function () {        
@@ -47,10 +50,7 @@ function MyApp({ Component, pageProps }) {
         );
       });
     }
-  }, [])
-
-  const { user } = useAuthState(firebase.auth());
-  const router = useRouter();
+  }, [user])  
 
   console.log(router.pathname)
 
