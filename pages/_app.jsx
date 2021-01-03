@@ -1,8 +1,6 @@
 //import React
 import { useEffect } from 'react'
 
-import { register, unregister } from 'next-offline/runtime'
-
 //import  NextJs
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -37,8 +35,8 @@ if (!firebase.apps.length) {
 function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
+    if ("serviceWorker" in navigator) {      
+      window.addEventListener("load", function () {        
         navigator.serviceWorker.register("/sw.js").then(
           function (registration) {
             console.log("Service Worker registration successful with scope: ", registration.scope);
