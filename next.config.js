@@ -1,4 +1,4 @@
-const withPWA = require('next-pwa')
+/*const withPWA = require('next-pwa')
 
 // change start-url cache strategy, so that we can prompt user to reload when
 // new version available, instead of showing new version directly
@@ -12,4 +12,4 @@ module.exports = withPWA({
     skipWaiting: false,
     runtimeCaching
   }
-})
+})*/
