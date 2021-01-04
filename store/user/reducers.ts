@@ -1,6 +1,7 @@
 import {
   SET_USER_IS_LOGGED_IN,
   SET_USER_IS_ADMIN,
+  RESET_USER,
   UserActionTypes,
   UserState,
 } from './types'
@@ -18,10 +19,10 @@ function NovoContratoReducer(
 
     case SET_USER_IS_LOGGED_IN:
       return { ...state, userIsLoggedIn: action.payload };
-
     case SET_USER_IS_ADMIN:
       return { ...state, userIsAdmin: action.payload }
-
+    case RESET_USER:
+      return initialState
     default:
       return state;
   }

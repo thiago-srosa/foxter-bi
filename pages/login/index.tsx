@@ -13,19 +13,24 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 //Import Styles + Custom Components
 import { StyledGoogleLoginContainer } from '../../src/pages/login/styles'
 
-function login() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
-}
+import { useSelector, useDispatch } from "react-redux";
+import { setUserIsLoggedIn } from "../../store/user/actions";
 
 const LoginPage = () => {
-
+  const dispatch = useDispatch();
   const router = useRouter();
-  const { user } = useAuthState(firebase.auth());
+  const { userIsLoggedIn } = useSelector((state) => state.user);
+
+  function login() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(
+      dispatch(setUserIsLoggedIn(true))
+    );
+  }
 
   useEffect(() => {
-    user ? router.push("/") : true;
-  }, [user])
+    userIsLoggedIn ? router.push("/") : true;
+  }, [userIsLoggedIn])
 
   return (
     <>

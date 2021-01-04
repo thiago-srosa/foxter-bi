@@ -26,7 +26,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 import { useSelector, useDispatch } from "react-redux";
-import { userReset, setUserIsAdmin } from "../../store/actions/user";
+import { resetUser, setUserIsAdmin } from "../../store/user/actions";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import useStyles from './styles';
 
@@ -56,7 +56,7 @@ const CustomDrawer: React.ElementType = (props) => {
         .where("email", "==", user.email)
         .get()
         .then(querySnapshot => {
-          querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin()) : null;
+          querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin(true)) : null;
         })
     }
   }, [user])
@@ -67,7 +67,7 @@ const CustomDrawer: React.ElementType = (props) => {
 
   const logout = () => {
     firebase.auth().signOut();
-    dispatch(userReset());
+    dispatch(resetUser());
   }
 
   const FuncaoNositema: React.ElementType = (props) => {

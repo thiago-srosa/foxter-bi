@@ -1,16 +1,12 @@
-//import React
-import { useEffect } from 'react'
 
 //import  NextJs
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 
 //Import Redux State
-import { storeWrapper } from "../store"
-
-//Import Firebase Hooks
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
+import { store, persistor } from '../store/index'
 
 //import Firebase
 import firebase from 'firebase/app'
@@ -18,6 +14,7 @@ import 'firebase/auth'
 
 //import Custom Components
 import CustomDrawer from '../components/Drawer/index'
+
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -34,13 +31,6 @@ if (!firebase.apps.length) {
 }
 
 const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
-
-  const { user } = useAuthState(firebase.auth());
-  const router = useRouter();
-
-  useEffect(() => {
-    user == null ? router.push("/login") : true;
-  }, [router.pathname, user])
 
   return (
     <>
@@ -73,11 +63,16 @@ const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
       </Head>
-      <CustomDrawer>
-        <Component {...pageProps} />
-      </CustomDrawer>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <CustomDrawer>
+            <Component {...pageProps} />
+          </CustomDrawer>
+        </PersistGate>
+      </Provider>
+
     </>
   )
 }
 
-export default storeWrapper.withRedux(MyApp)
+export default MyApp

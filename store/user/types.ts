@@ -1,5 +1,6 @@
 export const SET_USER_IS_LOGGED_IN = "SET_USER_IS_LOGGED_IN";
 export const SET_USER_IS_ADMIN = "SET_USER_IS_ADMIN";
+export const RESET_USER = "RESET_USER";
 
 export interface UserState {
   userIsLoggedIn: boolean,
@@ -16,6 +17,11 @@ export interface SetUserIsAdminAction {
   payload: boolean
 }
 
+export interface ResetUserAction {
+  type: typeof RESET_USER
+}
+
 export type UserActionTypes =
   SetUserIsLoggedInAction |
-  SetUserIsAdminAction
+  SetUserIsAdminAction |
+  ResetUserAction
