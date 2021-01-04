@@ -19,14 +19,16 @@ const CustomAvatar = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.avatarDiv}>
+    <>
       {user ?
         <>
-          <Avatar alt="Remy Sharp" className={classes.large} src={user.photoURL} />
+          <div className={classes.avatarDiv}>
+            <Avatar alt="Remy Sharp" className={classes.large} src={user.photoURL} />
+          </div>
           <p>Olá, <b>{user.displayName}</b></p>
         </>
         : null}
-    </div>
+    </>
   )
 }
 

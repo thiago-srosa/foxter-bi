@@ -44,9 +44,12 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     avatarDiv: {
+      display: 'flex',
       paddingTop: '15px',
-      textAlign: '-webkit-center',
+      justifyContent: 'center',
+
       '& > *': {
+        display: 'block',
         margin: theme.spacing(1),
       },
     },
