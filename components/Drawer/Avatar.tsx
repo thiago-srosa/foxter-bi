@@ -11,11 +11,14 @@ import 'firebase/auth';
 //
 import { useSelector } from "react-redux";
 
+//Import Type Root State
+import { RootState } from '../../store/reducers'
+
 //Import Styles
 import useStyles from './styles'
 
 const CustomAvatar = () => {
-  const { userIsLoggedIn, userDisplayName, userPhotoUrl } = useSelector((state) => state.user);
+  const { userIsLoggedIn, userDisplayName, userPhotoUrl } = useSelector((state: RootState) => state.user);
   const classes = useStyles();
 
   return (
@@ -27,7 +30,7 @@ const CustomAvatar = () => {
           </div>
           <p>Olá, <b>{userDisplayName}</b></p>
         </>
-        : null}        
+        : null}
     </>
   )
 }

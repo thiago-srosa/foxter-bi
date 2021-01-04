@@ -5,7 +5,7 @@ export const SET_USER_PHOTO_URL = 'SET_USER_PHOTO_URL'
 export const SET_USER_EMAIL = 'SET_USER_EMAIL'
 export const RESET_USER = 'RESET_USER'
 
-export interface UserState {
+export interface IUserState {
   userIsLoggedIn: boolean,
   userDisplayName: string,
   userIsAdmin: boolean,

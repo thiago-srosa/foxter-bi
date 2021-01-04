@@ -130,8 +130,6 @@ const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
         <meta property='og:site_name' content='PWA App' />
         <meta property='og:url' content='https://foxter-bi.vercel.app/' />
         <meta property='og:image' content='https://foxter-bi.vercel.app//static/icons/apple-touch-icon.png' />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
       </Head>
       <Provider store={store}>

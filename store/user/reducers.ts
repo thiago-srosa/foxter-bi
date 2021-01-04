@@ -6,10 +6,10 @@ import {
   SET_USER_EMAIL,
   RESET_USER,
   UserActionTypes,
-  UserState,
+  IUserState,
 } from './types'
 
-const initialState: UserState = {
+const initialState: IUserState = {
   userIsLoggedIn: false,
   userDisplayName: null,
   userIsAdmin: false,
@@ -17,10 +17,10 @@ const initialState: UserState = {
   userEmail: null,
 };
 
-function NovoContratoReducer(
+function UserReducer(
   state = initialState,
   action: UserActionTypes
-): UserState {
+): IUserState {
   switch (action.type) {
 
     case SET_USER_IS_LOGGED_IN:
@@ -40,4 +40,4 @@ function NovoContratoReducer(
   }
 }
 
-export default NovoContratoReducer;
+export default UserReducer;

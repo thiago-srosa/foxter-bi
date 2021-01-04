@@ -1,19 +1,26 @@
-import React from 'react'
+//Import React
+import React, { useEffect } from 'react'
+
+//Import React-Redux
+import { useSelector, useDispatch } from "react-redux";
+
 //import Google-Button
 import GoogleButton from 'react-google-button'
-//import React
-import { useEffect } from 'react';
+
 //import  NextJs
 import { useRouter } from 'next/router'
+
 //import Firebase
 import 'firebase/auth';
 import firebase from 'firebase/app';
-//Import Firebase Hooks
-import { useAuthState } from 'react-firebase-hooks/auth'
+
 //Import Styles + Custom Components
 import { StyledGoogleLoginContainer } from '../../src/pages/login/styles'
 
-import { useSelector, useDispatch } from "react-redux";
+//Import Type Root State
+import { RootState } from '../../store/reducers'
+
+//Import User Actions
 import {
   setUserIsLoggedIn,
   setUserDisplayName,
@@ -24,7 +31,7 @@ import {
 const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userIsLoggedIn } = useSelector((state) => state.user);
+  const userIsLoggedIn = useSelector((state: RootState) => state.user.userIsLoggedIn);
 
   function login() {
     const provider = new firebase.auth.GoogleAuthProvider();

@@ -30,6 +30,9 @@ import { resetUser, setUserIsAdmin } from "../../store/user/actions";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import useStyles from './styles';
 
+//Import Type Root State
+import { RootState } from '../../store/reducers'
+
 //Import Types.ts
 import {
   UserState,
@@ -47,8 +50,7 @@ const CustomDrawer: React.ElementType = (props) => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const { user }: UserState = useAuthState(firebase.auth());
-  const { userEmail,userIsLoggedIn, userIsAdmin } = useSelector<UserIsAdmin>((state) => state.user);
+  const { userEmail, userIsLoggedIn, userIsAdmin } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (userEmail) {
