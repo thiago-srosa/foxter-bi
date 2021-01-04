@@ -1,5 +1,5 @@
 //Import NextJS
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 
 //Import Styled-Components
 import { ServerStyleSheet } from 'styled-components'
@@ -8,7 +8,7 @@ import { ServerStyleSheet } from 'styled-components'
 import { ServerStyleSheets } from '@material-ui/styles'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {
     const styledComponentsSheet = new ServerStyleSheet()
     const materialSheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage;
@@ -21,11 +21,11 @@ class MyDocument extends Document {
       return {
         ...initialProps,
         styles: (
-          <React.Fragment>
+          <>
             {initialProps.styles}
             {materialSheets.getStyleElement()}
             {styledComponentsSheet.getStyleElement()}
-          </React.Fragment>
+          </>
         )
       }
     } finally {

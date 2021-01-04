@@ -11,7 +11,7 @@ import firebase from 'firebase/app';
 //Import Firebase Hooks
 import { useAuthState } from 'react-firebase-hooks/auth'
 //Import Styles + Custom Components
-import { StyledGoogleLoginContainer } from '../../components/login/styles'
+import { StyledGoogleLoginContainer } from '../../src/pages/login/styles'
 
 function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -30,7 +30,7 @@ const LoginPage = () => {
   return (
     <>
       <StyledGoogleLoginContainer>
-        <img src="https://i.ibb.co/NxK6nzL/Logo-3.png" alt="Setores-Foxter-PADRA-O" style={{ width: '240px'}} />
+        <img src="https://i.ibb.co/NxK6nzL/Logo-3.png" alt="Setores-Foxter-PADRA-O" style={{ width: '240px' }} />
         <div style={{ height: 150 }} />
         <GoogleButton
           onClick={login}

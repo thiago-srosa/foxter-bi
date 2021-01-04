@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import clsx from 'clsx';
 import Hidden from '@material-ui/core/Hidden';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,15 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Link from 'next/link'
-
-import Container from '@material-ui/core/Container';
 
 //Import Material UI
 import Button from '@material-ui/core/Button';
@@ -30,20 +25,30 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-import CustomAvatar from './Avatar';
-import { StyledLogoutButton, StyledA, useStyles } from './styles';
 import { useSelector, useDispatch } from "react-redux";
 import { userReset, setUserIsAdmin } from "../../store/actions/user";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import useStyles from './styles';
 
-function CustomDrawer(props) {
+//Import Types.ts
+import {
+  UserState,
+  UserIsAdmin
+} from '../../src/types'
+
+//Import Custom Components with loadable
+import loadable from '@loadable/component'
+const CustomAvatar = loadable(() => import('./Avatar'))
+const StyledA = loadable(() => import('./StyledA'))
+
+const CustomDrawer: React.ElementType = (props) => {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const { user } = useAuthState(firebase.auth());
-  const { userIsAdmin } = useSelector((state) => state.user);
+  const { user }: UserState = useAuthState(firebase.auth());
+  const { userIsAdmin } = useSelector<UserIsAdmin>((state) => state.user);
 
   useEffect(() => {
     if (user) {
@@ -65,8 +70,8 @@ function CustomDrawer(props) {
     dispatch(userReset());
   }
 
-  const FuncaoNositema = (props) => {
-    return <span style={{ textAlign: '-webkit-center', padding: '20px' }}>{props.funcao}</span>
+  const FuncaoNositema: React.ElementType = (props) => {
+    return <span style={{ padding: '20px' }}>{props.funcao}</span>
   }
 
   const drawer = (
@@ -82,7 +87,7 @@ function CustomDrawer(props) {
           <>
             <CustomAvatar />
             <div style={{}}>
-              <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
+              <Button variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
                 Sair
           </Button>
             </div >
@@ -113,18 +118,7 @@ function CustomDrawer(props) {
               <ListItemText primary="Novo Contrato" />
             </ListItem>
           </StyledA>
-        </Link>
-
-        <Link href="/novo-resumo-documentacao" passHref >
-          <StyledA >
-            <ListItem >
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Novo Resumo" />
-            </ListItem>
-          </StyledA>
-        </Link>
+        </Link>   
 
       </List>
     </div>

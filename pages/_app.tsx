@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 //import  NextJs
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import type { AppProps } from 'next/app'
 
 //Import Redux State
 import { storeWrapper } from "../store"
@@ -32,14 +33,14 @@ if (!firebase.apps.length) {
   firebase.app(); // if already initialized, use that one
 }
 
-function MyApp({ Component, pageProps }) {
+const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
 
   const { user } = useAuthState(firebase.auth());
   const router = useRouter();
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {      
-      window.addEventListener("load", function () {        
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
         navigator.serviceWorker.register("/sw.js").then(
           function (registration) {
             console.log("Service Worker registration successful with scope: ", registration.scope);
@@ -50,7 +51,7 @@ function MyApp({ Component, pageProps }) {
         );
       });
     }
-  }, [user])  
+  }, [])
 
   console.log(router.pathname)
 
