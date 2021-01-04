@@ -25,8 +25,7 @@ const CustomAvatar = () => {
           <div className={classes.avatarDiv}>
             <Avatar alt="Remy Sharp" className={classes.large} src={user.photoURL} />
           </div>
-          <p>Olá, <b>{user.displayName}</b></p>
-          <p>last test</p>
+          <p>Olá, <b>{user.displayName}</b></p>          
         </>
         : null}
     </>
