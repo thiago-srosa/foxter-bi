@@ -17,7 +17,7 @@ const initialState: NovoContratoState = {
   novoContratoVendedores: [],
 };
 
-export function NovoContratoReducer(
+function NovoContratoReducer(
   state = initialState,
   action: NovoContratoActionTypes
 ): NovoContratoState {
@@ -47,3 +47,5 @@ export function NovoContratoReducer(
       return state;
   }
 }
+
+export default NovoContratoReducer;
