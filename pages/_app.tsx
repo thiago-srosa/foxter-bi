@@ -33,13 +33,12 @@ if (!firebase.apps.length) {
   firebase.app(); // if already initialized, use that one
 }
 
+declare const window: any;
 
 const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
 
   const { user } = useAuthState(firebase.auth());
-  const router = useRouter();
-
-  declare const window: any;
+  const router = useRouter();  
 
   useEffect(() => {
 
