@@ -182,6 +182,7 @@ const CustomDrawer: React.ElementType = (props) => {
       </nav>
       <main className={classes.content} >
         <div className={classes.toolbar} />
+        <p>small test</p>
         {props.children}
       </main>
     </div>
