@@ -48,18 +48,18 @@ const CustomDrawer: React.ElementType = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
   const { user }: UserState = useAuthState(firebase.auth());
-  const { userIsAdmin } = useSelector<UserIsAdmin>((state) => state.user);
+  const { userEmail,userIsLoggedIn, userIsAdmin } = useSelector<UserIsAdmin>((state) => state.user);
 
   useEffect(() => {
-    if (user) {
+    if (userEmail) {
       firebase.firestore().collection("admin")
-        .where("email", "==", user.email)
+        .where("email", "==", userEmail)
         .get()
         .then(querySnapshot => {
           querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin(true)) : null;
         })
     }
-  }, [user])
+  }, [userEmail])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -83,7 +83,7 @@ const CustomDrawer: React.ElementType = (props) => {
 
       <Divider />
       <div style={{ textAlign: 'center' }}>
-        {user ?
+        {userIsLoggedIn ?
           <>
             <CustomAvatar />
             <div style={{}}>
@@ -118,7 +118,7 @@ const CustomDrawer: React.ElementType = (props) => {
               <ListItemText primary="Novo Contrato" />
             </ListItem>
           </StyledA>
-        </Link>   
+        </Link>
 
       </List>
     </div>
@@ -131,7 +131,7 @@ const CustomDrawer: React.ElementType = (props) => {
 
       <CssBaseline />
 
-      <AppBar position="fixed" className={classes.appBar} style={user ? null : { display: 'none' }}>
+      <AppBar position="fixed" className={classes.appBar} style={userIsLoggedIn ? null : { display: 'none' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -147,7 +147,7 @@ const CustomDrawer: React.ElementType = (props) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders" style={user ? null : { display: 'none' }}>
+      <nav className={classes.drawer} aria-label="mailbox folders" style={userIsLoggedIn ? null : { display: 'none' }}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css" >
 
@@ -163,7 +163,7 @@ const CustomDrawer: React.ElementType = (props) => {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
-            style={user ? null : { display: 'none' }}
+            style={userIsLoggedIn ? null : { display: 'none' }}
           >
             {drawer}
           </Drawer>
@@ -181,7 +181,7 @@ const CustomDrawer: React.ElementType = (props) => {
         </Hidden>
       </nav>
       <main className={classes.content} >
-        <div className={classes.toolbar} />        
+        <div className={classes.toolbar} />
         {props.children}
       </main>
     </div>

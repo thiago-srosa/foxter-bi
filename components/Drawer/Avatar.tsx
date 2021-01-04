@@ -4,30 +4,30 @@ import React from 'react';
 //Import Material-UI
 import Avatar from '@material-ui/core/Avatar';
 
-//Import Firebase Hooks
-import { useAuthState } from 'react-firebase-hooks/auth';
-
 //Import Firebase
 import firebase from 'firebase/app';
 import 'firebase/auth';
+
+//
+import { useSelector } from "react-redux";
 
 //Import Styles
 import useStyles from './styles'
 
 const CustomAvatar = () => {
-  const { user } = useAuthState(firebase.auth());
+  const { userIsLoggedIn, userDisplayName, userPhotoUrl } = useSelector((state) => state.user);
   const classes = useStyles();
 
   return (
     <>
-      {user ?
+      {userIsLoggedIn ?
         <>
           <div className={classes.avatarDiv}>
-            <Avatar alt="Remy Sharp" className={classes.large} src={user.photoURL} />
+            <Avatar alt="Remy Sharp" className={classes.large} src={userPhotoUrl} />
           </div>
-          <p>Olá, <b>{user.displayName}</b></p>          
+          <p>Olá, <b>{userDisplayName}</b></p>
         </>
-        : null}
+        : null}        
     </>
   )
 }

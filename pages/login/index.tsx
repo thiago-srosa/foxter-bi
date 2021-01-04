@@ -14,7 +14,12 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { StyledGoogleLoginContainer } from '../../src/pages/login/styles'
 
 import { useSelector, useDispatch } from "react-redux";
-import { setUserIsLoggedIn } from "../../store/user/actions";
+import {
+  setUserIsLoggedIn,
+  setUserDisplayName,
+  setUserEmail,
+  setUserPhotoUrl
+} from "../../store/user/actions";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -23,9 +28,12 @@ const LoginPage = () => {
 
   function login() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(
+    firebase.auth().signInWithPopup(provider).then(() => {
+      dispatch(setUserDisplayName(firebase.auth().currentUser.displayName))
+      dispatch(setUserEmail(firebase.auth().currentUser.email))
+      dispatch(setUserPhotoUrl(firebase.auth().currentUser.photoURL))
       dispatch(setUserIsLoggedIn(true))
-    );
+    })
   }
 
   useEffect(() => {
@@ -47,4 +55,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage;
+export default LoginPage
