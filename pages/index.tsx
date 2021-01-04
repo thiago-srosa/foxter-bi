@@ -53,18 +53,15 @@ export default function Home(): React.ReactElement {
         // `event.wasWaitingBeforeRegister` will be false if this is the first time the updated service worker is waiting.
         // When `event.wasWaitingBeforeRegister` is true, a previously updated service worker is still waiting.
         // You may want to customize the UI prompt accordingly.
-        if (confirm('A newer version of this web app is available, reload to update?')) {
-          wb.addEventListener('controlling', event => {
-            window.location.reload()
-          })
 
-          // Send a message to the waiting service worker, instructing it to activate.
-          wb.messageSW({ type: 'SKIP_WAITING' })
-        } else {
-          console.log(
-            'User rejected to reload the web app, keep using old version. New version will be automatically load when user open the app next time.'
-          )
-        }
+        wb.addEventListener('install', function (event) {
+          window.location.reload()
+        });
+
+        self.addEventListener('activate', function(event) {
+          window.location.reload()
+        });
+      
       }
 
       wb.addEventListener('waiting', promptNewVersionAvailable)

@@ -8,7 +8,7 @@ runtimeCaching[0].handler = 'StaleWhileRevalidate'
 module.exports = withPWA({
   pwa: {
     dest: 'public',
-    register: true,
+    register: false,
     skipWaiting: false,
     runtimeCaching
   }
