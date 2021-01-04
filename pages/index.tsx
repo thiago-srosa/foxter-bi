@@ -5,19 +5,8 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-//Import Firebase
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-
-//Import Firebase Hooks
-import { useAuthState } from 'react-firebase-hooks/auth'
-
 //Import React Redux
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setUserIsLoggedIn,
-} from "../store/user/actions";
+import { useSelector } from "react-redux";
 
 function ChangeTitle(): React.ReactElement {
   return (
@@ -30,7 +19,6 @@ function ChangeTitle(): React.ReactElement {
 declare const window: any
 
 export default function Home(): React.ReactElement {
-  //const { initialising, user } = useAuthState(firebase.auth());
   const router = useRouter();
   const { userIsLoggedIn } = useSelector((state) => state.user);
 
