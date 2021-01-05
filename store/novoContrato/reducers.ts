@@ -14,7 +14,7 @@ const initialState: NovoContratoState = {
   novoContratoValorLiquidoVenda: null,
   novoContratoValorCorreategemVenda: null,
   novoContratoPercentualComissaoVenda: null,
-  novoContratoVendedores: [],
+  novoContratoVendedores: null,
 };
 
 function NovoContratoReducer(
@@ -35,10 +35,9 @@ function NovoContratoReducer(
     case SET_NOVO_CONTRATO_PERCENTUAL_CORRETAGEM_VENDA:
       return { ...state, novoContratoPercentualComissaoVenda: action.payload }
 
-    /*
-  case ADD_NOVO_CONTRATO_VENDEDORES:
-    return { ...state, novoContratoVendedores: [...state.novoContratoVendedores, action.payload] };
-    */
+    case ADD_NOVO_CONTRATO_VENDEDORES:
+      return { ...state, novoContratoVendedores: [...state.novoContratoVendedores, action.payload] };
+
 
     case RESET_NOVO_CONTRATO:
       return initialState;

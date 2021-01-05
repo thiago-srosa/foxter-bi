@@ -1,57 +1,54 @@
-//Import NextJS
+//NEXTJS
 import Head from 'next/head'
-
-//Import Firebase Hooks
-import { useAuthState } from 'react-firebase-hooks/auth'
-
-//Import Custom Components
+//CUSTOM COMPONENTS
 import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
 import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
 import DadosGerais from '../../components/novo-contrato/DadosGerais'
 
-//Import Firebase
-import 'firebase/auth';
-import 'firebase/firestore';
-import firebase from 'firebase/app';
+//REACT-REDUX
+import { useSelector } from "react-redux";
+//STORE => TYPE ROOT STATE
+import { RootState } from '../../store/reducers'
 
 //Import Custom Styles
 import { SectionDiv } from '../../src/pages/novo-contrato/pageStyles'
 
-const solicitarContrato: React.ElementType = () => {
+const SolicitarContrato: React.ElementType = () => {
 
-  const { user } = useAuthState(firebase.auth());
+  const { userIsLoggedIn } = useSelector((state: RootState) => state.user);
 
-  var content = null;
+  const Content = (): React.ReactElement => {
+    if (userIsLoggedIn) {
+      return (
+        <>
+          <Head>
+            <title>Novo contrato</title>
+          </Head>
 
-  if (user !== null) {
-    content = (
-      <>
-        <Head>
-          <title>Novo contrato</title>
-        </Head>
+          <SectionDiv >
+            <DadosGerais />
+          </SectionDiv>
 
-        <SectionDiv >
-          <DadosGerais />
-        </SectionDiv>
+          <SectionDiv style={{ marginTop: 10 }}>
+            <NovoVendedorPF />
+            <TabelaVendedores />
+          </SectionDiv>
 
-        <SectionDiv style={{ marginTop: 10 }}>
-          <NovoVendedorPF />
-          <TabelaVendedores />
-        </SectionDiv>
-
-        <SectionDiv style={{ marginTop: 10 }}>
-          <NovoVendedorPF />
-          <TabelaVendedores />
-        </SectionDiv>
-      </>
-    )
+          <SectionDiv style={{ marginTop: 10 }}>
+            <NovoVendedorPF />
+            <TabelaVendedores />
+          </SectionDiv>
+        </>
+      )
+    }
+    return null
   }
 
   return (
     <>
-      {content}
+      <Content />
     </>
   )
 }
 
-export default solicitarContrato;
+export default SolicitarContrato;

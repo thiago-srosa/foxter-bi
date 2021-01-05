@@ -1,22 +1,22 @@
+//IMPORT REACT
 import React from 'react'
-
-//Import Material-UI
+//MATERIAL-UI
 import TextField from '@material-ui/core/TextField';
-
-//Import styles
+//CUSTOM STYLES
 import { H2, useStyles } from './styles'
-
-//Import react-number-format
+//REACT-NUMBER-FORMAT
 import NumberFormat from 'react-number-format';
-
-//Import React Redux
+//REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
+//STORE => TYPE ROOT STATE
+import { RootState } from '../../../store/reducers'
+//STORE => USER ACTIONS
 import {
-  setValorTotalVenda,
-  setValorLiquidoVenda,
-  setValorCorretagemVenda,
-  setPercentualCorretagemVenda,
-} from "../../../store/actions/novoContrato";
+  setNovoContratoValorTotalVenda,
+  setNovoContratoValorLiquidoVenda,
+  setNovoContratoValorCorretagemVenda,
+  setNovoContratoPercentualCorretagemVenda,
+} from "../../../store/novoContrato/actions";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -42,16 +42,18 @@ function NumberFormatCustom(props) {
   );
 }
 
-const DadosGerais = () => {
+const DadosGerais = (): React.ReactElement => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const {
-    novoContratoValorTotalVenda,
-    novoContratoValorLiquidoVenda,
-    novoContratoValorCorreategemVenda,
-    novoContratoPercentualComissaoVenda,
-  } = useSelector((state) => state.novoContrato);
+  
+  /*  const {
+      novoContratoValorTotalVenda,
+      novoContratoValorLiquidoVenda,
+      novoContratoValorCorreategemVenda,
+      novoContratoPercentualComissaoVenda,
+    } = useSelector((state: RootState) => state.novoContrato);
+  */
 
   return (
     <>
@@ -62,6 +64,7 @@ const DadosGerais = () => {
           label="Valor total"
           fullWidth
           required
+          onChange={(event) => { dispatch(setNovoContratoValorTotalVenda(+event.target.value)) }}
           autoComplete='off'
           type='number'
         />
@@ -71,6 +74,7 @@ const DadosGerais = () => {
           label="Valor da comissão"
           fullWidth
           required
+          onChange={(event) => { dispatch(setNovoContratoValorCorretagemVenda(+event.target.value)) }}
           autoComplete='off'
           type='number'
         />
@@ -80,6 +84,7 @@ const DadosGerais = () => {
           label="Valor líquido"
           fullWidth
           required
+          onChange={(event) => { dispatch(setNovoContratoValorLiquidoVenda(+event.target.value)) }}
           autoComplete='off'
           type='number'
         />
@@ -88,6 +93,7 @@ const DadosGerais = () => {
           id="percentualComissaoVenda"
           label="% comissão"
           fullWidth
+          onChange={(event) => { dispatch(setNovoContratoPercentualCorretagemVenda(+event.target.value)) }}
           required
           autoComplete='off'
           type='number'
@@ -95,8 +101,8 @@ const DadosGerais = () => {
 
         <TextField
           label="Valor total"
-          value={novoContratoValorTotalVenda}
-          onChange={(event) => { dispatch(setValorTotalVenda(event.target.value)) }}
+          //value={novoContratoValorTotalVenda}
+          onChange={(event) => { dispatch(setNovoContratoValorTotalVenda(+event.target.value)) }}
           id="valorTotalVenda"
           InputProps={{
             inputComponent: NumberFormatCustom,

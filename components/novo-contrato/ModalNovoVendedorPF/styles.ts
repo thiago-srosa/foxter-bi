@@ -76,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '50%',
     paddingRight: '15px',
     marginTop: '10px',
-    [theme.breakpoints.down('600')]: {
+    [theme.breakpoints.down(600)]: {
       width: '100%',
       display: 'block',
       paddingRight: '0px',
@@ -87,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '50%',
     marginTop: '10px',
     marginBottom: '0px',
-    [theme.breakpoints.down('600')]: {
+    [theme.breakpoints.down(600)]: {
       width: '100%',
       display: 'block',
       marginTop: '10px',

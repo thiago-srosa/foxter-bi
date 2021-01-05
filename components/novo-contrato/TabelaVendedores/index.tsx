@@ -11,6 +11,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 //Import React Redux
 import { useSelector } from "react-redux";
+import { RootState } from '../../../store/reducers';
 
 const useStyles = makeStyles({
   inputLabel: {
@@ -171,7 +172,7 @@ function CollapseableRow({ vendedor, index }) {
 
 function Row() {
 
-  const { novoContratoVendedores } = useSelector((state) => state.novoContrato);
+  const { novoContratoVendedores } = useSelector((state: RootState) => state.novoContrato);
 
   console.log(novoContratoVendedores)
 

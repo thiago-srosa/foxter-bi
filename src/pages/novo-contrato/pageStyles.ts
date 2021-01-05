@@ -1,7 +1,6 @@
-//Import Material UI
+//MATERIAL-UI
 import { makeStyles } from '@material-ui/core/styles';
-
-//Import styled-components
+//STYLED-COMPONETS
 import styled from 'styled-components'
 
 export const useStyles = makeStyles((theme) => ({

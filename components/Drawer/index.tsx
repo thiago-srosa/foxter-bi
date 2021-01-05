@@ -1,48 +1,41 @@
+//REACT
 import { useState, useEffect } from 'react';
-
-import Hidden from '@material-ui/core/Hidden';
+//MATERIAL-UI
 import { useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import Link from 'next/link'
-
-//Import Material UI
-import Button from '@material-ui/core/Button';
-
-import HomeIcon from '@material-ui/icons/Home';
+import ListItem from '@material-ui/core/ListItem'
+//FIREBASE
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-
+//REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
+//STORE => USER ACTIONS
 import { resetUser, setUserIsAdmin } from "../../store/user/actions";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import useStyles from './styles';
-
-//Import Type Root State
+//STORE => TYPE ROOT STATE
 import { RootState } from '../../store/reducers'
-
-//Import Types.ts
-import {
-  UserState,
-  UserIsAdmin
-} from '../../src/types'
-
-//Import Custom Components with loadable
+//CUSTOM STYLES
+import useStyles from './styles';
+//LOADABLE/COMPONENT
 import loadable from '@loadable/component'
+
+const Button = loadable(() => import('@material-ui/core/Button'))
+const HomeIcon = loadable(() => import('@material-ui/icons/Home'))
 const CustomAvatar = loadable(() => import('./Avatar'))
 const StyledA = loadable(() => import('./StyledA'))
+const Hidden = loadable(() => import('@material-ui/core/Hidden'))
+const Drawer = loadable(() => import('@material-ui/core/Drawer'))
+const CssBaseline = loadable(() => import('@material-ui/core/CssBaseline'))
+const AppBar = loadable(() => import('@material-ui/core/AppBar'))
+const Toolbar = loadable(() => import('@material-ui/core/Toolbar'))
+const List = loadable(() => import('@material-ui/core/List'))
+const Typography = loadable(() => import('@material-ui/core/Typography'))
+const Divider = loadable(() => import('@material-ui/core/Divider'))
+const IconButton = loadable(() => import('@material-ui/core/IconButton'))
+const MenuIcon = loadable(() => import('@material-ui/icons/Menu'))
+const ListItemIcon = loadable(() => import('@material-ui/core/ListItemIcon'))
+const ListItemText = loadable(() => import('@material-ui/core/ListItemText'))
+const InboxIcon = loadable(() => import('@material-ui/icons/MoveToInbox'))
+const Link = loadable(() => import('next/link'))
 
 const CustomDrawer: React.ElementType = (props) => {
   const { window } = props;
@@ -50,7 +43,11 @@ const CustomDrawer: React.ElementType = (props) => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const { userEmail, userIsLoggedIn, userIsAdmin } = useSelector((state: RootState) => state.user);
+  const {
+    userEmail,
+    userIsLoggedIn,
+    userIsAdmin
+  } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (userEmail) {
@@ -70,10 +67,27 @@ const CustomDrawer: React.ElementType = (props) => {
   const logout = () => {
     firebase.auth().signOut();
     dispatch(resetUser());
-  }
+  } 
 
-  const FuncaoNositema: React.ElementType = (props) => {
-    return <span style={{ padding: '20px' }}>{props.funcao}</span>
+  const CustomAvatarDiv = (): React.ReactElement => {
+    if (userIsLoggedIn) {
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <CustomAvatar />
+          <Button
+            variant="contained"
+            onClick={logout}
+            size="large"
+            color="secondary"
+            style={{ width: '200px', placeSelf: 'center' }}
+          >
+            Sair
+            </Button>
+          {userIsAdmin ? <span style={{ padding: '20px' }}>Administrador</span> : null}
+        </div >
+      )
+    }
+    return null
   }
 
   const drawer = (
@@ -84,20 +98,8 @@ const CustomDrawer: React.ElementType = (props) => {
       </div>
 
       <Divider />
-      <div style={{ textAlign: 'center' }}>
-        {userIsLoggedIn ?
-          <>
-            <CustomAvatar />
-            <div style={{}}>
-              <Button variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
-                Sair
-          </Button>
-            </div >
-          </>
-          : null
-        }
-        {userIsAdmin ? <FuncaoNositema funcao="Administrador" /> : null}
-      </div >
+
+      <CustomAvatarDiv />
 
       <List>
         <Link href="/" passHref >
@@ -190,156 +192,3 @@ const CustomDrawer: React.ElementType = (props) => {
   );
 }
 export default CustomDrawer
-
-/*
-function CustomDrawer(props) {
-
-  const dispatch = useDispatch();
-  const { userIsAdmin } = useSelector((state) => state.user);
-  const { user } = useAuthState(firebase.auth());
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  useEffect(() => {
-    if (user) {
-      firebase.firestore().collection("admin")
-        .where("email", "==", user.email)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.docs.length > 0 ? dispatch(setUserIsAdmin()) : null;
-        })
-    }
-  }, [user])
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const logout = () => {
-    firebase.auth().signOut();
-    dispatch(userReset());
-  }
-
-  const FuncaoNositema = (props) => {
-    return <span style={{ textAlign: '-webkit-center', padding: '20px' }}>{props.funcao}</span>
-  }
-
-  const container = window !== undefined ? () => window().document.body : undefined;
-
-  return (
-
-    <div className={classes.root} style={user ? null : { backgroundColor: 'rgb(66, 133, 244)' }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        style={user ? null : { display: 'none' }}
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <h2>
-            {"titulo aqui"}
-          </h2>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        style={user ? null : { display: 'none' }}
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-
-        <div className={classes.drawerHeader}>
-          <img src="https://i.ibb.co/B2XpXDB/Logo-3-1.png" alt="Setores-Foxter-PADRA-O" style={{ marginRight: '35px', width: '120px', }} />
-
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-
-        <Divider />
-
-        {user ?
-          <>
-            <CustomAvatar />
-            <Button className={classes.buttonLEFT} variant="contained" onClick={logout} size="large" color="secondary" style={{ width: '200px', placeSelf: 'center' }}>
-              Sair
-             </Button>
-          </>
-          : null
-        }
-
-        {userIsAdmin ? <FuncaoNositema funcao="Administrador" /> : null}
-
-        <List>
-          <Link href="/" passHref >
-            <StyledA >
-              <ListItem >
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Página Inicial" />
-              </ListItem>
-            </StyledA>
-          </Link>
-
-          <Link href="/novo-contrato" passHref >
-            <StyledA >
-              <ListItem >
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Novo Contrato" />
-              </ListItem>
-            </StyledA>
-          </Link>
-
-          <Link href="/novo-resumo-documentacao" passHref >
-            <StyledA >
-              <ListItem >
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Novo Resumo" />
-              </ListItem>
-            </StyledA>
-          </Link>
-
-        </List>
-      </Drawer>
-
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-        style={user ? { backgroundColor: '#eaeff1' } : null}
-      >
-        <div className={classes.drawerHeader} />
-        <Container className={classes.container} maxWidth="md">
-          {props.children}
-        </Container>
-      </main>
-    </div >
-
-  )
-}
-export default CustomDrawer
-
-*/

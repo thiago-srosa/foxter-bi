@@ -1,36 +1,43 @@
-//Import React
+//REACT
 import React from 'react';
-
-//Import Material-UI
-import Avatar from '@material-ui/core/Avatar';
-
-//Import Firebase
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
-//
+//REACT-REDUX
 import { useSelector } from "react-redux";
-
-//Import Type Root State
+//STORE => TYPE ROOT STATE
 import { RootState } from '../../store/reducers'
-
-//Import Styles
+//CUSTOM STYLES
 import useStyles from './styles'
+//LOADABLE/COMPONENT
+import loadable from '@loadable/component'
+
+const Avatar = loadable(() => import('@material-ui/core/Avatar'))
 
 const CustomAvatar = () => {
-  const { userIsLoggedIn, userDisplayName, userPhotoUrl } = useSelector((state: RootState) => state.user);
+
+  const {
+    userIsLoggedIn,
+    userDisplayName,
+    userPhotoUrl,
+  } = useSelector((state: RootState) => state.user);
+
   const classes = useStyles();
 
-  return (
-    <>
-      {userIsLoggedIn ?
+  const AvatarDiv = (): React.ReactElement => {
+    if (userIsLoggedIn) {
+      return (
         <>
           <div className={classes.avatarDiv}>
             <Avatar alt="Remy Sharp" className={classes.large} src={userPhotoUrl} />
           </div>
           <p>Olá, <b>{userDisplayName}</b></p>
         </>
-        : null}
+      )
+    }
+    return null
+  }
+
+  return (
+    <>
+      <AvatarDiv />
     </>
   )
 }

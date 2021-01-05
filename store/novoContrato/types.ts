@@ -5,12 +5,14 @@ export const SET_NOVO_CONTRATO_PERCENTUAL_CORRETAGEM_VENDA = "SET_NOVO_CONTRATO_
 export const ADD_NOVO_CONTRATO_VENDEDORES = "ADD_NOVO_CONTRATO_VENDEDORES";
 export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 
+import { NovoVendedorPFState } from './novoVendedorPF/types'
+
 export interface NovoContratoState {
   novoContratoValorTotalVenda: number,
   novoContratoValorLiquidoVenda: number,
   novoContratoValorCorreategemVenda: number,
   novoContratoPercentualComissaoVenda: number,
-  novoContratoVendedores: [],
+  novoContratoVendedores: NovoVendedorPFState[],
 };
 
 export interface SetNovoContratoValorTotalVendaAction {
@@ -33,11 +35,10 @@ export interface SetNovoContratoPercentualCorretagemVendaAction {
   payload: number
 }
 
-
-
-
-
-
+export interface AddNovoContratoVendedoresAction {
+  type: typeof ADD_NOVO_CONTRATO_VENDEDORES
+  payload: NovoVendedorPFState
+}
 
 export interface ResetNovoContratoAction {
   type: typeof RESET_NOVO_CONTRATO
@@ -48,4 +49,5 @@ export type NovoContratoActionTypes =
   SetNovoContratoValorLiquidoVendaAction |
   SetNovoContratoValorCorretagemVendaAction |
   SetNovoContratoPercentualCorretagemVendaAction |
+  AddNovoContratoVendedoresAction |
   ResetNovoContratoAction

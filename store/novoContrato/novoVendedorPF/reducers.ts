@@ -79,3 +79,5 @@ export function NovoVendedorPFReducer(
       return state;
   }
 };
+
+export default NovoVendedorPFReducer;
