@@ -15,9 +15,13 @@ export const SET_NOVO_VENDEDOR_PF_CEP = "SET_NOVO_VENDEDOR_PF_CEP";
 export const SET_NOVO_VENDEDOR_PF_OBSERVACAO = "SET_NOVO_VENDEDOR_PF_OBSERVACAO";
 export const RESET_NOVO_VENDEDOR_PF = "RESET_NOVO_VENDEDOR_PF";
 
+export interface handleDropDownSelection{
+  
+}
+
 export interface NovoVendedorPFState {
   novoVendedorPFNomeCompleto: string,
-  novoVendedorPFCPF: number,
+  novoVendedorPFCPF: string,
   novoVendedorPFRG: number,
   novoVendedorPFEmail: string,
   novoVendedorPFTelefone: number,
@@ -39,7 +43,7 @@ export interface SetNovoVendedorPFNomecompletoAction {
 }
 export interface SetNovoVendedorPFCPFAction {
   type: typeof SET_NOVO_VENDEDOR_PF_CPF
-  payload: number
+  payload: string
 }
 
 export interface SetNovoVendedorPFRGAction {

@@ -22,7 +22,7 @@ export const setNovoVendedorPFNomeCompleto = (nomeCompleto: string) => ({
   payload: nomeCompleto,
 })
 
-export const setNovoVendedorPFCPF = (cpf: number) => ({
+export const setNovoVendedorPFCPF = (cpf: string) => ({
   type: SET_NOVO_VENDEDOR_PF_CPF,
   payload: cpf,
 })

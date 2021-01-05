@@ -130,7 +130,7 @@ const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
         <meta property='og:site_name' content='PWA App' />
         <meta property='og:url' content='https://foxter-bi.vercel.app/' />
         <meta property='og:image' content='https://foxter-bi.vercel.app//static/icons/apple-touch-icon.png' />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
+        <link rel="stylesheet preconnect" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

@@ -1,8 +1,8 @@
 //NEXTJS
 import Head from 'next/head'
 //CUSTOM COMPONENTS
-import TabelaVendedores from '../../src/pages/novo-contrato/TabelaVendedores';
-import NovoVendedorPF from '../../src/pages/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
+import TabelaVendedores from '../../src/pages/novo-contrato/components/TabelaVendedores';
+import NovoVendedorPF from '../../src/pages/novo-contrato/components/ModalNovoVendedorPF/modalNovoVendedorPF';
 import DadosGerais from '../../src/pages/novo-contrato/'
 
 //REACT-REDUX
@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from '../../store/reducers'
 
 //Import Custom Styles
-import { SectionDiv } from '../../src/pages/novo-contrato/pageStyles'
+import { SectionDiv } from '../../src/pages/novo-contrato/styles'
 
 const SolicitarContrato: React.ElementType = () => {
 
@@ -27,11 +27,6 @@ const SolicitarContrato: React.ElementType = () => {
 
           <SectionDiv >
             <DadosGerais />
-          </SectionDiv>
-
-          <SectionDiv style={{ marginTop: 10 }}>
-            <NovoVendedorPF />
-            <TabelaVendedores />
           </SectionDiv>
 
           <SectionDiv style={{ marginTop: 10 }}>

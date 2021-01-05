@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
-
-//Import Material UI
-import { InputLabel, Input } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+//REACT
+import React, { useState } from 'react'
+//MATERIAL UI
+import { makeStyles } from '@material-ui/core/styles'
 
 //Import React Redux
-import { useSelector } from "react-redux";
-import { RootState } from '../../../../store/reducers';
+import { useSelector } from "react-redux"
+
+import { NovoVendedorPFState } from '../../../../../store/novoContrato/novoVendedorPF/types'
+import { RootState } from '../../../../../store/reducers'
+
+//LOADABLE/COMPONENT
+import loadable from '@loadable/component'
+
+const Input = loadable(() => import('@material-ui/core/Input'))
+const InputLabel = loadable(() => import('@material-ui/core/InputLabel'))
+const Collapse = loadable(() => import('@material-ui/core/Collapse'))
+const IconButton = loadable(() => import('@material-ui/core/IconButton'))
+const Typography = loadable(() => import('@material-ui/core/Typography'))
+const KeyboardArrowDownIcon = loadable(() => import('@material-ui/icons/KeyboardArrowDown'))
+const KeyboardArrowUpIcon = loadable(() => import('@material-ui/icons/KeyboardArrowUp'))
+
 
 const useStyles = makeStyles({
   inputLabel: {
@@ -23,8 +31,12 @@ const useStyles = makeStyles({
   }
 });
 
+interface ICollapseableRow {
+  vendedor: NovoVendedorPFState,
+  index: number
+}
 
-function CollapseableRow({ vendedor, index }) {
+function CollapseableRow(props: ICollapseableRow) {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -40,14 +52,14 @@ function CollapseableRow({ vendedor, index }) {
         <IconButton aria-label="expand row" size="small" onClick={() => handleClickCollapse()}>
           {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </IconButton>
-        {vendedor.novoVendedorNomeCompleto}
+        {props.vendedor.novoVendedorPFNomeCompleto}
       </div>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
 
         <form noValidate autoComplete="off">
 
-          <Typography variant="h6" gutterBottom component="div">
+          <Typography variant="h6" gutterBottom>
             Dados do vendedor
           </Typography>
 
@@ -56,7 +68,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorCPF}
+            value={props.vendedor.novoVendedorPFCPF}
           />
 
           <InputLabel className={classes.inputLabel}>RG</InputLabel>
@@ -64,7 +76,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorRG}
+            value={props.vendedor.novoVendedorPFRG}
           />
 
           <InputLabel className={classes.inputLabel}>E-mail</InputLabel>
@@ -72,7 +84,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorEmail}
+            value={props.vendedor.novoVendedorPFEmail}
           />
 
           <InputLabel className={classes.inputLabel}>Telefone</InputLabel>
@@ -80,7 +92,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorTelefone}
+            value={props.vendedor.novoVendedorPFTelefone}
           />
 
           <InputLabel className={classes.inputLabel}>Profissão</InputLabel>
@@ -88,7 +100,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorProfissao}
+            value={props.vendedor.novoVendedorPFProfissao}
           />
 
           <InputLabel className={classes.inputLabel}>Estado civil</InputLabel>
@@ -96,7 +108,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorEstadoCivil}
+            value={props.vendedor.novoVendedorPFEstadoCivil}
           />
 
           <InputLabel className={classes.inputLabel}>Regime de bens</InputLabel>
@@ -104,7 +116,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorRegimeBens}
+            value={props.vendedor.novoVendedorPFRegimeBens}
           />
 
           <InputLabel className={classes.inputLabel}>Logradouro</InputLabel>
@@ -112,7 +124,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorLogradouro}
+            value={props.vendedor.novoVendedorPFLogradouro}
           />
 
           <InputLabel className={classes.inputLabel}>Número</InputLabel>
@@ -120,7 +132,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorNumero}
+            value={props.vendedor.novoVendedorPFNumero}
           />
 
           <InputLabel className={classes.inputLabel}>Complemento</InputLabel>
@@ -128,7 +140,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorComplemento}
+            value={props.vendedor.novoVendedorPFComplemento}
           />
 
           <InputLabel className={classes.inputLabel}>Bairro</InputLabel>
@@ -136,7 +148,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorBairro}
+            value={props.vendedor.novoVendedorPFBairro}
           />
 
           <InputLabel className={classes.inputLabel}>Cidade</InputLabel>
@@ -144,7 +156,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorCidade}
+            value={props.vendedor.novoVendedorPFCidade}
           />
 
           <InputLabel className={classes.inputLabel}>CEP</InputLabel>
@@ -152,7 +164,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorCEP}
+            value={props.vendedor.novoVendedorPFCEP}
           />
 
           <InputLabel className={classes.inputLabel}>Observações</InputLabel>
@@ -160,7 +172,7 @@ function CollapseableRow({ vendedor, index }) {
             className={classes.input}
             fullWidth
             disabled
-            value={vendedor.novoVendedorObservacao}
+            value={props.vendedor.novoVendedorPFObservacao}
           />
 
         </form>
@@ -180,7 +192,7 @@ function Row() {
     <>
       {
         novoContratoVendedores.map((vendedor, index) => (
-          <CollapseableRow key={index} vendedor={vendedor} index={index} />
+          <CollapseableRow vendedor={vendedor} index={index} />
         ))
       }
     </>

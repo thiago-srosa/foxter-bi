@@ -26,11 +26,11 @@ import {
   setNovoVendedorPFCEP,
   setNovoVendedorPFObservacao,
   resetNovoVendedorPF,
-} from "../../../../store/novoContrato/novoVendedorPF/actions";
+} from "../../../../../store/novoContrato/novoVendedorPF/actions";
 //STORE => NOVO CONTRATO ACTIONS
-import { addNovoContratoVendedores } from "../../../../store/novoContrato/actions";
+import { addNovoContratoVendedores } from "../../../../../store/novoContrato/actions";
 //STORE => TYPE ROOT STATE
-import { RootState } from '../../../../store/reducers'
+import { RootState } from '../../../../../store/reducers'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
@@ -94,9 +94,9 @@ const NovoVendedorPF = () => {
     setOpen(false);
   };
 
-  const handleCEPchange = (postalCode) => {
+  const handleCEPchange = (postalCode: number) => {
     dispatch(setNovoVendedorPFCEP(postalCode))
-    if (postalCode.length === 8) {
+    if (postalCode.toString().length === 8) {
       const cepPromisse = axios.get('https://viacep.com.br/ws/' + postalCode + '/json/')
       cepPromisse.then((result) => {
         if (!result.data.erro) {
@@ -124,27 +124,12 @@ const NovoVendedorPF = () => {
     }
   }
 
-  const estadoCivil = [
-    { title: 'Solteiro(a)' },
-    { title: 'Casado(a)' },
-    { title: 'Separado(a)' },
-    { title: 'Divorciado(a)' },
-    { title: 'Viúvo(a)' },
-    { title: 'União Estável' },
-  ]
-
-  const regimeBens = [
-    { title: 'Comunhão parcial de bens' },
-    { title: 'Comunhão universal de bens' },
-    { title: 'Separação total de bens' },
-  ]
-
-  function handleClickChangeEstadoCivil(newValue) {
-    newValue !== null ? dispatch(setNovoVendedorPFEstadoCivil(newValue.title)) : dispatch(setNovoVendedorPFEstadoCivil(null))
+  function handleClickChangeEstadoCivil(newValue: string) {
+    newValue !== null ? dispatch(setNovoVendedorPFEstadoCivil(newValue)) : dispatch(setNovoVendedorPFEstadoCivil(null))
   }
 
-  function handleClickChangeRegimeBens(newValue) {
-    newValue !== null ? dispatch(setNovoVendedorPFRegimeBens(newValue.title)) : dispatch(setNovoVendedorPFRegimeBens(null))
+  function handleClickChangeRegimeBens(newValue: string) {
+    newValue !== null ? dispatch(setNovoVendedorPFRegimeBens(newValue)) : dispatch(setNovoVendedorPFRegimeBens(null))
   }
 
   function handleClickAddVendedorPF() {
@@ -254,10 +239,10 @@ const NovoVendedorPF = () => {
             fullWidth
             required
             autoComplete='off'
-            // error={novoVendedorPFCPF.toString().length >= 14 ? !cpf.isValid(novoVendedorPFCPF.toString()) : erroNovoVendedorPFCPF}
+            //error={novoVendedorPFCPF.toString().length >= 14 ? !cpf.isValid(novoVendedorPFCPF.toString()) : erroNovoVendedorPFCPF}
             value={novoVendedorPFCPF}
             helperText={erroNovoVendedorPFCPF ? 'CPF Inválido' : null}
-            onChange={e => dispatch(setNovoVendedorPFCPF(+cpf.format(e.target.value)))}
+            onChange={e => dispatch(setNovoVendedorPFCPF(cpf.format(e.target.value)))}
           />
 
           <TextField
@@ -309,46 +294,54 @@ const NovoVendedorPF = () => {
           />
 
           <AutoCompleteContainer>
+
             <Autocomplete
-              className={classes.inputModal50percentLEFT}
               fullWidth
-              options={estadoCivil}
-              //getOptionLabel={option => typeof option === 'string' ? option : option.title}
-              //getOptionSelected={(option, value) => option.title === value}
-              value={novoVendedorPFEstadoCivil}
-              onChange={(event, newValue) => handleClickChangeEstadoCivil(newValue)}
+              className={classes.inputModal50percentLEFT}
+              inputValue={novoVendedorPFEstadoCivil}
+              onInputChange={(event, newInputValue) => {
+                handleClickChangeEstadoCivil(newInputValue);
+              }}
+              options={['Solteiro(a)', 'Casado(a)', 'Separado(a)', 'Divorciado(a)', 'Viúvo(a)', 'União Estável']}
+              style={{ width: 300 }}
               renderInput={(params) =>
                 <TextField
                   {...params}
+                  fullWidth
                   required
                   error={erroNovoVendedorPFEstadoCivil}
-                  autoComplete='off'
-                  label='Situação Civil'
+                  autoComplete="off"
+                  label="Estado Civil"
                 />}
             />
+
             {(novoVendedorPFEstadoCivil === null ||
               novoVendedorPFEstadoCivil === "Solteiro(a)" ||
               novoVendedorPFEstadoCivil === "Separado(a)" ||
               novoVendedorPFEstadoCivil === "Divorciado(a)" ||
               novoVendedorPFEstadoCivil === "Viúvo(a)"
             ) ? null :
+
               <Autocomplete
                 className={classes.inputModal50percentRIGHT}
                 fullWidth
-                options={regimeBens}
-                //getOptionLabel={option => typeof option === 'string' ? option : option.title}
-                value={novoVendedorPFRegimeBens}
-                //getOptionSelected={(option, value) => option.title === value}
-                //onChange={(event, newValue) => dispatch(setNovoVendedorPFRegimeBens(newValue))}
+                inputValue={novoVendedorPFRegimeBens}
+                onInputChange={(event, newInputValue) => {
+                  handleClickChangeRegimeBens(newInputValue);
+                }}
+                options={['Comunhão parcial de bens', 'Comunhão universal de bens', 'Separação total de bens']}
+                style={{ width: 300 }}
                 renderInput={(params) =>
                   <TextField
                     {...params}
+                    fullWidth
                     required
                     error={erroNovoVendedorPFRegimeBens}
                     autoComplete="off"
-                    label="Regime de Bens"
+                    label="Estado Civil"
                   />}
               />}
+
           </AutoCompleteContainer>
 
           <TextField
@@ -361,7 +354,7 @@ const NovoVendedorPF = () => {
             error={erroNovoVendedorPFCEP}
             helperText={erroNovoVendedorPFCEP ? "CEP Inválido" : null}
             value={novoVendedorPFCEP}
-            onChange={e => handleCEPchange(e.target.value)}
+            onChange={e => handleCEPchange(+e.target.value)}
           />
 
           <TextField

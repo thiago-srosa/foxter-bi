@@ -19,7 +19,7 @@ import {
 import loadable from '@loadable/component'
 
 const TextField = loadable(() => import('@material-ui/core/TextField'))
-const H2 = loadable(() => import('./components/StyledH2'))
+const H2 = loadable(() => import('./StyledH2'))
 
 interface NumberFormatCustomProps {
   inputRef: (instance: NumberFormat | null) => void;
@@ -69,7 +69,7 @@ const DadosGerais = (): React.ReactElement => {
   return (
     <>
       <H2>Dados Gerais da Venda</H2>
-      <form className={classes.root} noValidate autoComplete='off'>
+      <form className={classes.form} noValidate autoComplete='off'>
 
         <TextField
           id='valorTotalVenda'
