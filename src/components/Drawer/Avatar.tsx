@@ -3,7 +3,7 @@ import React from 'react';
 //REACT-REDUX
 import { useSelector } from "react-redux";
 //STORE => TYPE ROOT STATE
-import { RootState } from '../../store/reducers'
+import { RootState } from '../../../store/reducers'
 //CUSTOM STYLES
 import useStyles from './styles'
 //LOADABLE/COMPONENT

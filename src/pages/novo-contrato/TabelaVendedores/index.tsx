@@ -11,7 +11,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 //Import React Redux
 import { useSelector } from "react-redux";
-import { RootState } from '../../../store/reducers';
+import { RootState } from '../../../../store/reducers';
 
 const useStyles = makeStyles({
   inputLabel: {

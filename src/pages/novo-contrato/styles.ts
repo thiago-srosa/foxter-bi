@@ -5,9 +5,10 @@ import styled from 'styled-components'
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    width: '100%',
     '& > *': {
-      width: '47%',
-      margin: 8,
+      width: '100%',
+      marginTop: 15,
     },
   },
 }));

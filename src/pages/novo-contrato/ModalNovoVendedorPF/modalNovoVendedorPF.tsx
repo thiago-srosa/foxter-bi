@@ -26,11 +26,11 @@ import {
   setNovoVendedorPFCEP,
   setNovoVendedorPFObservacao,
   resetNovoVendedorPF,
-} from "../../../store/novoContrato/novoVendedorPF/actions";
+} from "../../../../store/novoContrato/novoVendedorPF/actions";
 //STORE => NOVO CONTRATO ACTIONS
-import { addNovoContratoVendedores } from "../../../store/novoContrato/actions";
+import { addNovoContratoVendedores } from "../../../../store/novoContrato/actions";
 //STORE => TYPE ROOT STATE
-import { RootState } from '../../../store/reducers'
+import { RootState } from '../../../../store/reducers'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 

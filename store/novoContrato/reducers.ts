@@ -14,7 +14,7 @@ const initialState: NovoContratoState = {
   novoContratoValorLiquidoVenda: null,
   novoContratoValorCorreategemVenda: null,
   novoContratoPercentualComissaoVenda: null,
-  novoContratoVendedores: null,
+  novoContratoVendedores: [],
 };
 
 function NovoContratoReducer(

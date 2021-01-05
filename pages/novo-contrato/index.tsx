@@ -1,9 +1,9 @@
 //NEXTJS
 import Head from 'next/head'
 //CUSTOM COMPONENTS
-import TabelaVendedores from '../../components/novo-contrato/TabelaVendedores';
-import NovoVendedorPF from '../../components/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
-import DadosGerais from '../../components/novo-contrato/DadosGerais'
+import TabelaVendedores from '../../src/pages/novo-contrato/TabelaVendedores';
+import NovoVendedorPF from '../../src/pages/novo-contrato/ModalNovoVendedorPF/modalNovoVendedorPF';
+import DadosGerais from '../../src/pages/novo-contrato/'
 
 //REACT-REDUX
 import { useSelector } from "react-redux";

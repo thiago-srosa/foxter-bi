@@ -15,7 +15,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 //import Custom Components
-import CustomDrawer from '../components/Drawer/index'
+import CustomDrawer from '../src/components/Drawer/index'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
