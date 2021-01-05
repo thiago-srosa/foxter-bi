@@ -1,5 +1,8 @@
+//REACT
+import { useEffect } from 'react'
 //NEXTJS
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 //CUSTOM COMPONENTS
 import TabelaVendedores from '../../src/pages/novo-contrato/components/TabelaVendedores';
 import NovoVendedorPF from '../../src/pages/novo-contrato/components/ModalNovoVendedorPF/modalNovoVendedorPF';
@@ -16,6 +19,11 @@ import { SectionDiv } from '../../src/pages/novo-contrato/styles'
 const SolicitarContrato: React.ElementType = () => {
 
   const { userIsLoggedIn } = useSelector((state: RootState) => state.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    !userIsLoggedIn ? router.push("/login") : null;
+  }, [userIsLoggedIn])
 
   const Content = (): React.ReactElement => {
     if (userIsLoggedIn) {

@@ -19,7 +19,10 @@ import {
 import loadable from '@loadable/component'
 
 const TextField = loadable(() => import('@material-ui/core/TextField'))
+const Divider = loadable(() => import('@material-ui/core/Divider'))
 const H2 = loadable(() => import('./StyledH2'))
+const StyledSpanLabelTextField = loadable(() => import('./StyledSpanLabelTextField'))
+const StyledDivWrapper = loadable(() => import('./StyledDivWrapper'))
 
 interface NumberFormatCustomProps {
   inputRef: (instance: NumberFormat | null) => void;
@@ -68,58 +71,71 @@ const DadosGerais = (): React.ReactElement => {
 
   return (
     <>
-      <H2>Dados Gerais da Venda</H2>
+      <H2>Dados gerais da venda</H2>
       <form className={classes.form} noValidate autoComplete='off'>
+        <StyledDivWrapper>
+          <StyledSpanLabelTextField>Valor total da venda</StyledSpanLabelTextField>
+          <TextField
+            id='valorTotalVenda'
+            variant="outlined"
+            autoComplete='off'
+            value={novoContratoValorTotalVenda ? novoContratoValorTotalVenda : ''}
+            onChange={(event) => { dispatch(setNovoContratoValorTotalVenda(+event.target.value)) }}
+            InputProps={{
+              inputComponent: NumberFormatCustom as any,
+              inputProps: { prefix: 'R$ ' }
+            }}
+          />
+        </StyledDivWrapper>
 
-        <TextField
-          id='valorTotalVenda'
-          label='Valor total'
-          autoComplete='off'
-          value={novoContratoValorTotalVenda ? novoContratoValorTotalVenda : ''}
-          onChange={(event) => { dispatch(setNovoContratoValorTotalVenda(+event.target.value)) }}
-          InputProps={{
-            inputComponent: NumberFormatCustom as any,
-            inputProps: { prefix: 'R$ ' }
-          }}
-        />
+        <StyledDivWrapper>
+          <StyledSpanLabelTextField>Valor líquido</StyledSpanLabelTextField>
+          <TextField
+            id='valorLiquido'
+            variant="outlined"
+            autoComplete='off'
+            value={novoContratoValorLiquidoVenda ? novoContratoValorLiquidoVenda : ''}
+            onChange={(event) => { dispatch(setNovoContratoValorLiquidoVenda(+event.target.value)) }}
+            InputProps={{
+              inputComponent: NumberFormatCustom as any,
+              inputProps: { prefix: 'R$ ' }
+            }}
+          />
+        </StyledDivWrapper>
 
-        <TextField
-          id='valorCorretagem'
-          label='Valor corretagem'
-          autoComplete='off'
-          value={novoContratoValorCorreategemVenda ? novoContratoValorCorreategemVenda : ''}
-          onChange={(event) => { dispatch(setNovoContratoValorCorretagemVenda(+event.target.value)) }}
-          InputProps={{
-            inputComponent: NumberFormatCustom as any,
-            inputProps: { prefix: 'R$ ' }
-          }}
-        />
+        <StyledDivWrapper>
+          <StyledSpanLabelTextField>Corretagem (R$)</StyledSpanLabelTextField>
+          <TextField
+            id='valorCorretagem'
+            variant="outlined"
+            autoComplete='off'
+            value={novoContratoValorCorreategemVenda ? novoContratoValorCorreategemVenda : ''}
+            onChange={(event) => { dispatch(setNovoContratoValorCorretagemVenda(+event.target.value)) }}
+            InputProps={{
+              inputComponent: NumberFormatCustom as any,
+              inputProps: { prefix: 'R$ ' }
+            }}
+          />
+        </StyledDivWrapper>
 
-        <TextField
-          id='valorLiquido'
-          label='Valor líquido'
-          autoComplete='off'
-          value={novoContratoValorLiquidoVenda ? novoContratoValorLiquidoVenda : ''}
-          onChange={(event) => { dispatch(setNovoContratoValorLiquidoVenda(+event.target.value)) }}
-          InputProps={{
-            inputComponent: NumberFormatCustom as any,
-            inputProps: { prefix: 'R$ ' }
-          }}
-        />
-
-        <TextField
-          id='valorCorretagem'
-          label='% corretagem'
-          autoComplete='off'
-          value={novoContratoPercentualComissaoVenda ? novoContratoPercentualComissaoVenda : ''}
-          onChange={(event) => { dispatch(setNovoContratoPercentualCorretagemVenda(+event.target.value)) }}
-          InputProps={{
-            inputComponent: NumberFormatCustom as any,
-            inputProps: { prefix: '% ' }
-          }}
-        />
+        <StyledDivWrapper>
+          <StyledSpanLabelTextField>Corretagem (%)</StyledSpanLabelTextField>
+          <TextField
+            id='valorCorretagem'
+            variant="outlined"
+            autoComplete='off'
+            value={novoContratoPercentualComissaoVenda ? novoContratoPercentualComissaoVenda : ''}
+            onChange={(event) => { dispatch(setNovoContratoPercentualCorretagemVenda(+event.target.value)) }}
+            InputProps={{
+              inputComponent: NumberFormatCustom as any,
+              inputProps: { prefix: '% ' }
+            }}
+          />
+        </StyledDivWrapper>
 
       </form>
+
+      <Divider style={{ margin: '15px 8px 15px 8px' }} />
     </>
   )
 }

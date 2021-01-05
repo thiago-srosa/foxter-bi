@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 
 //import  NextJs
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
 
 //Import Redux State
@@ -18,12 +17,6 @@ import 'firebase/auth'
 //import Custom Components
 import CustomDrawer from '../src/components/Drawer/index'
 
-//Import React Redux
-import { useSelector } from "react-redux";
-
-//Import Store Types
-import { RootState } from '../store/reducers'
-
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: "AIzaSyBAPFmFw6QdZkSDlApluWgnEkYtTsHJjSY",
@@ -36,19 +29,6 @@ if (!firebase.apps.length) {
   })
 } else {
   firebase.app(); // if already initialized, use that one
-}
-
-const UserLoggedInListener = (): React.ReactElement => {
-  const router = useRouter();
-  const { userIsLoggedIn } = useSelector((state: RootState) => state.user);
-
-  useEffect(() => {
-    if (!userIsLoggedIn) {
-      router.push("/login")
-    }
-  }, [userIsLoggedIn])
-
-  return <> </>
 }
 
 declare const window: any
@@ -153,8 +133,7 @@ const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
         <link rel="stylesheet preconnect" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
       </Head>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <UserLoggedInListener />
+        <PersistGate loading={null} persistor={persistor}>          
           <CustomDrawer>
             <Component {...pageProps} />
           </CustomDrawer>

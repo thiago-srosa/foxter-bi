@@ -1,9 +1,24 @@
-//IREACT
+//Import React
 import React from 'react'
-//NEXTJS
+import { useEffect } from 'react'
+
+//Import NextJS
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+//Import Store Types
+import { RootState } from '../store/reducers'
+
+//Import React Redux
+import { useSelector } from "react-redux";
 
 export default function Home(): React.ReactElement {
+  const router = useRouter();
+  const userIsLoggedIn = useSelector((state: RootState) => state.user.userIsLoggedIn);
+
+  useEffect(() => {
+    !userIsLoggedIn ? router.push("/login") : null;
+  }, [userIsLoggedIn])
 
   function ChangeTitle(): React.ReactElement {
     return (
