@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
-export const StyledA = styled.a`
-  text-Decoration: none ;
-  cursor : pointer;
-`
-
-export const StyledGoogleLoginContainer = styled.div`
+const StyledDivGoogleLoginWrapper = styled.div`
   height: 100vh;
   text-align: -webkit-center;
   position: absolute;
@@ -17,3 +12,5 @@ export const StyledGoogleLoginContainer = styled.div`
   background-color: #3f51b5;
   padding-top: 30vh;
 `
+
+export default StyledDivGoogleLoginWrapper
