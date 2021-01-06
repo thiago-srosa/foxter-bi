@@ -11,17 +11,17 @@ import 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 //STORE => USER ACTIONS
 import { resetUser, setUserIsAdmin } from "../../../store/user/actions";
-//STORE => TYPE ROOT STATE
+//STATE TYPE
 import { RootState } from '../../../store/reducers'
 //CUSTOM STYLES
 import useStyles from './styles';
-//LOADABLE/COMPONENT
+//LOADABLE-COMPONENT
 import loadable from '@loadable/component'
 
 const Button = loadable(() => import('@material-ui/core/Button'))
 const HomeIcon = loadable(() => import('@material-ui/icons/Home'))
-const CustomAvatar = loadable(() => import('./Avatar'))
-const StyledA = loadable(() => import('./StyledA'))
+const CustomAvatar = loadable(() => import('./components/Avatar'))
+const StyledA = loadable(() => import('./components/StyledComponents/StyledA'))
 const Hidden = loadable(() => import('@material-ui/core/Hidden'))
 const Drawer = loadable(() => import('@material-ui/core/Drawer'))
 const CssBaseline = loadable(() => import('@material-ui/core/CssBaseline'))
@@ -37,7 +37,7 @@ const ListItemText = loadable(() => import('@material-ui/core/ListItemText'))
 const InboxIcon = loadable(() => import('@material-ui/icons/MoveToInbox'))
 const Link = loadable(() => import('next/link'))
 
-const CustomDrawer: React.ElementType = (props) => {
+const CustomDrawer = (props: any): JSX.Element => {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -67,9 +67,9 @@ const CustomDrawer: React.ElementType = (props) => {
   const logout = () => {
     firebase.auth().signOut();
     dispatch(resetUser());
-  } 
+  }
 
-  const CustomAvatarDiv = (): React.ReactElement => {
+  const CustomAvatarDiv = (): JSX.Element => {
     if (userIsLoggedIn) {
       return (
         <div style={{ textAlign: 'center' }}>

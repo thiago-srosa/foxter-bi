@@ -186,15 +186,13 @@ function Row() {
 
   const { novoContratoVendedores } = useSelector((state: RootState) => state.novoContrato);
 
-  console.log(novoContratoVendedores)
-
   return (
     <>
-      {
+      {/*
         novoContratoVendedores.map((vendedor, index) => (
           <CollapseableRow vendedor={vendedor} index={index} />
         ))
-      }
+        */}
     </>
   );
 }

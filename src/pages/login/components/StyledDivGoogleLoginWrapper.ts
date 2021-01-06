@@ -1,3 +1,4 @@
+//STYLED-COMPONENTS
 import styled from 'styled-components'
 
 const StyledDivGoogleLoginWrapper = styled.div`

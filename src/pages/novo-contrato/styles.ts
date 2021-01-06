@@ -31,12 +31,15 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   form: {
-    width: 200,    
+    width: '100%',
     '& > *': {
       paddingTop: 10,
-      width: '100%',           
+      width: '100%',
     },
   },
+  outlinedInputSmall: {
+    width: '200px',
+  }
 }));
 
 export const SectionDiv = styled.div`  

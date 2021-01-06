@@ -1,21 +1,19 @@
-//Import React
+//REACT
 import { useEffect } from 'react'
-
-//import  NextJs
+//NEXTJS
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-
-//Import Redux State
+//STATE => Redux-State
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import { store, persistor } from '../store/index'
-
-//import Firebase
+//FIREBASE
 import firebase from 'firebase/app'
 import 'firebase/auth'
+//LOADABLE-COMPONENTS
+import loadable from '@loadable/component'
 
-//import Custom Components
-import CustomDrawer from '../src/components/Drawer/index'
+const CustomDrawer = loadable(() => import('../src/components/Drawer/index'))
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -33,7 +31,7 @@ if (!firebase.apps.length) {
 
 declare const window: any
 
-const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && window.workbox !== undefined) {
@@ -133,7 +131,7 @@ const MyApp: React.ElementType = ({ Component, pageProps }: AppProps) => {
         <link rel="stylesheet preconnect" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" />
       </Head>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>          
+        <PersistGate loading={null} persistor={persistor}>
           <CustomDrawer>
             <Component {...pageProps} />
           </CustomDrawer>

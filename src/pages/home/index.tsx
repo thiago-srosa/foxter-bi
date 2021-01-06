@@ -1,18 +1,18 @@
-//Import React
+//REACT
 import React from 'react'
 import { useEffect } from 'react'
-
-//Import NextJS
-import Head from 'next/head'
+//import Head from 'next/head'
 import { useRouter } from 'next/router'
-
-//Import Store Types
+//STATE TYPES
 import { RootState } from '../../../store/reducers'
+//REACT-REDUX
+import { useSelector } from "react-redux"
+//LOADABLE/COMPONENT
+import loadable from '@loadable/component'
 
-//Import React Redux
-import { useSelector } from "react-redux";
+const Head = loadable(() => import('next/head'))
 
-function HomePage() {
+const HomePage = (): JSX.Element => {
   const router = useRouter();
   const userIsLoggedIn = useSelector((state: RootState) => state.user.userIsLoggedIn);
 
@@ -30,9 +30,7 @@ function HomePage() {
   return (
     <>
       <ChangeTitle />
-
       <p>Painel não desenvolvido.</p>
-
     </>
   )
 }

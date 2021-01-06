@@ -2,13 +2,11 @@
 import styled from 'styled-components'
 
 export const H2 = styled.h2`
-    margin: 0px 0px 16px;
-    display: block;
-    color: inherit;
+    color: rgb(66, 66, 66);
     text-align: inherit;
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 32px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 24px;
 `
 
 export default H2

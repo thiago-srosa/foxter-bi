@@ -4,20 +4,11 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 //REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
-//GOOGLE BUTTON
-import GoogleButton from 'react-google-button'
 //FIREBASE
 import 'firebase/auth';
 import firebase from 'firebase/app';
-
-//Import Type Root State
+//STATE TYPES
 import { RootState } from '../../../store/reducers'
-
-//LOADABLE/COMPONENT
-import loadable from '@loadable/component'
-
-const StyledDivGoogleLoginWrapper = loadable(() => import('./components/StyledDivGoogleLoginWrapper'))
-
 //Import User Actions
 import {
   setUserIsLoggedIn,
@@ -25,13 +16,22 @@ import {
   setUserEmail,
   setUserPhotoUrl
 } from "../../../store/user/actions"
+//LOADABLE/COMPONENT
+import loadable from '@loadable/component'
+const StyledDivGoogleLoginWrapper = loadable(() => import('./components/StyledDivGoogleLoginWrapper'))
+const GoogleButton = loadable(() => import('react-google-button'))
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
+
   const dispatch = useDispatch();
   const router = useRouter();
   const userIsLoggedIn = useSelector((state: RootState) => state.user.userIsLoggedIn);
 
-  function login() {
+  useEffect(() => {
+    userIsLoggedIn ? router.push("/") : true;
+  }, [userIsLoggedIn])
+
+  function login(): void {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(() => {
       dispatch(setUserDisplayName(firebase.auth().currentUser.displayName))
@@ -40,10 +40,6 @@ const LoginPage = () => {
       dispatch(setUserIsLoggedIn(true))
     })
   }
-
-  useEffect(() => {
-    userIsLoggedIn ? router.push("/") : true;
-  }, [userIsLoggedIn])
 
   return (
     <>

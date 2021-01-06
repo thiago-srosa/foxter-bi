@@ -2,16 +2,16 @@
 import React from 'react';
 //REACT-REDUX
 import { useSelector } from "react-redux";
-//STORE => TYPE ROOT STATE
-import { RootState } from '../../../store/reducers'
+//STATE TYPE
+import { RootState } from '../../../../store/reducers'
 //CUSTOM STYLES
-import useStyles from './styles'
+import useStyles from '../styles'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
 const Avatar = loadable(() => import('@material-ui/core/Avatar'))
 
-const CustomAvatar = () => {
+const CustomAvatar = (): JSX.Element => {
 
   const {
     userIsLoggedIn,
