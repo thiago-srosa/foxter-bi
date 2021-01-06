@@ -1,12 +1,14 @@
 import {
-  SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO, 
+  SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
+  SET_TOOGLE_ACTION,
   GlobalActionTypes,
   IGlobalState,
 } from './types'
 
 const initialState: IGlobalState = {
   //NOVO CONTRATO
-  NovoContratoRadioButtonCalculaValorNegociacao: null,  
+  novoContratoRadioButtonCalculaValorNegociacao: null,
+  toogleDrawer: false,
 };
 
 function GlobalReducer(
@@ -16,7 +18,9 @@ function GlobalReducer(
   switch (action.type) {
 
     case SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO:
-      return { ...state, NovoContratoRadioButtonCalculaValorNegociacao: action.payload };       
+      return { ...state, novoContratoRadioButtonCalculaValorNegociacao: action.payload };
+    case SET_TOOGLE_ACTION:
+      return { ...state, toogleDrawer: action.payload };
     default:
       return state;
   }

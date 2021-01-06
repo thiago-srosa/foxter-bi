@@ -11,6 +11,8 @@ import 'firebase/auth';
 import { useSelector, useDispatch } from "react-redux";
 //STORE => USER ACTIONS
 import { resetUser, setUserIsAdmin } from "../../../store/user/actions";
+//STORE => USER ACTIONS
+import { setToogleDrawer } from "../../../store/global/actions";
 //STATE TYPE
 import { RootState } from '../../../store/reducers'
 //CUSTOM STYLES
@@ -41,13 +43,17 @@ const CustomDrawer = (props: any): JSX.Element => {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
+
   const {
     userEmail,
     userIsLoggedIn,
     userIsAdmin
   } = useSelector((state: RootState) => state.user);
+
+  const {
+    toogleDrawer
+  } = useSelector((state: RootState) => state.global);
 
   useEffect(() => {
     if (userEmail) {
@@ -61,7 +67,7 @@ const CustomDrawer = (props: any): JSX.Element => {
   }, [userEmail])
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    dispatch(setToogleDrawer(!toogleDrawer))
   };
 
   const logout = () => {
@@ -103,7 +109,7 @@ const CustomDrawer = (props: any): JSX.Element => {
 
       <List>
         <Link href="/" passHref >
-          <StyledA >
+          <StyledA onClick={() => dispatch(setToogleDrawer(false))}>
             <ListItem >
               <ListItemIcon>
                 <HomeIcon />
@@ -114,7 +120,7 @@ const CustomDrawer = (props: any): JSX.Element => {
         </Link>
 
         <Link href="/novo-contrato" passHref >
-          <StyledA >
+          <StyledA onClick={() => dispatch(setToogleDrawer(false))}>
             <ListItem >
               <ListItemIcon>
                 <InboxIcon />
@@ -159,7 +165,7 @@ const CustomDrawer = (props: any): JSX.Element => {
             container={container}
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
+            open={toogleDrawer}
             onClose={handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,

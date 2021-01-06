@@ -22,8 +22,8 @@ const Divider = loadable(() => import('@material-ui/core/Divider'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
-const H1 = loadable(() => import('./components/StyledComponents/StyledH1'))
-const H2 = loadable(() => import('./components/StyledComponents/StyledH2'))
+const H1 = loadable(() => import('../../components/StyledComponents/StyledH1'))
+const H2 = loadable(() => import('../../components/StyledComponents/StyledH2'))
 const Head = loadable(() => import('next/head'))
 const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
 const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/modalNovoVendedorPF'))
@@ -69,20 +69,6 @@ const NovoContrato = (): JSX.Element => {
           <StyledDivWrapper>
             <H2>Seleciona a melhor opção que completa o valor total:</H2>
             <CustomRadioButtosGroup />
-          </StyledDivWrapper>
-
-          <StyledDivWrapper>
-            <H2>Valor líquido</H2>
-            <OutlinedInput
-            className={classes.outlinedInputSmall}
-              id='ValorLíquido'
-              startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-              required              
-              value={novoContratoValorLiquidoVenda ? novoContratoValorLiquidoVenda : ''}
-              autoComplete='off'
-              onChange={e => dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value)))}
-              inputComponent={NumberFormatCustom as any}
-            />
           </StyledDivWrapper>
 
         </form>

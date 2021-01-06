@@ -1,5 +1,6 @@
 import {
   SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
+  SET_TOOGLE_ACTION,
   GlobalActionTypes,
 } from './types'
 
@@ -9,5 +10,12 @@ export function setNovoContratoRadioButtonCalculaValorNegocicao(selection: strin
   return {
     type: SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
     payload: selection
+  }
+}
+
+export function setToogleDrawer(toogleDrawer: boolean): GlobalActionTypes {
+  return {
+    type: SET_TOOGLE_ACTION,
+    payload: toogleDrawer
   }
 }
