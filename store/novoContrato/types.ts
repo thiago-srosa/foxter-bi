@@ -10,7 +10,7 @@ import { NovoVendedorPFState } from './novoVendedorPF/types'
 export interface NovoContratoState {
   novoContratoValorTotalVenda: number,
   novoContratoValorLiquidoVenda: number,
-  novoContratoValorCorreategemVenda: number,
+  novoContratoValorCorretagemVenda: number,
   novoContratoPercentualComissaoVenda: number,
   novoContratoVendedores: NovoVendedorPFState[],
 };

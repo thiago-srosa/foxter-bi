@@ -35,19 +35,31 @@ function CustomRadioButtosGroup() {
     novoContratoRadioButtonCalculaValorNegociacao
   } = useSelector((state: RootState) => state.global)
   const {
-    novoContratoPercentualComissaoVenda,
-    novoContratoValorCorreategemVenda,
+    novoContratoValorTotalVenda,
     novoContratoValorLiquidoVenda,
-    novoContratoValorTotalVenda
+    novoContratoValorCorretagemVenda,
+    novoContratoPercentualComissaoVenda,
   } = useSelector((state: RootState) => state.novoContrato)
 
   const handleChangeSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setNovoContratoRadioButtonCalculaValorNegocicao((event.target as HTMLInputElement).value))
   };
 
+  interface IOptions {
+    value1: string,
+    value2: string,
+    value3: string,
+  }
+
+  const option: IOptions = {
+    value1: 'valor_liquido',
+    value2: 'valor_corretagem',
+    value3: 'percentual_corretagem'
+  }
+
   let content: JSX.Element
 
-  if (novoContratoRadioButtonCalculaValorNegociacao === "valor_liquido") {
+  if (novoContratoRadioButtonCalculaValorNegociacao === option.value1) {
     content = <>
       <H2>Valor líquido da venda</H2>
       <OutlinedInput
@@ -63,13 +75,30 @@ function CustomRadioButtosGroup() {
     </>
   }
 
+  if (novoContratoRadioButtonCalculaValorNegociacao === option.value2) {
+    content = <>
+      <H2>Valor corretagem</H2>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='ValorCorretagem'
+        startAdornment={<InputAdornment position="start">R$</InputAdornment>}
+        required
+        value={novoContratoValorCorretagemVenda ? novoContratoValorCorretagemVenda : ''}
+        autoComplete='off'
+        onChange={e => dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value)))}
+        inputComponent={NumberFormatCustom as any}
+      />
+    </>
+  }
+
+
   return (
     <>
       <FormControl >
-        <RadioGroup aria-label="gender" name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
-          <FormControlLabel value="valor_liquido" control={<Radio color='primary' />} label='Valor líquido' />
-          <FormControlLabel value='valor_corretagem' control={<Radio color='primary' />} label='Valor corretagem' />
-          <FormControlLabel value='percentual_corretagem' control={<Radio color='primary' />} label='Percentual corretagem' />
+        <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
+          <FormControlLabel value={option.value1} control={<Radio color='primary' />} label='Valor líquido' />
+          <FormControlLabel value={option.value2} control={<Radio color='primary' />} label='Valor corretagem' />
+          <FormControlLabel value={option.value3} control={<Radio color='primary' />} label='Percentual corretagem' />
         </RadioGroup>
       </FormControl>
       { content}

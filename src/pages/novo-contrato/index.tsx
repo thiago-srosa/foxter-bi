@@ -36,7 +36,7 @@ const NovoContrato = (): JSX.Element => {
   const {
     novoContratoValorTotalVenda,
     novoContratoValorLiquidoVenda,
-    novoContratoValorCorreategemVenda,
+    novoContratoValorCorretagemVenda,
     novoContratoPercentualComissaoVenda,
   } = useSelector((state: RootState) => state.novoContrato)
   const router = useRouter()
