@@ -59,7 +59,12 @@ const NovoContrato = (): JSX.Element => {
               required              
               value={novoContratoValorTotalVenda ? novoContratoValorTotalVenda : ''}
               autoComplete='off'
-              onChange={e => dispatch(setNovoContratoValorTotalVenda(parseInt(e.target.value)))}
+              onChange={e => {
+                dispatch(setNovoContratoValorTotalVenda(parseInt(e.target.value)))
+                dispatch(setNovoContratoValorLiquidoVenda(null))
+                dispatch(setNovoContratoValorCorretagemVenda(null))
+                dispatch(setNovoContratoPercentualCorretagemVenda(null))
+              }}
               inputComponent={NumberFormatCustom as any}
             />
           </StyledDivWrapper>
