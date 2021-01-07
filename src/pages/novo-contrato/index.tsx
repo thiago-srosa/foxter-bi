@@ -22,6 +22,7 @@ const Divider = loadable(() => import('@material-ui/core/Divider'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
+const H1 = loadable(() => import('../../components/StyledComponents/StyledH1'))
 const H2 = loadable(() => import('../../components/StyledComponents/StyledH2'))
 const Head = loadable(() => import('next/head'))
 const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
@@ -61,7 +62,14 @@ const NovoContrato = (): JSX.Element => {
 
   return (
     <>
+      <Head>
+        <title>Novo contrato</title>
+      </Head>
+      <H1>Novo contrato</H1>
+
       <StyledContentSidebar >
+
+        <ProgressBar />
 
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
@@ -95,11 +103,11 @@ const NovoContrato = (): JSX.Element => {
                   default:
                     null
                 }
-
               }}
               inputComponent={NumberFormatCustom as any}
             />
           </StyledDivWrapper>
+
 
           <StyledDivWrapper>
             <CustomRadioButtosGroup />
@@ -109,12 +117,10 @@ const NovoContrato = (): JSX.Element => {
 
         <Divider style={{ margin: '15px 8px 15px 8px' }} />
 
-
         <SectionDiv style={{ marginTop: 10 }}>
           <NovoVendedorPF />
           <TabelaVendedores />
         </SectionDiv>
-
 
         <Button
           variant="contained"
@@ -124,9 +130,8 @@ const NovoContrato = (): JSX.Element => {
           style={{ width: '200px', placeSelf: 'center' }}
         >
           RESETAR CONTRATO
-      </Button>
+        </Button>
 
-        <ProgressBar />
 
       </StyledContentSidebar>
 

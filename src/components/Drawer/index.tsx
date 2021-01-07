@@ -152,9 +152,8 @@ const CustomDrawer = (props: any): JSX.Element => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
+
+          
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders" style={userIsLoggedIn ? null : { display: 'none' }}>

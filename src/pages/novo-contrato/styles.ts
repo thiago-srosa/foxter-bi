@@ -32,8 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%',
-    '& > *': {
-      paddingTop: 10,
+    '& > *': {      
       width: '100%',
     },
   },

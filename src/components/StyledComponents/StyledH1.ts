@@ -2,13 +2,14 @@
 import styled from 'styled-components'
 
 export const H1 = styled.h1`
-    margin: 0px 0px 16px;
-    display: block;
-    color: inherit;
-    text-align: inherit;
-    font-size: 1.5rem;
+    top: 3px;
+    position: fixed;
+    z-index: 1300;
+    color: white;
+    left: 55px;
+    height: 50px;
+    font-size: 21px;
     font-weight: 400;
-    line-height: 32px;
 `
 
 export default H1

@@ -4,7 +4,6 @@ import {
   createStyles,
   Theme
 } from '@material-ui/core/styles';
-import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 const drawerWidth = 280;
 
@@ -20,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     appBar: {
+      height: 64,
+      paddingTop: 5,
       [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -32,25 +33,25 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
+    toolbar: theme.mixins.toolbar,    
     drawerPaper: {
       width: drawerWidth,
     },
-    contentWrapper: {
+    contentWrapper: {      
       display: 'block',
       width: 800,
       margin: 'auto',
       paddingTop: 30,
     },
-    
+
     content: {
       display: 'flex',
       flexWrap: 'wrap',
-      flexGrow: 1,     
+      flexGrow: 1,
       padding: theme.spacing(3),
-      backgroundColor: 'white',      
+      backgroundColor: 'white',
       margin: 'auto',
-    },     
+    },
     drawerHeader: {
       height: 64,
       backgroundColor: '#3f51b5',
