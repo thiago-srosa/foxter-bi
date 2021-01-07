@@ -190,9 +190,11 @@ const CustomDrawer = (props: any): JSX.Element => {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content} >
-        <div className={classes.toolbar} />
-        {props.children}
+      <main className={classes.contentWrapper} >
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
+          {props.children}
+        </div>
       </main>
     </div>
   );

@@ -29,6 +29,10 @@ const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/m
 const NumberFormatCustom = loadable(() => import('../../components/NumberFormatCustom'))
 const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/components/CustomRadioButtosGroup'))
 const Button = loadable(() => import('@material-ui/core/Button'))
+const ProgressBar = loadable(() => import('./components/ProgressBar/'))
+const StyledContentSidebar = loadable(() => import('../../components/StyledComponents/StyledContentSidebar'))
+const StyledSidebar = loadable(() => import('../../components/StyledComponents/StyledSidebar'))
+
 //CONSTANTES
 import { novoContratoRadioOptions } from '../../constants'
 
@@ -57,7 +61,8 @@ const NovoContrato = (): JSX.Element => {
 
   return (
     <>
-      <SectionDiv >
+      <StyledContentSidebar >
+
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
             <H2>Valor total da venda</H2>
@@ -103,24 +108,37 @@ const NovoContrato = (): JSX.Element => {
         </form>
 
         <Divider style={{ margin: '15px 8px 15px 8px' }} />
-      </SectionDiv>
-
-      <SectionDiv style={{ marginTop: 10 }}>
-        <NovoVendedorPF />
-        <TabelaVendedores />
-      </SectionDiv>
 
 
-      <Button
-        variant="contained"
-        onClick={handleResetNovoContrato}
-        size="large"
-        color="secondary"
-        style={{ width: '200px', placeSelf: 'center' }}
-      >
-        RESETAR CONTRATO
+        <SectionDiv style={{ marginTop: 10 }}>
+          <NovoVendedorPF />
+          <TabelaVendedores />
+        </SectionDiv>
+
+
+        <Button
+          variant="contained"
+          onClick={handleResetNovoContrato}
+          size="large"
+          color="secondary"
+          style={{ width: '200px', placeSelf: 'center' }}
+        >
+          RESETAR CONTRATO
       </Button>
 
+        <ProgressBar />
+
+      </StyledContentSidebar>
+
+      <StyledSidebar>
+        <p>SECTION</p>
+        <p>SECTION</p>
+        <p>SECTION</p>
+        <p>SECTION</p>
+        <p>SECTION</p>
+        <p>SECTION</p>
+        <p>SECTION</p>
+      </StyledSidebar>
     </>
   )
 }

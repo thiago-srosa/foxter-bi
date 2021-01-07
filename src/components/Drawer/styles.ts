@@ -4,6 +4,7 @@ import {
   createStyles,
   Theme
 } from '@material-ui/core/styles';
+import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 const drawerWidth = 280;
 
@@ -35,11 +36,21 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      backgroundColor: 'white',
+    contentWrapper: {
+      display: 'block',
+      width: 800,
+      margin: 'auto',
+      paddingTop: 30,
     },
+    
+    content: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexGrow: 1,     
+      padding: theme.spacing(3),
+      backgroundColor: 'white',      
+      margin: 'auto',
+    },     
     drawerHeader: {
       height: 64,
       backgroundColor: '#3f51b5',
