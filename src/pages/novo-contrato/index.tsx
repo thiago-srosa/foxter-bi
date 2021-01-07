@@ -14,6 +14,7 @@ import {
   setNovoContratoValorLiquidoVenda,
   setNovoContratoValorCorretagemVenda,
   setNovoContratoPercentualCorretagemVenda,
+  resetNovoContrato,
 } from '../../../store/novoContrato/actions'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
@@ -27,6 +28,7 @@ const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
 const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/modalNovoVendedorPF'))
 const NumberFormatCustom = loadable(() => import('../../components/NumberFormatCustom'))
 const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/components/CustomRadioButtosGroup'))
+const Button = loadable(() => import('@material-ui/core/Button'))
 //CONSTANTES
 import { novoContratoRadioOptions } from '../../constants'
 
@@ -48,6 +50,10 @@ const NovoContrato = (): JSX.Element => {
   useEffect(() => {
     !userIsLoggedIn ? router.push("/login") : null;
   }, [userIsLoggedIn])
+
+  function handleResetNovoContrato(): void {
+    dispatch(resetNovoContrato())
+  }
 
   return (
     <>
@@ -103,6 +109,18 @@ const NovoContrato = (): JSX.Element => {
         <NovoVendedorPF />
         <TabelaVendedores />
       </SectionDiv>
+
+
+      <Button
+        variant="contained"
+        onClick={handleResetNovoContrato}
+        size="large"
+        color="secondary"
+        style={{ width: '200px', placeSelf: 'center' }}
+      >
+        RESETAR CONTRATO
+      </Button>
+
     </>
   )
 }

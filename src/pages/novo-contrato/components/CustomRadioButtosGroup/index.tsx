@@ -110,18 +110,19 @@ function CustomRadioButtosGroup() {
   }
 
   selectedInput = <>
-    <H2>Valor líquido da venda</H2>
-    <OutlinedInput
-      className={classes.outlinedInputSmall}
-      style={novoContratoRadioOptions == null ? { display: 'none' } : null}
-      id='SelectedInput'
-      startAdornment={<HandleStartAdorment />}
-      required
-      value={handleValueInput}
-      autoComplete='off'
-      onChange={e => { handleOnchangeInput(e.target.value) }}
-      inputComponent={NumberFormatCustom as any}
-    />
+    <span style={novoContratoRadioButtonCalculaValorNegociacao == null ? { display: 'none' } : null}>
+      <H2>{novoContratoRadioButtonCalculaValorNegociacao}</H2>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='SelectedInput'
+        startAdornment={<HandleStartAdorment />}
+        required
+        value={handleValueInput}
+        autoComplete='off'
+        onChange={e => { handleOnchangeInput(e.target.value) }}
+        inputComponent={NumberFormatCustom as any}
+      />
+    </span>
   </>
 
   let dadosGeraisCalculados: JSX.Element
