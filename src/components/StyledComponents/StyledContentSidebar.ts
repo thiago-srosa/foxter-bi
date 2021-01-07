@@ -5,7 +5,8 @@ export const StyledContentSidebar = styled.div`
     width: 65%;
     flex-grow: 1;
     margin-top: 10px;
-    
+    padding-left: 24px;
+    padding-right: 24px;
 `
 
 export default StyledContentSidebar

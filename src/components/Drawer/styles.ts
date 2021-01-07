@@ -40,15 +40,13 @@ const useStyles = makeStyles((theme: Theme) =>
     contentWrapper: {      
       display: 'block',
       width: 800,
-      margin: 'auto',
-      paddingTop: 30,
+      margin: 'auto',      
     },
 
     content: {
       display: 'flex',
       flexWrap: 'wrap',
-      flexGrow: 1,
-      padding: theme.spacing(3),
+      flexGrow: 1,      
       backgroundColor: 'white',
       margin: 'auto',
     },

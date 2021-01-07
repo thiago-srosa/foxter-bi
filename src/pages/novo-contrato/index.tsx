@@ -67,9 +67,9 @@ const NovoContrato = (): JSX.Element => {
       </Head>
       <H1>Novo contrato</H1>
 
-      <StyledContentSidebar >
+      <ProgressBar />
 
-        <ProgressBar />
+      <StyledContentSidebar >
 
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
