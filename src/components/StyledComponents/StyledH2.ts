@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 export const H2 = styled.h2`
-    color: rgb(66, 66, 66);
+    color: black;
     text-align: inherit;
     font-size: 1rem;
     font-weight: 500;

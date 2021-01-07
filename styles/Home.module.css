@@ -1,3 +1,6 @@
+.html{  
+  background-color: white;
+}
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -63,7 +66,6 @@
 }
 
 .code {
-  background: #fafafa;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;

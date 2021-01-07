@@ -11,7 +11,7 @@ export interface NovoContratoState {
   novoContratoValorTotalVenda: number,
   novoContratoValorLiquidoVenda: number,
   novoContratoValorCorretagemVenda: number,
-  novoContratoPercentualComissaoVenda: number,
+  novoContratoPercentualCorretagemVenda: number,
   novoContratoVendedores: NovoVendedorPFState[],
 };
 

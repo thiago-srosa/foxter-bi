@@ -22,7 +22,6 @@ const Divider = loadable(() => import('@material-ui/core/Divider'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
-const H1 = loadable(() => import('../../components/StyledComponents/StyledH1'))
 const H2 = loadable(() => import('../../components/StyledComponents/StyledH2'))
 const Head = loadable(() => import('next/head'))
 const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
@@ -37,7 +36,7 @@ const NovoContrato = (): JSX.Element => {
     novoContratoValorTotalVenda,
     novoContratoValorLiquidoVenda,
     novoContratoValorCorretagemVenda,
-    novoContratoPercentualComissaoVenda,
+    novoContratoPercentualCorretagemVenda,
   } = useSelector((state: RootState) => state.novoContrato)
   const router = useRouter()
   const classes = useStyles()
@@ -49,8 +48,7 @@ const NovoContrato = (): JSX.Element => {
 
   return (
     <>
-      <SectionDiv >
-        <H1>Dados gerais da venda</H1>
+      <SectionDiv >        
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
             <H2>Valor total da venda</H2>
@@ -66,8 +64,7 @@ const NovoContrato = (): JSX.Element => {
             />
           </StyledDivWrapper>
 
-          <StyledDivWrapper>
-            <H2>Seleciona a melhor opção que completa o valor total:</H2>
+          <StyledDivWrapper>            
             <CustomRadioButtosGroup />
           </StyledDivWrapper>
 
