@@ -1,11 +1,11 @@
 //REACT
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 //REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
 //STORE => TYPE ROOT STATE
 import { RootState } from '../../../../../store/reducers'
 //GLOBAL ACTIONS
-import { setNovoContratoRadioButtonCalculaValorNegocicao } from '../../../../../store/global/actions'
+import { setNovoContratoRadioButtonCalculaValorNegocicao } from '../../../../../store/novoContrato/actions'
 //NOVO CONTRATO ACTIONS
 import {
   setNovoContratoValorLiquidoVenda,
@@ -26,6 +26,8 @@ const NumberFormatCustom = loadable(() => import('../../../../components/NumberF
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
 const StyledValuesDiv = loadable(() => import('./components/StyledComponents/StyledValuesDiv'))
 const StyledDivWrapperRadio = loadable(() => import('./components/StyledComponents/StyledDivWrapperRadio'))
+//CONSTANTS
+import { novoContratoRadioOptions } from '../../../../constants'
 //CUSTOM STYLES
 import { useStyles } from '../../styles'
 
@@ -35,9 +37,7 @@ function CustomRadioButtosGroup() {
   const dispatch = useDispatch()
 
   const {
-    novoContratoRadioButtonCalculaValorNegociacao
-  } = useSelector((state: RootState) => state.global)
-  const {
+    novoContratoRadioButtonCalculaValorNegociacao,
     novoContratoValorTotalVenda,
     novoContratoValorLiquidoVenda,
     novoContratoValorCorretagemVenda,
@@ -48,80 +48,81 @@ function CustomRadioButtosGroup() {
     dispatch(setNovoContratoRadioButtonCalculaValorNegocicao((event.target as HTMLInputElement).value))
   };
 
-  interface IOptions {
-    value1: string,
-    value2: string,
-    value3: string,
-  }
-
-  const option: IOptions = {
-    value1: 'valor_liquido',
-    value2: 'valor_corretagem',
-    value3: 'percentual_corretagem'
-  }
-
   let selectedInput: JSX.Element
 
-  if (novoContratoRadioButtonCalculaValorNegociacao === option.value1) {
-    selectedInput = <>
-      <H2>Valor líquido da venda</H2>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='ValorLiquido'
-        startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-        required
-        value={novoContratoValorLiquidoVenda ? novoContratoValorLiquidoVenda : ''}
-        autoComplete='off'
-        onChange={e => {
-          dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value)))
-          dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda - parseInt(e.target.value)))
-          dispatch(setNovoContratoPercentualCorretagemVenda((novoContratoValorTotalVenda - parseInt(e.target.value)) / novoContratoValorTotalVenda * 100))
-        }
-        }
-        inputComponent={NumberFormatCustom as any}
-      />
-    </>
+  const HandleStartAdorment = (): JSX.Element => {
+    switch (novoContratoRadioButtonCalculaValorNegociacao) {
+      //valor liquido
+      case novoContratoRadioOptions.value1:
+        return <InputAdornment position="start">R$</InputAdornment>
+      //valor corretagem
+      case novoContratoRadioOptions.value2:
+        return <InputAdornment position="start">R$</InputAdornment>
+      //percentual corretagem
+      case novoContratoRadioOptions.value3:
+        return <InputAdornment position="start">%</InputAdornment>
+      default:
+        return <InputAdornment position="start"></InputAdornment>
+    }
+  }
+  let handleValueInput: number
+
+  switch (novoContratoRadioButtonCalculaValorNegociacao) {
+    //valor líquido
+    case novoContratoRadioOptions.value1:
+      handleValueInput = novoContratoValorLiquidoVenda
+      break;
+    //valor corretagem
+    case novoContratoRadioOptions.value2:
+      handleValueInput = novoContratoValorCorretagemVenda
+      break;
+    //percentual corretagem
+    case novoContratoRadioOptions.value3:
+      handleValueInput = novoContratoPercentualCorretagemVenda
+      break;
+    //DEFAULT
+    default:
+      null
   }
 
-  if (novoContratoRadioButtonCalculaValorNegociacao === option.value2) {
-    selectedInput = <>
-      <H2>Valor corretagem da venda</H2>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='ValorCorretagem'
-        startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-        required
-        value={novoContratoValorCorretagemVenda ? novoContratoValorCorretagemVenda : ''}
-        autoComplete='off'
-        onChange={e => {
-          dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value)))
-          dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - parseInt(e.target.value)))
-          dispatch(setNovoContratoPercentualCorretagemVenda(parseInt(e.target.value) / novoContratoValorTotalVenda * 100))
-        }}
-        inputComponent={NumberFormatCustom as any}
-      />
-    </>
+  function handleOnchangeInput(inputValue: string): void {
+    console.log(inputValue)
+    switch (novoContratoRadioButtonCalculaValorNegociacao) {
+      //valor liquido
+      case novoContratoRadioOptions.value1:
+        dispatch(setNovoContratoValorLiquidoVenda(+inputValue))
+        dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda - (+inputValue)))
+        dispatch(setNovoContratoPercentualCorretagemVenda((novoContratoValorTotalVenda - (+inputValue)) / novoContratoValorTotalVenda * 100))
+        break;
+      //valor corretagem
+      case novoContratoRadioOptions.value2:
+        dispatch(setNovoContratoValorCorretagemVenda(+inputValue))
+        dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - (+inputValue)))
+        dispatch(setNovoContratoPercentualCorretagemVenda((+inputValue) / novoContratoValorTotalVenda * 100))
+        break;
+      //percentual corretagem
+      case novoContratoRadioOptions.value3:
+        dispatch(setNovoContratoPercentualCorretagemVenda(+inputValue))
+        dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorTotalVenda * (+inputValue) / 100))
+        dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda * (+inputValue) / 100))
+        break;
+    }
   }
 
-  if (novoContratoRadioButtonCalculaValorNegociacao === option.value3) {
-    selectedInput = <>
-      <H2>Percentual de corretagem da venda</H2>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='ValorCorretagem'
-        startAdornment={<InputAdornment position="start">%</InputAdornment>}
-        required
-        value={novoContratoPercentualCorretagemVenda ? novoContratoPercentualCorretagemVenda : ''}
-        autoComplete='off'
-        onChange={e => {
-          dispatch(setNovoContratoPercentualCorretagemVenda(parseInt(e.target.value)))
-          dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda * parseInt(e.target.value) / 100))
-          dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorTotalVenda * parseInt(e.target.value) / 100))
-        }}
-        inputComponent={NumberFormatCustom as any}
-      />
-    </>
-  }
+  selectedInput = <>
+    <H2>Valor líquido da venda</H2>
+    <OutlinedInput
+      className={classes.outlinedInputSmall}
+      style={novoContratoRadioOptions == null ? { display: 'none' } : null}
+      id='SelectedInput'
+      startAdornment={<HandleStartAdorment />}
+      required
+      value={handleValueInput}
+      autoComplete='off'
+      onChange={e => { handleOnchangeInput(e.target.value) }}
+      inputComponent={NumberFormatCustom as any}
+    />
+  </>
 
   let dadosGeraisCalculados: JSX.Element
 
@@ -212,9 +213,9 @@ function CustomRadioButtosGroup() {
         <H2>Seleciona a melhor opção que completa o valor total:</H2>
         <FormControl >
           <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
-            <FormControlLabel value={option.value1} control={<Radio color='primary' />} label='Valor líquido' />
-            <FormControlLabel value={option.value2} control={<Radio color='primary' />} label='Valor corretagem' />
-            <FormControlLabel value={option.value3} control={<Radio color='primary' />} label='Percentual corretagem' />
+            <FormControlLabel value={novoContratoRadioOptions.value1} control={<Radio color='primary' />} label='Valor líquido' />
+            <FormControlLabel value={novoContratoRadioOptions.value2} control={<Radio color='primary' />} label='Valor corretagem' />
+            <FormControlLabel value={novoContratoRadioOptions.value3} control={<Radio color='primary' />} label='Percentual corretagem' />
           </RadioGroup>
         </FormControl>
         {selectedInput}

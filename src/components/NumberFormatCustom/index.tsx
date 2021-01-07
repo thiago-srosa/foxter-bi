@@ -27,7 +27,7 @@ function NumberFormatCustom(props: NumberFormatCustomProps) {
       decimalSeparator=','
       decimalScale={2}
       fixedDecimalScale={true}
-      isNumericString
+      isNumericString={true}
       prefix={prefix}
     />
   );

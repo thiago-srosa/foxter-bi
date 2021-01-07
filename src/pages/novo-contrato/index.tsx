@@ -15,7 +15,6 @@ import {
   setNovoContratoValorCorretagemVenda,
   setNovoContratoPercentualCorretagemVenda,
 } from '../../../store/novoContrato/actions'
-
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 const Divider = loadable(() => import('@material-ui/core/Divider'))
@@ -28,16 +27,20 @@ const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
 const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/modalNovoVendedorPF'))
 const NumberFormatCustom = loadable(() => import('../../components/NumberFormatCustom'))
 const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/components/CustomRadioButtosGroup'))
+//CONSTANTES
+import { novoContratoRadioOptions } from '../../constants'
 
 const NovoContrato = (): JSX.Element => {
 
   const { userIsLoggedIn } = useSelector((state: RootState) => state.user)
   const {
+    novoContratoRadioButtonCalculaValorNegociacao,
     novoContratoValorTotalVenda,
     novoContratoValorLiquidoVenda,
     novoContratoValorCorretagemVenda,
     novoContratoPercentualCorretagemVenda,
   } = useSelector((state: RootState) => state.novoContrato)
+
   const router = useRouter()
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -48,7 +51,7 @@ const NovoContrato = (): JSX.Element => {
 
   return (
     <>
-      <SectionDiv >        
+      <SectionDiv >
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
             <H2>Valor total da venda</H2>
@@ -56,20 +59,38 @@ const NovoContrato = (): JSX.Element => {
               className={classes.outlinedInputSmall}
               id='ValorTotal'
               startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-              required              
+              required
               value={novoContratoValorTotalVenda ? novoContratoValorTotalVenda : ''}
               autoComplete='off'
               onChange={e => {
                 dispatch(setNovoContratoValorTotalVenda(parseInt(e.target.value)))
-                dispatch(setNovoContratoValorLiquidoVenda(null))
-                dispatch(setNovoContratoValorCorretagemVenda(null))
-                dispatch(setNovoContratoPercentualCorretagemVenda(null))
+
+                switch (novoContratoRadioButtonCalculaValorNegociacao) {
+                  //RADIO BUTTON= valor-liquido
+                  case novoContratoRadioOptions.value1:
+                    dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda - novoContratoValorLiquidoVenda))
+                    dispatch(setNovoContratoPercentualCorretagemVenda((novoContratoValorTotalVenda - novoContratoValorLiquidoVenda) / novoContratoValorTotalVenda * 100))
+                    break;
+                  //RADIO BUTTON = valor corretagem
+                  case novoContratoRadioOptions.value2:
+                    dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorCorretagemVenda))
+                    dispatch(setNovoContratoPercentualCorretagemVenda(novoContratoValorCorretagemVenda / novoContratoValorTotalVenda * 100))
+                    break;
+                  //RADIO BUTTON = pertual corretagem
+                  case novoContratoRadioOptions.value3:
+                    dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda * novoContratoPercentualCorretagemVenda / 100))
+                    dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorTotalVenda * novoContratoPercentualCorretagemVenda / 100))
+                    break;
+                  default:
+                    null
+                }
+
               }}
               inputComponent={NumberFormatCustom as any}
             />
           </StyledDivWrapper>
 
-          <StyledDivWrapper>            
+          <StyledDivWrapper>
             <CustomRadioButtosGroup />
           </StyledDivWrapper>
 

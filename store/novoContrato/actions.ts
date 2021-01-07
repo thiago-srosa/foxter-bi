@@ -1,4 +1,5 @@
 import {
+  SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
   SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA,
   SET_NOVO_CONTRATO_VALOR_LIQUIDO_VENDA,
   SET_NOVO_CONTRATO_VALOR_CORRETAGEM_VENDA,
@@ -11,7 +12,14 @@ import {
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
 // TypeScript infers that this function is returning SendMessageAction
-export const addNovoContratoVendedores = (novoContratoVendedores: NovoVendedorPFState) => ({
+export function setNovoContratoRadioButtonCalculaValorNegocicao(selection: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
+    payload: selection
+  }
+}
+
+export const addNovoContratoVendedores = (novoContratoVendedores: NovoVendedorPFState): NovoContratoActionTypes => ({
   type: ADD_NOVO_CONTRATO_VENDEDORES,
   payload: novoContratoVendedores,
 })

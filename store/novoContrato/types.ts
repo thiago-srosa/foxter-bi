@@ -1,3 +1,4 @@
+export const SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO = 'SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO'
 export const SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA = "SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA";
 export const SET_NOVO_CONTRATO_VALOR_LIQUIDO_VENDA = "SET_NOVO_CONTRATO_VALOR_LIQUIDO_VENDA";
 export const SET_NOVO_CONTRATO_VALOR_CORRETAGEM_VENDA = "SET_NOVO_CONTRATO_VALOR_CORRETAGEM_VENDA";
@@ -8,12 +9,18 @@ export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
 export interface NovoContratoState {
+  novoContratoRadioButtonCalculaValorNegociacao: string,
   novoContratoValorTotalVenda: number,
   novoContratoValorLiquidoVenda: number,
   novoContratoValorCorretagemVenda: number,
   novoContratoPercentualCorretagemVenda: number,
   novoContratoVendedores: NovoVendedorPFState[],
 };
+
+export interface SetRadioButtonNovoContratoCalculaValorNegociacaoAction {
+  type: typeof SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO
+  payload: string
+}
 
 export interface SetNovoContratoValorTotalVendaAction {
   type: typeof SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA
@@ -50,4 +57,5 @@ export type NovoContratoActionTypes =
   SetNovoContratoValorCorretagemVendaAction |
   SetNovoContratoPercentualCorretagemVendaAction |
   AddNovoContratoVendedoresAction |
-  ResetNovoContratoAction
+  ResetNovoContratoAction |
+  SetRadioButtonNovoContratoCalculaValorNegociacaoAction

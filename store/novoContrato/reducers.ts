@@ -1,6 +1,7 @@
 import {
   NovoContratoState,
   NovoContratoActionTypes,
+  SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO,
   SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA,
   SET_NOVO_CONTRATO_VALOR_LIQUIDO_VENDA,
   SET_NOVO_CONTRATO_VALOR_CORRETAGEM_VENDA,
@@ -10,6 +11,7 @@ import {
 } from './types'
 
 const initialState: NovoContratoState = {
+  novoContratoRadioButtonCalculaValorNegociacao: null,
   novoContratoValorTotalVenda: null,
   novoContratoValorLiquidoVenda: null,
   novoContratoValorCorretagemVenda: null,
@@ -22,6 +24,9 @@ function NovoContratoReducer(
   action: NovoContratoActionTypes
 ): NovoContratoState {
   switch (action.type) {
+
+    case SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO:
+      return { ...state, novoContratoRadioButtonCalculaValorNegociacao: action.payload };
 
     case SET_NOVO_CONTRATO_VALOR_TOTAL_VENDA:
       return { ...state, novoContratoValorTotalVenda: action.payload };
