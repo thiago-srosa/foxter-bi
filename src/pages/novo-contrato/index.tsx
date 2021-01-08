@@ -10,55 +10,37 @@ import { RootState } from '../../../store/reducers'
 import { SectionDiv } from './styles'
 import { useStyles } from './styles'
 import {
-  setNovoContratoValorTotalVenda,
-  setNovoContratoValorLiquidoVenda,
-  setNovoContratoValorCorretagemVenda,
-  setNovoContratoPercentualCorretagemVenda,
   resetNovoContrato,
 } from '../../../store/novoContrato/actions'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
-const Divider = loadable(() => import('@material-ui/core/Divider'))
-const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
-const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
-const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
+const CustomDivider = loadable(() => import('../../components/CustomDivider'))
 const H1 = loadable(() => import('../../components/StyledComponents/StyledH1'))
 const H2 = loadable(() => import('../../components/StyledComponents/StyledH2'))
-const H3 = loadable(() => import('../../components/StyledComponents/StyledH3'))
 const Head = loadable(() => import('next/head'))
 const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
 const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/modalNovoVendedorPF'))
-const NumberFormatCustom = loadable(() => import('../../components/NumberFormatCustom'))
-const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/components/CustomRadioButtosGroup'))
 const Button = loadable(() => import('@material-ui/core/Button'))
 const ProgressBar = loadable(() => import('./components/ProgressBar/'))
 const StyledContentSidebar = loadable(() => import('../../components/StyledComponents/StyledContentSidebar'))
 const DadosGerais = loadable(() => import('./components/DadosGerais'))
+const DadosInternos = loadable(() => import('./components/DadosInternos'))
 const Sidebar = loadable(() => import('./components/Sidebar'))
-
-//CONSTANTES
-import { novoContratoRadioOptions } from '../../constants'
 
 const NovoContrato = (): JSX.Element => {
 
-  const refDadosGerais = useRef()
-
   const { userIsLoggedIn } = useSelector((state: RootState) => state.user)
-  const {
-    novoContratoRadioButtonCalculaValorNegociacao,
-    novoContratoValorTotalVenda,
-    novoContratoValorLiquidoVenda,
-    novoContratoValorCorretagemVenda,
-    novoContratoPercentualCorretagemVenda,
-  } = useSelector((state: RootState) => state.novoContrato)
-
-  const router = useRouter()
-  const classes = useStyles()
-  const dispatch = useDispatch()
 
   useEffect(() => {
     !userIsLoggedIn ? router.push("/login") : null;
   }, [userIsLoggedIn])
+
+  const refDadosGerais = useRef()
+  const refDadosInternos = useRef()
+
+  const router = useRouter()
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
   function handleResetNovoContrato(): void {
     dispatch(resetNovoContrato())
@@ -69,6 +51,7 @@ const NovoContrato = (): JSX.Element => {
       <Head>
         <title>Novo contrato</title>
       </Head>
+
       <H1>Novo contrato</H1>
 
       <ProgressBar />
@@ -78,22 +61,15 @@ const NovoContrato = (): JSX.Element => {
         <form className={classes.form} noValidate autoComplete='off'>
 
           <DadosGerais refDadosGerais={refDadosGerais} />
-
-          <StyledDivWrapper>
-            <CustomRadioButtosGroup />
-          </StyledDivWrapper>
+          <CustomDivider  />
+          <DadosInternos refDadosInternos={refDadosInternos} />
 
         </form>
 
         <SectionDiv style={{ marginTop: 10 }}>
           <NovoVendedorPF />
           <TabelaVendedores />
-        </SectionDiv>
-
-        <Divider style={{ margin: '15px 0px 15px 0px' }} />
-        <H2>Dados internos</H2>
-
-        <Divider style={{ margin: '15px 0px 15px 0px' }} />
+        </SectionDiv>   
 
         <Button
           variant="contained"

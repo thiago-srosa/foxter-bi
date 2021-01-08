@@ -3,33 +3,33 @@ import React, { SyntheticEvent } from 'react'
 //REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
 //STORE => TYPE ROOT STATE
-import { RootState } from '../../../../../store/reducers'
+import { RootState } from '../../../../../../../store/reducers'
 //GLOBAL ACTIONS
-import { setNovoContratoRadioButtonCalculaValorNegocicao } from '../../../../../store/novoContrato/actions'
+import { setNovoContratoRadioButtonCalculaValorNegocicao } from '../../../../../../../store/novoContrato/actions'
 //NOVO CONTRATO ACTIONS
 import {
   setNovoContratoValorLiquidoVenda,
   setNovoContratoValorCorretagemVenda,
   setNovoContratoPercentualCorretagemVenda,
-} from '../../../../../store/novoContrato/actions'
+} from '../../../../../../../store/novoContrato/actions'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 const FormControl = loadable(() => import('@material-ui/core/FormControl'))
 const RadioGroup = loadable(() => import('@material-ui/core/RadioGroup'))
 const FormControlLabel = loadable(() => import('@material-ui/core/FormControlLabel'))
 const Radio = loadable(() => import('@material-ui/core/Radio'))
-const H3 = loadable(() => import('../../../../components/StyledComponents/StyledH3'))
+const H3 = loadable(() => import('../../../../../../components/StyledComponents/StyledH3'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const NumberFormat = loadable(() => import('react-number-format'))
-const NumberFormatCustom = loadable(() => import('../../../../components/NumberFormatCustom'))
+const NumberFormatCustom = loadable(() => import('../../../../../../components/NumberFormatCustom'))
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
 const StyledValuesDiv = loadable(() => import('./components/StyledComponents/StyledValuesDiv'))
 const StyledDivWrapperRadio = loadable(() => import('./components/StyledComponents/StyledDivWrapperRadio'))
 //CONSTANTS
-import { novoContratoRadioOptions } from '../../../../constants'
+import { novoContratoRadioOptions } from '../../../../../../constants'
 //CUSTOM STYLES
-import { useStyles } from '../../styles'
+import { useStyles } from '../../../../styles'
 
 function CustomRadioButtosGroup() {
 
@@ -213,7 +213,7 @@ function CustomRadioButtosGroup() {
       <StyledDivWrapperRadio>
         <H3>Seleciona a melhor opção que completa o valor total:</H3>
         <FormControl >
-          <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
+          <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} defaultValue={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
             <FormControlLabel value={novoContratoRadioOptions.value1} control={<Radio color='primary' />} label='Valor líquido' />
             <FormControlLabel value={novoContratoRadioOptions.value2} control={<Radio color='primary' />} label='Valor corretagem' />
             <FormControlLabel value={novoContratoRadioOptions.value3} control={<Radio color='primary' />} label='Percentual corretagem' />

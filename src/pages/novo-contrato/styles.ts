@@ -38,7 +38,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   outlinedInputSmall: {
     width: '200px',
-  }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    width: 200,
+  },
 }));
 
 export const SectionDiv = styled.div`  

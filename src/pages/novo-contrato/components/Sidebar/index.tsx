@@ -8,12 +8,11 @@ import loadable from '@loadable/component'
 const StyledSidebar = loadable(() => import('../../../../components/StyledComponents/StyledSidebar'))
 const SidebarDadosGerais = loadable(() => import('./components/SidebarDadosGerais'))
 
-const Sidebar = (props: INovoContratoSidebar) => {
-
+const Sidebar = ({ refDadosGerais }: INovoContratoSidebar) => {
 
   return (
     <StyledSidebar>
-      <SidebarDadosGerais refDadosGerais={props.refDadosGerais} />
+      <SidebarDadosGerais refDadosGerais={refDadosGerais} />
       <p>Dados Internos</p>
       <p>SECTION</p>
       <p>SECTION</p>

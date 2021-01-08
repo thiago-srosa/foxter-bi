@@ -9,18 +9,18 @@ import {
   setNovoContratoValorTotalVenda,
   setNovoContratoValorLiquidoVenda,
   setNovoContratoValorCorretagemVenda,
-  setNovoContratoPercentualCorretagemVenda,
-  resetNovoContrato,
+  setNovoContratoPercentualCorretagemVenda,  
 } from '../../../../../store/novoContrato/actions'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
-const StyledDivWrapper = loadable(() => import('./../../components/StyledComponents/StyledDivWrapper'))
+const StyledDivWrapper = loadable(() => import('./../../../../components/StyledComponents/StyledDivWrapper'))
 const H2 = loadable(() => import('../../../../components/StyledComponents/StyledH2'))
 const H3 = loadable(() => import('../../../../components/StyledComponents/StyledH3'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const NumberFormatCustom = loadable(() => import('../../../../components/NumberFormatCustom'))
+const CustomRadioButtosGroup = loadable(() => import('../../../novo-contrato/components/DadosGerais/components/CustomRadioButtosGroup'))
 //STYLES
 import { useStyles } from '../../styles'
 //CONSTANTES
@@ -75,6 +75,9 @@ const DadosGerais = ({ refDadosGerais }) => {
         }}
         inputComponent={NumberFormatCustom as any}
       />
+
+      <CustomRadioButtosGroup />
+
     </StyledDivWrapper>
   )
 }

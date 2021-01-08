@@ -5,5 +5,6 @@ export interface IOptions {
 }
 
 export interface INovoContratoSidebar {
-  refDadosGerais: any,
+  refDadosGerais?: any,
+  refDadosInternos?: any,
 }
