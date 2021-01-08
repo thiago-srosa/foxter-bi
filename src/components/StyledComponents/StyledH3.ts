@@ -1,13 +1,13 @@
 //STYLED-COMPONENTS
 import styled from 'styled-components'
 
-export const H2 = styled.h2`
-    color: darkblue;
+export const H3 = styled.h3`
+    color: black;
     text-align: inherit;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
     line-height: 24px;
-    scroll-margin: 100px;
 `
 
-export default H2
+export default H3
+

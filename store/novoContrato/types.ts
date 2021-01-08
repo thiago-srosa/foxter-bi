@@ -9,11 +9,14 @@ export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
 export interface NovoContratoState {
+  //INFORMAÇÕES AUXILIARES PARA O DESENVOLVEDOR
   novoContratoRadioButtonCalculaValorNegociacao: string,
+  //DADOS GERAIS DA VENDA
   novoContratoValorTotalVenda: number,
   novoContratoValorLiquidoVenda: number,
   novoContratoValorCorretagemVenda: number,
   novoContratoPercentualCorretagemVenda: number,
+  //VENDEDORES
   novoContratoVendedores: NovoVendedorPFState[],
 };
 

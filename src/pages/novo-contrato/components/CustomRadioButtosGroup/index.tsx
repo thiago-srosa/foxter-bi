@@ -18,7 +18,7 @@ const FormControl = loadable(() => import('@material-ui/core/FormControl'))
 const RadioGroup = loadable(() => import('@material-ui/core/RadioGroup'))
 const FormControlLabel = loadable(() => import('@material-ui/core/FormControlLabel'))
 const Radio = loadable(() => import('@material-ui/core/Radio'))
-const H2 = loadable(() => import('../../../../components/StyledComponents/StyledH2'))
+const H3 = loadable(() => import('../../../../components/StyledComponents/StyledH3'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
 const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment'))
 const NumberFormat = loadable(() => import('react-number-format'))
@@ -111,7 +111,7 @@ function CustomRadioButtosGroup() {
 
   selectedInput = <>
     <span style={novoContratoRadioButtonCalculaValorNegociacao == null ? { display: 'none' } : null}>
-      <H2>{novoContratoRadioButtonCalculaValorNegociacao}</H2>
+      <H3>{novoContratoRadioButtonCalculaValorNegociacao}</H3>
       <OutlinedInput
         className={classes.outlinedInputSmall}
         id='SelectedInput'
@@ -131,7 +131,7 @@ function CustomRadioButtosGroup() {
     dadosGeraisCalculados = (
 
       <StyledDivWrapper>
-        <H2>Dados gerais da venda:</H2>
+        <H3>Dados gerais da venda:</H3>
 
         <StyledValuesDiv>
           <span>Proprietário:</span>
@@ -211,7 +211,7 @@ function CustomRadioButtosGroup() {
   return (
     <>
       <StyledDivWrapperRadio>
-        <H2>Seleciona a melhor opção que completa o valor total:</H2>
+        <H3>Seleciona a melhor opção que completa o valor total:</H3>
         <FormControl >
           <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
             <FormControlLabel value={novoContratoRadioOptions.value1} control={<Radio color='primary' />} label='Valor líquido' />

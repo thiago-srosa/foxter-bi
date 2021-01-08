@@ -1,12 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 const StyledProgressbarWrapper = loadable(() => import('./componets/StyledProgressbarWrapper'))
+const Box = loadable(() => import('@material-ui/core/Box'))
+const Typography = loadable(() => import('@material-ui/core/Typography'))
+
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
   return (

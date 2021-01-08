@@ -8,7 +8,7 @@ export const StyledSidebar = styled.div`
   align-self: start;
   position: sticky;
   width: 100px;
-  top: 50px;
+  top: 100px;
   width: 20%;
   @media(max-width: 1000px){
     display: none;

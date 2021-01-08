@@ -1,5 +1,5 @@
 //REACT
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 //NEXTJS
 import { useRouter } from 'next/router'
 //REACT-REDUX
@@ -24,6 +24,7 @@ const InputAdornment = loadable(() => import('@material-ui/core/InputAdornment')
 const StyledDivWrapper = loadable(() => import('./components/StyledComponents/StyledDivWrapper'))
 const H1 = loadable(() => import('../../components/StyledComponents/StyledH1'))
 const H2 = loadable(() => import('../../components/StyledComponents/StyledH2'))
+const H3 = loadable(() => import('../../components/StyledComponents/StyledH3'))
 const Head = loadable(() => import('next/head'))
 const TabelaVendedores = loadable(() => import('./components/TabelaVendedores'))
 const NovoVendedorPF = loadable(() => import('./components/ModalNovoVendedorPF/modalNovoVendedorPF'))
@@ -32,12 +33,15 @@ const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/component
 const Button = loadable(() => import('@material-ui/core/Button'))
 const ProgressBar = loadable(() => import('./components/ProgressBar/'))
 const StyledContentSidebar = loadable(() => import('../../components/StyledComponents/StyledContentSidebar'))
-const StyledSidebar = loadable(() => import('../../components/StyledComponents/StyledSidebar'))
+const Sidebar = loadable(() => import('./components/Sidebar'))
 
 //CONSTANTES
 import { novoContratoRadioOptions } from '../../constants'
 
 const NovoContrato = (): JSX.Element => {
+
+  const refDadosGerais = useRef()
+
 
   const { userIsLoggedIn } = useSelector((state: RootState) => state.user)
   const {
@@ -73,7 +77,8 @@ const NovoContrato = (): JSX.Element => {
 
         <form className={classes.form} noValidate autoComplete='off'>
           <StyledDivWrapper>
-            <H2>Valor total da venda</H2>
+            <H2 ref={refDadosGerais}>Dados gerais</H2>
+            <H3>Valor total da venda</H3>
             <OutlinedInput
               className={classes.outlinedInputSmall}
               id='ValorTotal'
@@ -87,18 +92,18 @@ const NovoContrato = (): JSX.Element => {
                 switch (novoContratoRadioButtonCalculaValorNegociacao) {
                   //RADIO BUTTON= valor-liquido
                   case novoContratoRadioOptions.value1:
-                    dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda - novoContratoValorLiquidoVenda))
-                    dispatch(setNovoContratoPercentualCorretagemVenda((novoContratoValorTotalVenda - novoContratoValorLiquidoVenda) / novoContratoValorTotalVenda * 100))
+                    dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value) - novoContratoValorLiquidoVenda))
+                    dispatch(setNovoContratoPercentualCorretagemVenda((parseInt(e.target.value) - novoContratoValorLiquidoVenda) / parseInt(e.target.value) * 100))
                     break;
                   //RADIO BUTTON = valor corretagem
                   case novoContratoRadioOptions.value2:
-                    dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorCorretagemVenda))
-                    dispatch(setNovoContratoPercentualCorretagemVenda(novoContratoValorCorretagemVenda / novoContratoValorTotalVenda * 100))
+                    dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value) - novoContratoValorCorretagemVenda))
+                    dispatch(setNovoContratoPercentualCorretagemVenda(novoContratoValorCorretagemVenda / parseInt(e.target.value) * 100))
                     break;
                   //RADIO BUTTON = pertual corretagem
                   case novoContratoRadioOptions.value3:
-                    dispatch(setNovoContratoValorCorretagemVenda(novoContratoValorTotalVenda * novoContratoPercentualCorretagemVenda / 100))
-                    dispatch(setNovoContratoValorLiquidoVenda(novoContratoValorTotalVenda - novoContratoValorTotalVenda * novoContratoPercentualCorretagemVenda / 100))
+                    dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value) * novoContratoPercentualCorretagemVenda / 100))
+                    dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value) - parseInt(e.target.value) * novoContratoPercentualCorretagemVenda / 100))
                     break;
                   default:
                     null
@@ -115,12 +120,15 @@ const NovoContrato = (): JSX.Element => {
 
         </form>
 
-        <Divider style={{ margin: '15px 8px 15px 8px' }} />
-
         <SectionDiv style={{ marginTop: 10 }}>
           <NovoVendedorPF />
           <TabelaVendedores />
         </SectionDiv>
+
+        <Divider style={{ margin: '15px 0px 15px 0px' }} />
+        <H2>Dados internos</H2>
+
+        <Divider style={{ margin: '15px 0px 15px 0px' }} />
 
         <Button
           variant="contained"
@@ -132,18 +140,12 @@ const NovoContrato = (): JSX.Element => {
           RESETAR CONTRATO
         </Button>
 
-
       </StyledContentSidebar>
 
-      <StyledSidebar>
-        <p>SECTION</p>
-        <p>SECTION</p>
-        <p>SECTION</p>
-        <p>SECTION</p>
-        <p>SECTION</p>
-        <p>SECTION</p>
-        <p>SECTION</p>
-      </StyledSidebar>
+      <Sidebar
+        refDadosGerais={refDadosGerais}
+      />
+
     </>
   )
 }
