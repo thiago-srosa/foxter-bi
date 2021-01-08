@@ -4,7 +4,7 @@ import { IOptions } from './types'
 export const novoContratoRadioOptions: IOptions = {
   value1: 'Valor líquido',
   value2: 'Valor corretagem',
-  value3: 'Percentual corretagme',
+  value3: 'Percentual corretagem',
 }
 
 export const scrollIntoView: object = {

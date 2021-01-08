@@ -33,6 +33,7 @@ const CustomRadioButtosGroup = loadable(() => import('../novo-contrato/component
 const Button = loadable(() => import('@material-ui/core/Button'))
 const ProgressBar = loadable(() => import('./components/ProgressBar/'))
 const StyledContentSidebar = loadable(() => import('../../components/StyledComponents/StyledContentSidebar'))
+const DadosGerais = loadable(() => import('./components/DadosGerais'))
 const Sidebar = loadable(() => import('./components/Sidebar'))
 
 //CONSTANTES
@@ -75,43 +76,8 @@ const NovoContrato = (): JSX.Element => {
       <StyledContentSidebar >
 
         <form className={classes.form} noValidate autoComplete='off'>
-          <StyledDivWrapper>
-            <H2 ref={refDadosGerais}>Dados gerais</H2>
-            <H3>Valor total da venda</H3>
-            <OutlinedInput
-              className={classes.outlinedInputSmall}
-              id='ValorTotal'
-              startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-              required
-              value={novoContratoValorTotalVenda ? novoContratoValorTotalVenda : ''}
-              autoComplete='off'
-              onChange={e => {
-                dispatch(setNovoContratoValorTotalVenda(parseInt(e.target.value)))
 
-                switch (novoContratoRadioButtonCalculaValorNegociacao) {
-                  //RADIO BUTTON= valor-liquido
-                  case novoContratoRadioOptions.value1:
-                    dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value) - novoContratoValorLiquidoVenda))
-                    dispatch(setNovoContratoPercentualCorretagemVenda((parseInt(e.target.value) - novoContratoValorLiquidoVenda) / parseInt(e.target.value) * 100))
-                    break;
-                  //RADIO BUTTON = valor corretagem
-                  case novoContratoRadioOptions.value2:
-                    dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value) - novoContratoValorCorretagemVenda))
-                    dispatch(setNovoContratoPercentualCorretagemVenda(novoContratoValorCorretagemVenda / parseInt(e.target.value) * 100))
-                    break;
-                  //RADIO BUTTON = pertual corretagem
-                  case novoContratoRadioOptions.value3:
-                    dispatch(setNovoContratoValorCorretagemVenda(parseInt(e.target.value) * novoContratoPercentualCorretagemVenda / 100))
-                    dispatch(setNovoContratoValorLiquidoVenda(parseInt(e.target.value) - parseInt(e.target.value) * novoContratoPercentualCorretagemVenda / 100))
-                    break;
-                  default:
-                    null
-                }
-              }}
-              inputComponent={NumberFormatCustom as any}
-            />
-          </StyledDivWrapper>
-
+          <DadosGerais refDadosGerais={refDadosGerais} />
 
           <StyledDivWrapper>
             <CustomRadioButtosGroup />

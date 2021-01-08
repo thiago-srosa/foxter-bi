@@ -29,10 +29,10 @@ const SidebarDadosGerais = (props: INovoContratoSidebar) => {
 
   let iconStatus: React.ReactElement
 
-  if (novoContratoValorTotalVenda &&
-    novoContratoValorLiquidoVenda &&
-    novoContratoValorCorretagemVenda &
-    novoContratoPercentualCorretagemVenda
+  if (novoContratoValorTotalVenda>0 &&
+    novoContratoValorLiquidoVenda>0 &&
+    novoContratoValorCorretagemVenda>0 &&
+    novoContratoPercentualCorretagemVenda>0
   ) {
     iconStatus = <CheckCircleIcon style={styleCheckCircleIcon} fontSize='small' color='action' />
   }
