@@ -42,7 +42,6 @@ const NovoContrato = (): JSX.Element => {
 
   const refDadosGerais = useRef()
 
-
   const { userIsLoggedIn } = useSelector((state: RootState) => state.user)
   const {
     novoContratoRadioButtonCalculaValorNegociacao,

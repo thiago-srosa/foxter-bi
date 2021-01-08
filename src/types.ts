@@ -4,3 +4,6 @@ export interface IOptions {
   value3: string,
 }
 
+export interface INovoContratoSidebar {
+  refDadosGerais: any,
+}

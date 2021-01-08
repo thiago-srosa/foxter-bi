@@ -1,23 +1,20 @@
 
 //REACT
 import React from 'react'
+//INTERFACES
+import { INovoContratoSidebar } from '../../../../types'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 const StyledSidebar = loadable(() => import('../../../../components/StyledComponents/StyledSidebar'))
-const RadioButtonUncheckedIcon = loadable(() => import('@material-ui/icons/RadioButtonUnchecked'))
+const SidebarDadosGerais = loadable(() => import('./components/SidebarDadosGerais'))
 
-const Sidebar = (props) => {
+const Sidebar = (props: INovoContratoSidebar) => {
 
-  function teste() {
-    props.refDadosGerais.current.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",      
-    })
-  }
+
   return (
     <StyledSidebar>
-      <div style={{ display: 'flex' }} onClick={teste}><RadioButtonUncheckedIcon fontSize='small' color='action' />Dados gerais</div>
-      <p>Dados Internos</p>      
+      <SidebarDadosGerais refDadosGerais={props.refDadosGerais} />
+      <p>Dados Internos</p>
       <p>SECTION</p>
       <p>SECTION</p>
       <p>SECTION</p>
