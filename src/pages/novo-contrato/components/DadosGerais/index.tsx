@@ -9,8 +9,10 @@ import {
   setNovoContratoValorTotalVenda,
   setNovoContratoValorLiquidoVenda,
   setNovoContratoValorCorretagemVenda,
-  setNovoContratoPercentualCorretagemVenda,  
+  setNovoContratoPercentualCorretagemVenda,
 } from '../../../../../store/novoContrato/actions'
+//TYPES
+import { NumberFormatProps } from '../../../../components/NumberFormatCustom'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
@@ -23,10 +25,12 @@ const NumberFormatCustom = loadable(() => import('../../../../components/NumberF
 const CustomRadioButtosGroup = loadable(() => import('../../../novo-contrato/components/DadosGerais/components/CustomRadioButtosGroup'))
 //STYLES
 import { useStyles } from '../../styles'
+//TYPES
+import { INovoContratoSidebarDadosGerais } from '../../../../types'
 //CONSTANTES
 import { novoContratoRadioOptions } from '../../../../constants'
 
-const DadosGerais = ({ refDadosGerais }) => {
+const DadosGerais = ({ refIsVisibleDadosGerais, refSidebarDadosGerais }: INovoContratoSidebarDadosGerais) => {
 
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -40,8 +44,8 @@ const DadosGerais = ({ refDadosGerais }) => {
   } = useSelector((state: RootState) => state.novoContrato)
 
   return (
-    <StyledDivWrapper>
-      <H2 ref={refDadosGerais}>Dados gerais</H2>
+    <StyledDivWrapper ref={refIsVisibleDadosGerais}>
+      <H2 ref={refSidebarDadosGerais}>Dados gerais</H2>
       <H3>Valor total da venda</H3>
       <OutlinedInput
         className={classes.outlinedInputSmall}
@@ -74,6 +78,11 @@ const DadosGerais = ({ refDadosGerais }) => {
           }
         }}
         inputComponent={NumberFormatCustom as any}
+        inputProps={{
+          thousandSeparator: '.',
+          decimalScale: 2,
+          fixedDecimalScale: true,
+        } as NumberFormatProps}
       />
 
       <CustomRadioButtosGroup />

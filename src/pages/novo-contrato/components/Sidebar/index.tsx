@@ -7,13 +7,27 @@ import { INovoContratoSidebar } from '../../../../types'
 import loadable from '@loadable/component'
 const StyledSidebar = loadable(() => import('../../../../components/StyledComponents/StyledSidebar'))
 const SidebarDadosGerais = loadable(() => import('./components/SidebarDadosGerais'))
+const SidebarDadosInternos = loadable(() => import('./components/SidebarDadosInternos'))
 
-const Sidebar = ({ refDadosGerais }: INovoContratoSidebar) => {
+const Sidebar = ({
+  //DADOS GERAIS
+  refIsVisibleDadosGerais,
+  refSidebarDadosGerais,
+  //DADOS INTERNOS
+  refIsVisibleDadosInternos,
+  refSidebarDadosInternos,
+}: INovoContratoSidebar) => {
 
   return (
     <StyledSidebar>
-      <SidebarDadosGerais refDadosGerais={refDadosGerais} />
-      <p>Dados Internos</p>
+      <SidebarDadosGerais
+        refIsVisibleDadosGerais={refIsVisibleDadosGerais}
+        refSidebarDadosGerais={refSidebarDadosGerais}
+      />
+      <SidebarDadosInternos
+        refIsVisibleDadosInternos={refIsVisibleDadosInternos}
+        refSidebarDadosInternos={refSidebarDadosInternos}
+      />
       <p>SECTION</p>
       <p>SECTION</p>
       <p>SECTION</p>

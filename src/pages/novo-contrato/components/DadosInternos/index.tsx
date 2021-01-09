@@ -13,6 +13,9 @@ import {
 } from '../../../../../store/novoContrato/actions'
 //STYLES
 import { useStyles } from '../../styles'
+//TYPES
+import { INovoContratoSidebarDadosInternos } from '../../../../types'
+import { NumberFormatProps } from '../../../../components/NumberFormatCustom'
 //CONSTANTS
 import { origemCaptacao } from '../../../../constants'
 //LOADABLE/COMPONENT
@@ -26,11 +29,11 @@ const RadioGroup = loadable(() => import('@material-ui/core/RadioGroup'))
 const FormControlLabel = loadable(() => import('@material-ui/core/FormControlLabel'))
 const Radio = loadable(() => import('@material-ui/core/Radio'))
 const OutlinedInput = loadable(() => import('@material-ui/core/OutlinedInput'))
-const NumberFormat = loadable(() => import('react-number-format'))
+const NumberFormatCustom = loadable(() => import('../../../../components/NumberFormatCustom'))
 const Select = loadable(() => import('@material-ui/core/Select'))
 const MenuItem = loadable(() => import('@material-ui/core/MenuItem'))
 
-const DadosInternos = ({ refDadosInternos }) => {
+const DadosInternos = ({ refIsVisibleDadosInternos, refSidebarDadosInternos }: INovoContratoSidebarDadosInternos) => {
 
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -47,14 +50,14 @@ const DadosInternos = ({ refDadosInternos }) => {
   }
 
   return (
-    <StyledDivWrapper>
-      <H2 ref={refDadosInternos}>Dados internos</H2>
+    <StyledDivWrapper ref={refIsVisibleDadosInternos}>
+      <H2 ref={refSidebarDadosInternos}>Dados internos</H2>
 
       <H3>Imóvel é exclusividade Foxter?</H3>
       <FormControl >
         <RadioGroup row name="NovoContratoExclusivadeSelection" value={novoContratoExclusividade} onChange={handleOnChangeRadio}>
-          <FormControlLabel value={true} control={<Radio />} label="Sim" />
-          <FormControlLabel value={false} control={<Radio />} label="Não" />
+          <FormControlLabel value={true} control={<Radio color='primary' />} label="Sim" />
+          <FormControlLabel value={false} control={<Radio color='primary' />} label="Não" />
         </RadioGroup>
       </FormControl>
 
@@ -66,7 +69,12 @@ const DadosInternos = ({ refDadosInternos }) => {
         value={novoContratoNumeroAgsFoco ? novoContratoNumeroAgsFoco : ''}
         autoComplete='off'
         onChange={(e) => { dispatch(setNovoContratoNumeroAgsFoco(+e.target.value)) }}
-        inputComponent={NumberFormat as any}
+        inputComponent={NumberFormatCustom as any}
+        inputProps={{          
+          thousandSeparator: '.',
+          decimalScale: 1,
+          fixedDecimalScale: false,
+        } as NumberFormatProps}
       />
 
       <H3>Código da oportunidade no Konecty:</H3>
@@ -77,7 +85,12 @@ const DadosInternos = ({ refDadosInternos }) => {
         value={novoContratoCodigoOportunidade ? novoContratoCodigoOportunidade : ''}
         autoComplete='off'
         onChange={(e) => { dispatch(setNovoContratoCodigoOportunidade(+e.target.value)) }}
-        inputComponent={NumberFormat as any}
+        inputComponent={NumberFormatCustom as any}
+        inputProps={{          
+          thousandSeparator: '',
+          decimalScale: 0,
+          fixedDecimalScale: false,
+        } as NumberFormatProps}
       />
       <H3>Origem da captção do comprador:</H3>
       <FormControl variant="outlined" className={classes.formControl}>
@@ -87,8 +100,8 @@ const DadosInternos = ({ refDadosInternos }) => {
           value={novoContratoOrigemCaptacao}
           onChange={(e) => dispatch(setNovoContratoOrigemCaptacao(e.target.value.toString()))}
         >
-          
-          {Object.values(origemCaptacao).map((opcao, index) => <MenuItem key={index} value={opcao}>{opcao}</MenuItem>)}          
+
+          {Object.values(origemCaptacao).map((opcao, index) => <MenuItem key={index} value={opcao}>{opcao}</MenuItem>)}
         </Select>
       </FormControl>
 

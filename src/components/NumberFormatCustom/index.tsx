@@ -4,13 +4,23 @@ import React from 'react'
 import NumberFormat from 'react-number-format';
 
 interface NumberFormatCustomProps {
-  inputRef: (instance: NumberFormat | null) => void;
-  onChange: (event: { target: { value: string } }) => void;
-  prefix: string;
+  inputRef: (instance: NumberFormat | null) => void,
+  onChange: (event: { target: { value: string } }) => void,
+  prefix: string,
+  decimalScale: number,
+  thousandSeparator: string,
+  fixedDecimalScale: boolean,
+}
+
+export interface NumberFormatProps {
+  prefix: string,
+  thousandSeparator: string,
+  decimalScale: number,
+  fixedDecimalScale: boolean,
 }
 
 function NumberFormatCustom(props: NumberFormatCustomProps) {
-  const { inputRef, onChange, prefix, ...other } = props;
+  const { inputRef, onChange, prefix, decimalScale, thousandSeparator, fixedDecimalScale, ...other } = props;
 
   return (
     <NumberFormat
@@ -23,9 +33,9 @@ function NumberFormatCustom(props: NumberFormatCustomProps) {
           },
         });
       }}
-      thousandSeparator='.'
+      thousandSeparator={thousandSeparator}
       decimalSeparator=','
-      decimalScale={2}
+      decimalScale={decimalScale}
       fixedDecimalScale={true}
       isNumericString={true}
       prefix={prefix}

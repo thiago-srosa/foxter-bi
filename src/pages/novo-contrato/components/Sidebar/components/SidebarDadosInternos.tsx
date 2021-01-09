@@ -3,7 +3,7 @@ import React from 'react'
 //CONSTANTS
 import { scrollIntoView, styleRadioButtonUncheckedIcon, styleCheckCircleIcon, isVisibleSidebar } from '../../../../../constants'
 //INTERFACES
-import { INovoContratoSidebarDadosGerais } from '../../../../../types'
+import { INovoContratoSidebarDadosInternos } from '../../../../../types'
 //REACT-REDUX
 import { useSelector } from "react-redux"
 //STORE => TYPE ROOT STATE
@@ -16,26 +16,26 @@ const CheckCircleIcon = loadable(() => import('@material-ui/icons/CheckCircle'))
 //REACT IS VISIBLE
 import { useIsVisible } from "react-is-visible"
 
-const SidebarDadosGerais = ({ refSidebarDadosGerais, refIsVisibleDadosGerais, }: INovoContratoSidebarDadosGerais) => {
+const SidebarDadosInternos = ({ refIsVisibleDadosInternos, refSidebarDadosInternos }: INovoContratoSidebarDadosInternos) => {
 
-  const isVisible = useIsVisible(refIsVisibleDadosGerais)
+  const isVisible = useIsVisible(refIsVisibleDadosInternos)
   const {
-    novoContratoValorTotalVenda,
-    novoContratoValorLiquidoVenda,
-    novoContratoValorCorretagemVenda,
-    novoContratoPercentualCorretagemVenda,
+    novoContratoExclusividade,
+    novoContratoCodigoOportunidade,
+    novoContratoNumeroAgsFoco,
+    novoContratoOrigemCaptacao,
   } = useSelector((state: RootState) => state.novoContrato)
 
   function handleOnClickDadosGerais() {
-    refSidebarDadosGerais.current.scrollIntoView({ scrollIntoView })
+    refSidebarDadosInternos.current.scrollIntoView({ scrollIntoView })
   }
 
   let iconStatus: React.ReactElement
 
-  if (novoContratoValorTotalVenda > 0 &&
-    novoContratoValorLiquidoVenda > 0 &&
-    novoContratoValorCorretagemVenda > 0 &&
-    novoContratoPercentualCorretagemVenda > 0
+  if (novoContratoExclusividade != null &&
+    novoContratoCodigoOportunidade > 0 &&
+    novoContratoNumeroAgsFoco > 0 &&
+    novoContratoOrigemCaptacao != null
   ) {
     iconStatus = <CheckCircleIcon style={styleCheckCircleIcon} fontSize='small' color='action' />
   }
@@ -46,12 +46,12 @@ const SidebarDadosGerais = ({ refSidebarDadosGerais, refIsVisibleDadosGerais, }:
   return (
     <StyledSidebarSectionDiv style={isVisible ? isVisibleSidebar : null} onClick={handleOnClickDadosGerais}>
       {iconStatus}
-        Dados gerais
+        Dados internos
     </StyledSidebarSectionDiv>
   )
 }
 
-export default SidebarDadosGerais
+export default SidebarDadosInternos
 
 
 

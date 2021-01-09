@@ -28,6 +28,8 @@ const StyledValuesDiv = loadable(() => import('./components/StyledComponents/Sty
 const StyledDivWrapperRadio = loadable(() => import('./components/StyledComponents/StyledDivWrapperRadio'))
 //CONSTANTS
 import { novoContratoRadioOptions } from '../../../../../../constants'
+//TYPES
+import { NumberFormatProps } from '../../../../../../components/NumberFormatCustom'
 //CUSTOM STYLES
 import { useStyles } from '../../../../styles'
 
@@ -121,6 +123,11 @@ function CustomRadioButtosGroup() {
         autoComplete='off'
         onChange={e => { handleOnchangeInput(e.target.value) }}
         inputComponent={NumberFormatCustom as any}
+        inputProps={{
+          thousandSeparator: '.',
+          decimalScale: 2,
+          fixedDecimalScale: true,
+        } as NumberFormatProps}
       />
     </span>
   </>

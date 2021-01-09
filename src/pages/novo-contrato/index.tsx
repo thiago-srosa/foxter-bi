@@ -35,8 +35,12 @@ const NovoContrato = (): JSX.Element => {
     !userIsLoggedIn ? router.push("/login") : null;
   }, [userIsLoggedIn])
 
-  const refDadosGerais = useRef()
-  const refDadosInternos = useRef()
+  //
+  const refSidebarDadosGerais = useRef()
+  const refIsVisibleDadosGerais = useRef()
+  //
+  const refSidebarDadosInternos = useRef()
+  const refIsVisibleDadosInternos = useRef()
 
   const router = useRouter()
   const classes = useStyles()
@@ -60,16 +64,23 @@ const NovoContrato = (): JSX.Element => {
 
         <form className={classes.form} noValidate autoComplete='off'>
 
-          <DadosGerais refDadosGerais={refDadosGerais} />
-          <CustomDivider  />
-          <DadosInternos refDadosInternos={refDadosInternos} />
+          <DadosGerais
+            refIsVisibleDadosGerais={refIsVisibleDadosGerais}
+            refSidebarDadosGerais={refSidebarDadosGerais}
+          />
+          <CustomDivider />
+
+          <DadosInternos
+            refIsVisibleDadosInternos={refIsVisibleDadosInternos}
+            refSidebarDadosInternos={refSidebarDadosInternos}
+          />
 
         </form>
 
         <SectionDiv style={{ marginTop: 10 }}>
           <NovoVendedorPF />
           <TabelaVendedores />
-        </SectionDiv>   
+        </SectionDiv>
 
         <Button
           variant="contained"
@@ -84,7 +95,12 @@ const NovoContrato = (): JSX.Element => {
       </StyledContentSidebar>
 
       <Sidebar
-        refDadosGerais={refDadosGerais}
+        //DADOS GERAIS
+        refSidebarDadosGerais={refSidebarDadosGerais}
+        refIsVisibleDadosGerais={refIsVisibleDadosGerais}
+        //DADOS INTERNOS
+        refSidebarDadosInternos={refSidebarDadosInternos}
+        refIsVisibleDadosInternos={refIsVisibleDadosInternos}
       />
 
     </>

@@ -25,7 +25,7 @@ export const origemCaptacao: object = {
   value15: 'Site novidade imobiliária',
   value16: 'Site perdigueiro',
   value17: 'SMS',
-  value18: 'Visita loja', 
+  value18: 'Visita loja',
   value19: 'Contato pessoal corretor',
   value20: 'Anúncio patrocinado',
   value21: 'Portal',
@@ -43,4 +43,9 @@ export const styleRadioButtonUncheckedIcon: object = {
 export const styleCheckCircleIcon: object = {
   paddingRight: '5px',
   color: green[500],
+}
+
+export const isVisibleSidebar: object = {
+  color: 'darkblue',
+  fontWeight: '700',
 }
