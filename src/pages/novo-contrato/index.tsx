@@ -25,6 +25,7 @@ const ProgressBar = loadable(() => import('./components/ProgressBar/'))
 const StyledContentSidebar = loadable(() => import('../../components/StyledComponents/StyledContentSidebar'))
 const DadosGerais = loadable(() => import('./components/DadosGerais'))
 const DadosInternos = loadable(() => import('./components/DadosInternos'))
+const DadosImovel = loadable(() => import('./components/DadosImovel'))
 const Sidebar = loadable(() => import('./components/Sidebar'))
 
 const NovoContrato = (): JSX.Element => {
@@ -35,12 +36,15 @@ const NovoContrato = (): JSX.Element => {
     !userIsLoggedIn ? router.push("/login") : null;
   }, [userIsLoggedIn])
 
-  //
+  //DADOS GERAIS
   const refSidebarDadosGerais = useRef()
   const refIsVisibleDadosGerais = useRef()
-  //
+  //DADOS INTERNOS
   const refSidebarDadosInternos = useRef()
   const refIsVisibleDadosInternos = useRef()
+  //DADOS IMOVEL
+  const refSidebarDadosImovel = useRef()
+  const refIsVisibleDadosImovel = useRef()
 
   const router = useRouter()
   const classes = useStyles()
@@ -75,6 +79,11 @@ const NovoContrato = (): JSX.Element => {
             refSidebarDadosInternos={refSidebarDadosInternos}
           />
 
+          <DadosImovel
+            refIsVisibleDadosImovel={refIsVisibleDadosImovel}
+            refSidebarDadosImovel={refSidebarDadosImovel}
+          />
+
         </form>
 
         <SectionDiv style={{ marginTop: 10 }}>
@@ -101,6 +110,9 @@ const NovoContrato = (): JSX.Element => {
         //DADOS INTERNOS
         refSidebarDadosInternos={refSidebarDadosInternos}
         refIsVisibleDadosInternos={refIsVisibleDadosInternos}
+        //DADOS IMOVEL
+        refSidebarDadosImovel={refSidebarDadosImovel}
+        refIsVisibleDadosImovel={refIsVisibleDadosImovel}
       />
 
     </>

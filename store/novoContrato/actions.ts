@@ -10,8 +10,12 @@ import {
   SET_NOVO_CONTRATO_EXCLUSIVIDADE,
   SET_NOVO_CONTRATO_NUMERO_AGS_FOCO,
   SET_NOVO_CONTRATO_ORIGEM_CAPTACAO,
+  SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO,
+  SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
+  //DADOS IMÓVEL
+  SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
   //RESET
   RESET_NOVO_CONTRATO,
   NovoContratoActionTypes
@@ -20,6 +24,27 @@ import {
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
 // TypeScript infers that this function is returning SendMessageAction
+
+export function setNovoContratoImovelLogradouro(logradouro: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
+    payload: logradouro
+  }
+}
+
+export function setNovoContratoOrigemCaptacaoPortal(origemCaptacaoPortal: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
+    payload: origemCaptacaoPortal
+  }
+}
+
+export function setNovoContratoOutraOrigemCaptacao(outraOrigemCaptacao: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO,
+    payload: outraOrigemCaptacao
+  }
+}
 
 export function setNovoContratoOrigemCaptacao(origemCaptacao: string): NovoContratoActionTypes {
   return {

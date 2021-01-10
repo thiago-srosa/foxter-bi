@@ -16,7 +16,7 @@ import {
 //STYLES
 import { useStyles } from '../../styles'
 //TYPES
-import { INovoContratoSidebarDadosInternos } from '../../../../types'
+import { INovoContratoSidebarDadosImovel } from '../../../../types'
 import { NumberFormatProps } from '../../../../components/NumberFormatCustom'
 //CONSTANTS
 import { origemCaptacao } from '../../../../constants'
@@ -35,7 +35,7 @@ const NumberFormatCustom = loadable(() => import('../../../../components/NumberF
 const Select = loadable(() => import('@material-ui/core/Select'))
 const MenuItem = loadable(() => import('@material-ui/core/MenuItem'))
 
-const DadosInternos = ({ refIsVisibleDadosInternos, refSidebarDadosInternos }: INovoContratoSidebarDadosInternos) => {
+const DadosImovel = ({ refIsVisibleDadosImovel, refSidebarDadosImovel }: INovoContratoSidebarDadosImovel) => {
 
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -54,8 +54,8 @@ const DadosInternos = ({ refIsVisibleDadosInternos, refSidebarDadosInternos }: I
   }
 
   return (
-    <StyledDivWrapper ref={refIsVisibleDadosInternos}>
-      <H2 ref={refSidebarDadosInternos}>Dados internos</H2>
+    <StyledDivWrapper ref={refIsVisibleDadosImovel}>
+      <H2 ref={refSidebarDadosImovel}>Dados internos</H2>
 
       <H3>Imóvel é exclusividade Foxter?</H3>
       <FormControl >
@@ -142,4 +142,4 @@ const DadosInternos = ({ refIsVisibleDadosInternos, refSidebarDadosInternos }: I
   )
 }
 
-export default DadosInternos;
+export default DadosImovel;

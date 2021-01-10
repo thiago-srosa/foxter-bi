@@ -64,7 +64,7 @@ function CustomRadioButtosGroup() {
       case novoContratoRadioOptions.value3:
         return <InputAdornment position="start">%</InputAdornment>
       default:
-        return <InputAdornment position="start"></InputAdornment>
+        return null
     }
   }
   let handleValueInput: number
@@ -220,7 +220,12 @@ function CustomRadioButtosGroup() {
       <StyledDivWrapperRadio>
         <H3>Seleciona a melhor opção que completa o valor total:</H3>
         <FormControl >
-          <RadioGroup name="NovoContratoSelection" value={novoContratoRadioButtonCalculaValorNegociacao} defaultValue={novoContratoRadioButtonCalculaValorNegociacao} onChange={handleChangeSelection}>
+          <RadioGroup
+            name="NovoContratoSelection"
+            value={novoContratoRadioButtonCalculaValorNegociacao ? novoContratoRadioButtonCalculaValorNegociacao : null}
+            defaultValue={novoContratoRadioButtonCalculaValorNegociacao ? novoContratoRadioButtonCalculaValorNegociacao : null}
+            onChange={handleChangeSelection}
+          >
             <FormControlLabel value={novoContratoRadioOptions.value1} control={<Radio color='primary' />} label='Valor líquido' />
             <FormControlLabel value={novoContratoRadioOptions.value2} control={<Radio color='primary' />} label='Valor corretagem' />
             <FormControlLabel value={novoContratoRadioOptions.value3} control={<Radio color='primary' />} label='Percentual corretagem' />

@@ -8,6 +8,7 @@ import loadable from '@loadable/component'
 const StyledSidebar = loadable(() => import('../../../../components/StyledComponents/StyledSidebar'))
 const SidebarDadosGerais = loadable(() => import('./components/SidebarDadosGerais'))
 const SidebarDadosInternos = loadable(() => import('./components/SidebarDadosInternos'))
+const SidebarDadosImovel = loadable(() => import('./components/SidebarDadosImovel'))
 
 const Sidebar = ({
   //DADOS GERAIS
@@ -16,6 +17,9 @@ const Sidebar = ({
   //DADOS INTERNOS
   refIsVisibleDadosInternos,
   refSidebarDadosInternos,
+  //DADOS IMOVEL
+  refIsVisibleDadosImovel,
+  refSidebarDadosImovel,
 }: INovoContratoSidebar) => {
 
   return (
@@ -28,6 +32,10 @@ const Sidebar = ({
         refIsVisibleDadosInternos={refIsVisibleDadosInternos}
         refSidebarDadosInternos={refSidebarDadosInternos}
       />
+      <SidebarDadosImovel
+        refIsVisibleDadosImovel={refIsVisibleDadosImovel}
+        refSidebarDadosImovel={refSidebarDadosImovel}
+      />
       <p>SECTION</p>
       <p>SECTION</p>
       <p>SECTION</p>
@@ -35,7 +43,5 @@ const Sidebar = ({
     </StyledSidebar>
   )
 }
-
-
 
 export default Sidebar

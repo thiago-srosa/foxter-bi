@@ -9,6 +9,8 @@ export interface INovoContratoSidebar {
   refIsVisibleDadosGerais: any,
   refSidebarDadosInternos: any,
   refIsVisibleDadosInternos: any,
+  refSidebarDadosImovel: any,
+  refIsVisibleDadosImovel: any,
 }
 
 export interface INovoContratoSidebarDadosGerais {
@@ -19,4 +21,9 @@ export interface INovoContratoSidebarDadosGerais {
 export interface INovoContratoSidebarDadosInternos {
   refSidebarDadosInternos: any,
   refIsVisibleDadosInternos: any,
+}
+
+export interface INovoContratoSidebarDadosImovel {
+  refSidebarDadosImovel: any,
+  refIsVisibleDadosImovel: any,
 }

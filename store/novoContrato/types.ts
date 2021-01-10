@@ -11,6 +11,12 @@ export const SET_NOVO_CONTRATO_EXCLUSIVIDADE = 'SET_NOVO_CONTRATO_EXCLUSIVIDADE'
 export const SET_NOVO_CONTRATO_NUMERO_AGS_FOCO = 'SET_NOVO_CONTRATO_NUMERO_AGS_FOCO'
 export const SET_NOVO_CONTRATO_CODIGO_OPORTUNIDADE = 'SET_NOVO_CONTRATO_CODIGO_OPORTUNIDADE'
 export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_ORIGEM_CAPTACAO'
+export const SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO'
+export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL = 'SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL'
+//DADOS IMÓVEL
+export const SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO = 'SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO'
+export const SET_NOVO_CONTRATO_IMOVEL_BAIRRO = 'SET_NOVO_CONTRATO_IMOVEL_BAIRRO'
+export const SET_NOVO_CONTRATO_IMOVEL_CIDADE = 'SET_NOVO_CONTRATO_IMOVEL_CIDADE'
 //RESET
 export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 
@@ -29,9 +35,40 @@ export interface NovoContratoState {
   novoContratoNumeroAgsFoco: number,
   novoContratoCodigoOportunidade: number,
   novoContratoOrigemCaptacao: string,
+  novoContratoOutraOrigemCaptacao: string,
+  novoContratoOrigemCaptacaoPortal: string,
+  //DADOS IMÓVEL
+  novoContratoImovelLogradouro: string,
+  novoContratoImovelBairro: string,
+  novoContratoImovelCidade: string,
   //VENDEDORES
   novoContratoVendedores: NovoVendedorPFState[],
 };
+
+export interface SetNovoContratoImovelBairro {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_BAIRRO
+  payload: string
+}
+
+export interface SetNovoContratoImovelCidade {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_CIDADE
+  payload: string
+}
+
+export interface SetNovoContratoImovelLogradouro {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO
+  payload: string
+}
+
+export interface SetNovoContratoOrigemCaptacaoPortal {
+  type: typeof SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL
+  payload: string
+}
+
+export interface SetNovoContratoOutraOrigemCaptacao {
+  type: typeof SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO
+  payload: string
+}
 
 export interface SetNovoContratoNumeroAgsFoco {
   type: typeof SET_NOVO_CONTRATO_NUMERO_AGS_FOCO
@@ -88,6 +125,11 @@ export interface ResetNovoContratoAction {
 }
 
 export type NovoContratoActionTypes =
+  SetNovoContratoImovelBairro |
+  SetNovoContratoImovelCidade |
+  SetNovoContratoImovelLogradouro |
+  SetNovoContratoOrigemCaptacaoPortal |
+  SetNovoContratoOutraOrigemCaptacao |
   SetNovoContratoValorTotalVendaAction |
   SetNovoContratoValorLiquidoVendaAction |
   SetNovoContratoValorCorretagemVendaAction |

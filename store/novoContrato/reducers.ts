@@ -12,6 +12,12 @@ import {
   SET_NOVO_CONTRATO_EXCLUSIVIDADE,
   SET_NOVO_CONTRATO_NUMERO_AGS_FOCO,
   SET_NOVO_CONTRATO_ORIGEM_CAPTACAO,
+  SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO,
+  SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
+  //DADOS IMÓVEL
+  SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
+  SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
+  SET_NOVO_CONTRATO_IMOVEL_CIDADE,
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
   //RESET
@@ -32,6 +38,12 @@ const initialState: NovoContratoState = {
   novoContratoExclusividade: null,
   novoContratoCodigoOportunidade: null,
   novoContratoOrigemCaptacao: null,
+  novoContratoOutraOrigemCaptacao: null,
+  novoContratoOrigemCaptacaoPortal: null,
+  //DADOS IMÓVEL
+  novoContratoImovelLogradouro: null,
+  novoContratoImovelBairro: null,
+  novoContratoImovelCidade: null,
 };
 
 function NovoContratoReducer(
@@ -39,7 +51,7 @@ function NovoContratoReducer(
   action: NovoContratoActionTypes
 ): NovoContratoState {
   switch (action.type) {
-    
+
     //DADOS GERAIS
     case SET_NOVO_CONTRATO_RADIO_BUTTON_CALCULA_VALOR_NEGOCIACAO:
       return { ...state, novoContratoRadioButtonCalculaValorNegociacao: action.payload }
@@ -61,6 +73,18 @@ function NovoContratoReducer(
       return { ...state, novoContratoNumeroAgsFoco: action.payload }
     case SET_NOVO_CONTRATO_ORIGEM_CAPTACAO:
       return { ...state, novoContratoOrigemCaptacao: action.payload }
+    case SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO:
+      return { ...state, novoContratoOutraOrigemCaptacao: action.payload }
+    case SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL:
+      return { ...state, novoContratoOrigemCaptacaoPortal: action.payload }
+
+    //DADOS IMÓVEL
+    case SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO:
+      return { ...state, novoContratoImovelLogradouro: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_BAIRRO:
+      return { ...state, novoContratoImovelBairro: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_CIDADE:
+      return { ...state, novoContratoImovelCidade: action.payload }
 
     case ADD_NOVO_CONTRATO_VENDEDORES:
       return { ...state, novoContratoVendedores: [...state.novoContratoVendedores, action.payload] }

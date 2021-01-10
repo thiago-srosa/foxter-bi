@@ -29,6 +29,7 @@ export const origemCaptacao: object = {
   value19: 'Contato pessoal corretor',
   value20: 'Anúncio patrocinado',
   value21: 'Portal',
+  value22: 'Outra',
 }
 
 export const scrollIntoView: object = {
