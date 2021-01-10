@@ -9,6 +9,7 @@ const StyledSidebar = loadable(() => import('../../../../components/StyledCompon
 const SidebarDadosGerais = loadable(() => import('./components/SidebarDadosGerais'))
 const SidebarDadosInternos = loadable(() => import('./components/SidebarDadosInternos'))
 const SidebarDadosImovel = loadable(() => import('./components/SidebarDadosImovel'))
+const SidebarVagasGaragem = loadable(() => import('./components/SidebarVagasGaragem'))
 
 const Sidebar = ({
   //DADOS GERAIS
@@ -20,6 +21,9 @@ const Sidebar = ({
   //DADOS IMOVEL
   refIsVisibleDadosImovel,
   refSidebarDadosImovel,
+  //DADOS IMOVEL
+  refIsVisibleVagasGaragem,
+  refSidebarVagasGaragem,
 }: INovoContratoSidebar) => {
 
   return (
@@ -36,10 +40,10 @@ const Sidebar = ({
         refIsVisibleDadosImovel={refIsVisibleDadosImovel}
         refSidebarDadosImovel={refSidebarDadosImovel}
       />
-      <p>SECTION</p>
-      <p>SECTION</p>
-      <p>SECTION</p>
-      <p>SECTION</p>
+      <SidebarVagasGaragem
+        refIsVisibleVagasGaragem={refIsVisibleVagasGaragem}
+        refSidebarVagasGaragem={refSidebarVagasGaragem}
+      />
     </StyledSidebar>
   )
 }

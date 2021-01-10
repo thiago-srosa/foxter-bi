@@ -50,3 +50,23 @@ export const isVisibleSidebar: object = {
   color: 'darkblue',
   fontWeight: '700',
 }
+
+export const registrosImoveis: object = {
+  'Alvorada': {
+    1: 'Registro de Imóveis de Alvorada',
+  },
+  'Porto Alegre': {
+    1: '1º Zona',
+    2: '2º Zona',
+    3: '3º Zona',
+    4: '4º Zona',
+    5: '5º Zona',
+    6: '6º Zona',
+  },
+  'Canoas': {
+    1: 'Registro de Imóveis de Canoas',
+  },
+  'Capão da Canoa': {
+    1: 'Registro de Imóveis de Capão da Canoa'
+  }
+}

@@ -11,6 +11,8 @@ export interface INovoContratoSidebar {
   refIsVisibleDadosInternos: any,
   refSidebarDadosImovel: any,
   refIsVisibleDadosImovel: any,
+  refSidebarVagasGaragem: any,
+  refIsVisibleVagasGaragem: any,
 }
 
 export interface INovoContratoSidebarDadosGerais {
@@ -26,4 +28,9 @@ export interface INovoContratoSidebarDadosInternos {
 export interface INovoContratoSidebarDadosImovel {
   refSidebarDadosImovel: any,
   refIsVisibleDadosImovel: any,
+}
+
+export interface INovoContratoSidebarVagasGaragem {
+  refSidebarVagasGaragem: any,
+  refIsVisibleVagasGaragem: any,
 }

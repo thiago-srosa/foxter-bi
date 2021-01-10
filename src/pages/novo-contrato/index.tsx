@@ -26,6 +26,7 @@ const StyledContentSidebar = loadable(() => import('../../components/StyledCompo
 const DadosGerais = loadable(() => import('./components/DadosGerais'))
 const DadosInternos = loadable(() => import('./components/DadosInternos'))
 const DadosImovel = loadable(() => import('./components/DadosImovel'))
+const VagasGaragem = loadable(() => import('./components/VagasGaragem'))
 const Sidebar = loadable(() => import('./components/Sidebar'))
 
 const NovoContrato = (): JSX.Element => {
@@ -45,6 +46,9 @@ const NovoContrato = (): JSX.Element => {
   //DADOS IMOVEL
   const refSidebarDadosImovel = useRef()
   const refIsVisibleDadosImovel = useRef()
+  //VAGAS GARAGEM
+  const refSidebarVagasGaragem = useRef()
+  const refIsVisibleVagasGaragem = useRef()
 
   const router = useRouter()
   const classes = useStyles()
@@ -81,10 +85,17 @@ const NovoContrato = (): JSX.Element => {
           />
 
           <CustomDivider />
-          
+
           <DadosImovel
             refIsVisibleDadosImovel={refIsVisibleDadosImovel}
             refSidebarDadosImovel={refSidebarDadosImovel}
+          />
+
+          <CustomDivider />
+
+          <VagasGaragem
+            refIsVisibleVagasGaragem={refIsVisibleVagasGaragem}
+            refSidebarVagasGaragem={refSidebarVagasGaragem}
           />
 
         </form>
@@ -116,6 +127,9 @@ const NovoContrato = (): JSX.Element => {
         //DADOS IMOVEL
         refSidebarDadosImovel={refSidebarDadosImovel}
         refIsVisibleDadosImovel={refIsVisibleDadosImovel}
+        //DADOS IMOVEL
+        refSidebarVagasGaragem={refSidebarVagasGaragem}
+        refIsVisibleVagasGaragem={refIsVisibleVagasGaragem}
       />
 
     </>
