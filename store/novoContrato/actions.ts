@@ -15,7 +15,14 @@ import {
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
   //DADOS IMÓVEL
+  SET_NOVO_CONTRATO_IMOVEL_CIDADE,
+  SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
   SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
+  SET_NOVO_CONTRATO_IMOVEL_NUMERO,
+  SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO,
+  SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,
+  SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO,
+  SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
   //RESET
   RESET_NOVO_CONTRATO,
   NovoContratoActionTypes
@@ -23,7 +30,55 @@ import {
 
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
-// TypeScript infers that this function is returning SendMessageAction
+// TypeScript infers that this function is returning 
+export function setNovoContratoImovelInscricaoIptu(inscricaoIptu: number): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
+    payload: inscricaoIptu
+  }
+}
+
+export function setNovoContratoImovelAdmCondominio(admCondominio: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO,
+    payload: admCondominio
+  }
+}
+
+export function setNovoContratoImovelEmCondominio(emCondominio: boolean): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,
+    payload: emCondominio
+  }
+}
+
+export function setNovoContratoImovelCidade(cidade: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_CIDADE,
+    payload: cidade
+  }
+}
+
+export function setNovoContratoImovelBairro(bairro: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
+    payload: bairro
+  }
+}
+
+export function setNovoContratoImovelNumero(numero: number): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_NUMERO,
+    payload: numero
+  }
+}
+
+export function setNovoContratoImovelComplemento(complemento: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO,
+    payload: complemento
+  }
+}
 
 export function setNovoContratoImovelLogradouro(logradouro: string): NovoContratoActionTypes {
   return {

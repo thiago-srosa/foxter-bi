@@ -15,9 +15,14 @@ import {
   SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO,
   SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
   //DADOS IMÓVEL
-  SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
-  SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
   SET_NOVO_CONTRATO_IMOVEL_CIDADE,
+  SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
+  SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
+  SET_NOVO_CONTRATO_IMOVEL_NUMERO,
+  SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO,
+  SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,  
+  SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO,
+  SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
   //RESET
@@ -41,9 +46,14 @@ const initialState: NovoContratoState = {
   novoContratoOutraOrigemCaptacao: null,
   novoContratoOrigemCaptacaoPortal: null,
   //DADOS IMÓVEL
-  novoContratoImovelLogradouro: null,
-  novoContratoImovelBairro: null,
   novoContratoImovelCidade: null,
+  novoContratoImovelBairro: null,
+  novoContratoImovelLogradouro: null,
+  novoContratoImovelNumero: null,
+  novoContratoImovelComplemento: null,
+  novoContratoImovelEmCondominio: null,
+  novoContratoImovelAdmCondominio: null,
+  novoContratoImovelInscricaoIptu: null,
 };
 
 function NovoContratoReducer(
@@ -79,12 +89,22 @@ function NovoContratoReducer(
       return { ...state, novoContratoOrigemCaptacaoPortal: action.payload }
 
     //DADOS IMÓVEL
-    case SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO:
-      return { ...state, novoContratoImovelLogradouro: action.payload }
-    case SET_NOVO_CONTRATO_IMOVEL_BAIRRO:
-      return { ...state, novoContratoImovelBairro: action.payload }
     case SET_NOVO_CONTRATO_IMOVEL_CIDADE:
       return { ...state, novoContratoImovelCidade: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_BAIRRO:
+      return { ...state, novoContratoImovelBairro: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO:
+      return { ...state, novoContratoImovelLogradouro: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_NUMERO:
+      return { ...state, novoContratoImovelNumero: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO:
+      return { ...state, novoContratoImovelComplemento: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO:
+      return { ...state, novoContratoImovelEmCondominio: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO:
+      return { ...state, novoContratoImovelAdmCondominio: action.payload }
+    case SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU:
+      return { ...state, novoContratoImovelInscricaoIptu: action.payload }
 
     case ADD_NOVO_CONTRATO_VENDEDORES:
       return { ...state, novoContratoVendedores: [...state.novoContratoVendedores, action.payload] }

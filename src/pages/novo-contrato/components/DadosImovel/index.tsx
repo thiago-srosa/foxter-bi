@@ -6,12 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../../../store/reducers'
 //NOVO CONTRATO ACTIONS
 import {
-  setNovoContratoExlusividade,
-  setNovoContratoNumeroAgsFoco,
-  setNovoContratoOrigemCaptacao,
-  setNovoContratoCodigoOportunidade,
-  setNovoContratoOutraOrigemCaptacao,
-  setNovoContratoOrigemCaptacaoPortal,
+  setNovoContratoImovelCidade,
+  setNovoContratoImovelBairro,
+  setNovoContratoImovelLogradouro,
+  setNovoContratoImovelNumero,
+  setNovoContratoImovelComplemento,
+  setNovoContratoImovelEmCondominio,
+  setNovoContratoImovelAdmCondominio,
+  setNovoContratoImovelInscricaoIptu,
 } from '../../../../../store/novoContrato/actions'
 //STYLES
 import { useStyles } from '../../styles'
@@ -19,7 +21,7 @@ import { useStyles } from '../../styles'
 import { INovoContratoSidebarDadosImovel } from '../../../../types'
 import { NumberFormatProps } from '../../../../components/NumberFormatCustom'
 //CONSTANTS
-import { origemCaptacao } from '../../../../constants'
+import { } from '../../../../constants'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
@@ -41,101 +43,123 @@ const DadosImovel = ({ refIsVisibleDadosImovel, refSidebarDadosImovel }: INovoCo
   const dispatch = useDispatch()
 
   const {
-    novoContratoOrigemCaptacao,
-    novoContratoNumeroAgsFoco,
-    novoContratoExclusividade,
-    novoContratoCodigoOportunidade,
-    novoContratoOutraOrigemCaptacao,
-    novoContratoOrigemCaptacaoPortal,
+    novoContratoImovelCidade,
+    novoContratoImovelBairro,
+    novoContratoImovelLogradouro,
+    novoContratoImovelNumero,
+    novoContratoImovelComplemento,
+    novoContratoImovelEmCondominio,
+    novoContratoImovelAdmCondominio,
+    novoContratoImovelInscricaoIptu,
   } = useSelector((state: RootState) => state.novoContrato)
 
   const handleOnChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    (event.target as HTMLInputElement).value === true.toString() ? dispatch(setNovoContratoExlusividade(true)) : dispatch(setNovoContratoExlusividade(false))
+    (event.target as HTMLInputElement).value === true.toString() ? dispatch(setNovoContratoImovelEmCondominio(true)) : dispatch(setNovoContratoImovelEmCondominio(false))
   }
 
   return (
     <StyledDivWrapper ref={refIsVisibleDadosImovel}>
-      <H2 ref={refSidebarDadosImovel}>Dados internos</H2>
+      <H2 ref={refSidebarDadosImovel}>Dados do Imóvel</H2>
 
-      <H3>Imóvel é exclusividade Foxter?</H3>
+      <H3>Cidade onde o imóvel está localizado:</H3>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='imovci'
+        required
+        fullWidth={true}
+        value={novoContratoImovelCidade ? novoContratoImovelCidade : ''}
+        autoComplete='off'
+        onChange={(e) => { dispatch(setNovoContratoImovelCidade(e.target.value)) }}
+      />
+
+      <H3>Bairro onde o imóvel está localizado:</H3>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='imovelbair'
+        required
+        fullWidth={true}
+        value={novoContratoImovelBairro ? novoContratoImovelBairro : ''}
+        autoComplete='off'
+        onChange={(e) => { dispatch(setNovoContratoImovelBairro(e.target.value)) }}
+      />
+
+      <H3>Logradouro onde o imóvel está localizado:</H3>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='logradouro'
+        required
+        fullWidth={true}
+        value={novoContratoImovelLogradouro ? novoContratoImovelLogradouro : ''}
+        autoComplete='off'
+        onChange={(e) => { dispatch(setNovoContratoImovelLogradouro(e.target.value)) }}
+      />
+
+      <H3>Número do endereço do imóvel:</H3>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='logradouro'
+        required
+        value={novoContratoImovelNumero ? novoContratoImovelNumero : ''}
+        autoComplete='off'
+        onChange={(e) => { dispatch(setNovoContratoImovelNumero(+e.target.value)) }}
+        inputComponent={NumberFormatCustom as any}
+        inputProps={{
+          thousandSeparator: '.',
+          decimalScale: 0,
+          fixedDecimalScale: false,
+        } as NumberFormatProps}
+      />
+
+      <H3>Complemento do endereço do imóvel:</H3>
+      <OutlinedInput
+        className={classes.outlinedInputSmall}
+        id='compl'
+        required
+        fullWidth={true}
+        value={novoContratoImovelComplemento ? novoContratoImovelComplemento : ''}
+        autoComplete='off'
+        onChange={(e) => { dispatch(setNovoContratoImovelComplemento(e.target.value)) }}
+      />
+
+      <H3>Imóvel em condomínio?</H3>
       <FormControl >
-        <RadioGroup row name="NovoContratoExclusivadeSelection" value={novoContratoExclusividade} onChange={handleOnChangeRadio}>
+        <RadioGroup row name="NovoContratoImovelEmCondominio" value={novoContratoImovelEmCondominio} onChange={handleOnChangeRadio}>
           <FormControlLabel value={true} control={<Radio color='primary' />} label="Sim" />
           <FormControlLabel value={false} control={<Radio color='primary' />} label="Não" />
         </RadioGroup>
       </FormControl>
 
-      <H3>Número de agenciamentos foco do corretor vendedor:</H3>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='numeroAgs'
-        required
-        value={novoContratoNumeroAgsFoco ? novoContratoNumeroAgsFoco : ''}
-        autoComplete='off'
-        onChange={(e) => { dispatch(setNovoContratoNumeroAgsFoco(+e.target.value)) }}
-        inputComponent={NumberFormatCustom as any}
-        inputProps={{
-          thousandSeparator: '.',
-          decimalScale: 1,
-          fixedDecimalScale: false,
-        } as NumberFormatProps}
-      />
-
-      <H3>Código da oportunidade no Konecty:</H3>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='codigoKonecty'
-        required
-        value={novoContratoCodigoOportunidade ? novoContratoCodigoOportunidade : ''}
-        autoComplete='off'
-        onChange={(e) => { dispatch(setNovoContratoCodigoOportunidade(+e.target.value)) }}
-        inputComponent={NumberFormatCustom as any}
-        inputProps={{
-          thousandSeparator: '',
-          decimalScale: 0,
-          fixedDecimalScale: false,
-        } as NumberFormatProps}
-      />
-      <H3>Origem da captção do comprador:</H3>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <Select
-          id="sleectOptions"
-          value={novoContratoOrigemCaptacao ? novoContratoOrigemCaptacao : ''}
-          onChange={(e) => dispatch(setNovoContratoOrigemCaptacao(e.target.value.toString()))}
-        >
-
-          {Object.values(origemCaptacao).map((opcao, index) => <MenuItem key={index} value={opcao}>{opcao}</MenuItem>)}
-        </Select>
-      </FormControl>
-
-      {novoContratoOrigemCaptacao === 'Outra' ?
+      {novoContratoImovelEmCondominio ?
         <>
-          <H3>Qual o nome dessa outra origem de captação?</H3>
+          <H3>Qual é a administradora do condomínio?</H3>
           <OutlinedInput
             className={classes.outlinedInputSmall}
-            id='selecaoOutra'
+            id='admcondominio'
             required
-            value={novoContratoOutraOrigemCaptacao ? novoContratoOutraOrigemCaptacao : ''}
+            fullWidth={true}
+            value={novoContratoImovelAdmCondominio ? novoContratoImovelAdmCondominio : ''}
             autoComplete='off'
-            onChange={(e) => { dispatch(setNovoContratoOutraOrigemCaptacao(e.target.value)) }}
+            onChange={(e) => { dispatch(setNovoContratoImovelAdmCondominio(e.target.value)) }}
           />
         </>
-        : null
-      }
-
-      {novoContratoOrigemCaptacao === 'Portal' ?
+        :
         <>
-          <H3>Qual o nome dessa outra origem de captação?</H3>
+          <H3>Qual o nº de inscrição do IPTU?</H3>
           <OutlinedInput
             className={classes.outlinedInputSmall}
-            id='selecaoPortal'
+            id='iptu'
             required
-            value={novoContratoOrigemCaptacaoPortal ? novoContratoOrigemCaptacaoPortal : ''}
+            value={novoContratoImovelInscricaoIptu ? novoContratoImovelInscricaoIptu : ''}
             autoComplete='off'
-            onChange={(e) => { dispatch(setNovoContratoOrigemCaptacaoPortal(e.target.value)) }}
+            onChange={(e) => { dispatch(setNovoContratoImovelInscricaoIptu(+e.target.value)) }}
+            inputComponent={NumberFormatCustom as any}
+            inputProps={{
+              thousandSeparator: '.',
+              decimalScale: 0,
+              fixedDecimalScale: false,
+            } as NumberFormatProps}
           />
         </>
-        : null
       }
 
     </StyledDivWrapper>

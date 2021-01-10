@@ -72,6 +72,7 @@ const NovoContrato = (): JSX.Element => {
             refIsVisibleDadosGerais={refIsVisibleDadosGerais}
             refSidebarDadosGerais={refSidebarDadosGerais}
           />
+
           <CustomDivider />
 
           <DadosInternos
@@ -79,6 +80,8 @@ const NovoContrato = (): JSX.Element => {
             refSidebarDadosInternos={refSidebarDadosInternos}
           />
 
+          <CustomDivider />
+          
           <DadosImovel
             refIsVisibleDadosImovel={refIsVisibleDadosImovel}
             refSidebarDadosImovel={refSidebarDadosImovel}

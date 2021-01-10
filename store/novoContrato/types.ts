@@ -14,9 +14,14 @@ export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_ORIGEM_CAPTA
 export const SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO'
 export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL = 'SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL'
 //DADOS IMÓVEL
-export const SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO = 'SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO'
-export const SET_NOVO_CONTRATO_IMOVEL_BAIRRO = 'SET_NOVO_CONTRATO_IMOVEL_BAIRRO'
 export const SET_NOVO_CONTRATO_IMOVEL_CIDADE = 'SET_NOVO_CONTRATO_IMOVEL_CIDADE'
+export const SET_NOVO_CONTRATO_IMOVEL_BAIRRO = 'SET_NOVO_CONTRATO_IMOVEL_BAIRRO'
+export const SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO = 'SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO'
+export const SET_NOVO_CONTRATO_IMOVEL_NUMERO = 'SET_NOVO_CONTRATO_IMOVEL_NUMERO'
+export const SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO = 'SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO'
+export const SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO = 'SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO'
+export const SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO = 'SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO'
+export const SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU = 'SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU'
 //RESET
 export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 
@@ -38,12 +43,41 @@ export interface NovoContratoState {
   novoContratoOutraOrigemCaptacao: string,
   novoContratoOrigemCaptacaoPortal: string,
   //DADOS IMÓVEL
-  novoContratoImovelLogradouro: string,
-  novoContratoImovelBairro: string,
   novoContratoImovelCidade: string,
+  novoContratoImovelBairro: string,
+  novoContratoImovelLogradouro: string,
+  novoContratoImovelNumero: number,
+  novoContratoImovelComplemento: string,
+  novoContratoImovelEmCondominio: boolean,
+  novoContratoImovelAdmCondominio: string,
+  novoContratoImovelInscricaoIptu: number,
   //VENDEDORES
   novoContratoVendedores: NovoVendedorPFState[],
 };
+export interface SetNovoContratoImovelAdmCondominio {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO
+  payload: string
+}
+
+export interface SetNovoContratoImovelInscricaoIPTU {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU
+  payload: number
+}
+
+export interface SetNovoContratoImovelEmCondominio {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO
+  payload: boolean
+}
+
+export interface SetNovoContratoImovelNumero {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_NUMERO
+  payload: number
+}
+
+export interface SetNovoContratoImovelComplemento {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO
+  payload: string
+}
 
 export interface SetNovoContratoImovelBairro {
   type: typeof SET_NOVO_CONTRATO_IMOVEL_BAIRRO
@@ -125,6 +159,11 @@ export interface ResetNovoContratoAction {
 }
 
 export type NovoContratoActionTypes =
+  SetNovoContratoImovelAdmCondominio |
+  SetNovoContratoImovelInscricaoIPTU |
+  SetNovoContratoImovelEmCondominio |
+  SetNovoContratoImovelNumero |
+  SetNovoContratoImovelComplemento |
   SetNovoContratoImovelBairro |
   SetNovoContratoImovelCidade |
   SetNovoContratoImovelLogradouro |
