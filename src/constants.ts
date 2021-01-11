@@ -32,6 +32,15 @@ export const origemCaptacao: object = {
   value22: 'Outra',
 }
 
+
+export const tipoImovel: object = {
+  value1: 'Apartamento',
+  value2: 'Casa',
+  value3: 'JK',
+  value4: 'Sala comercial',
+  value5: 'Loja',  
+}
+
 export const scrollIntoView: object = {
   behavior: "smooth",
   block: "nearest",

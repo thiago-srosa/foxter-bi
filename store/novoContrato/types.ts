@@ -14,6 +14,7 @@ export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_ORIGEM_CAPTA
 export const SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO = 'SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO'
 export const SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL = 'SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL'
 //DADOS IMÓVEL
+export const SET_NOVO_CONTRATO_IMOVEL_TIPO = 'SET_NOVO_CONTRATO_IMOVEL_TIPO'
 export const SET_NOVO_CONTRATO_IMOVEL_CIDADE = 'SET_NOVO_CONTRATO_IMOVEL_CIDADE'
 export const SET_NOVO_CONTRATO_IMOVEL_BAIRRO = 'SET_NOVO_CONTRATO_IMOVEL_BAIRRO'
 export const SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO = 'SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO'
@@ -22,6 +23,10 @@ export const SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO = 'SET_NOVO_CONTRATO_IMOVEL_CO
 export const SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO = 'SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO'
 export const SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO = 'SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO'
 export const SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU = 'SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU'
+//VAGA GARAGEM
+export const SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO = 'SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO'
+export const SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS = 'SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS'
+export const SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS = 'SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS'
 //RESET
 export const RESET_NOVO_CONTRATO = "RESET_NOVO_CONTRATO";
 
@@ -42,7 +47,8 @@ export interface NovoContratoState {
   novoContratoOrigemCaptacao: string,
   novoContratoOutraOrigemCaptacao: string,
   novoContratoOrigemCaptacaoPortal: string,
-  //DADOS IMÓVEL
+  //DADOS IMÓVEL  
+  novoContratoImovelTipo: string,
   novoContratoImovelCidade: string,
   novoContratoImovelBairro: string,
   novoContratoImovelLogradouro: string,
@@ -51,9 +57,34 @@ export interface NovoContratoState {
   novoContratoImovelEmCondominio: boolean,
   novoContratoImovelAdmCondominio: string,
   novoContratoImovelInscricaoIptu: number,
+  //VAGA GARAGEM
+  novoContratoVagaGaragemFazParteNegociacao: boolean,
+  novoContratoVagaGaragemEscrituradas: number,
+  novoContratoVagaGaragemVinculadas: number,
   //VENDEDORES
   novoContratoVendedores: NovoVendedorPFState[],
 };
+
+export interface SetNovoContratoVagaGaragemVinculadas {
+  type: typeof SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS
+  payload: number
+}
+
+export interface SetNovoContratoVagaGaragemEscrituradas {
+  type: typeof SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS
+  payload: number
+}
+
+export interface SetNovoContratoVagaGaragemFazParteNegociacao {
+  type: typeof SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO
+  payload: boolean
+}
+
+export interface SetNovoContratoImovelTipo {
+  type: typeof SET_NOVO_CONTRATO_IMOVEL_TIPO
+  payload: string
+}
+
 export interface SetNovoContratoImovelAdmCondominio {
   type: typeof SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO
   payload: string
@@ -159,6 +190,10 @@ export interface ResetNovoContratoAction {
 }
 
 export type NovoContratoActionTypes =
+  SetNovoContratoVagaGaragemVinculadas |
+  SetNovoContratoVagaGaragemEscrituradas |
+  SetNovoContratoVagaGaragemFazParteNegociacao |
+  SetNovoContratoImovelTipo |
   SetNovoContratoImovelAdmCondominio |
   SetNovoContratoImovelInscricaoIPTU |
   SetNovoContratoImovelEmCondominio |

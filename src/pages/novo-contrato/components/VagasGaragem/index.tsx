@@ -6,14 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../../../store/reducers'
 //NOVO CONTRATO ACTIONS
 import {
-  setNovoContratoImovelCidade,
-  setNovoContratoImovelBairro,
-  setNovoContratoImovelLogradouro,
-  setNovoContratoImovelNumero,
-  setNovoContratoImovelComplemento,
-  setNovoContratoImovelEmCondominio,
-  setNovoContratoImovelAdmCondominio,
-  setNovoContratoImovelInscricaoIptu,
+  setNovoContratoVagaGaragemFazParteNegociacao,
+  setNovoContratoVagaGaragemEscrituradas,
+  setNovoContratoVagaGaragemVinculadas,
 } from '../../../../../store/novoContrato/actions'
 //STYLES
 import { useStyles } from '../../styles'
@@ -43,34 +38,64 @@ const VagasGaragem = ({ refIsVisibleVagasGaragem, refSidebarVagasGaragem }: INov
   const dispatch = useDispatch()
 
   const {
-    novoContratoImovelCidade,
-    novoContratoImovelBairro,
-    novoContratoImovelLogradouro,
-    novoContratoImovelNumero,
-    novoContratoImovelComplemento,
-    novoContratoImovelEmCondominio,
-    novoContratoImovelAdmCondominio,
-    novoContratoImovelInscricaoIptu,
+    novoContratoVagaGaragemFazParteNegociacao,
+    novoContratoVagaGaragemEscrituradas,
+    novoContratoVagaGaragemVinculadas,
   } = useSelector((state: RootState) => state.novoContrato)
 
   const handleOnChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    (event.target as HTMLInputElement).value === true.toString() ? dispatch(setNovoContratoImovelEmCondominio(true)) : dispatch(setNovoContratoImovelEmCondominio(false))
+    (event.target as HTMLInputElement).value === true.toString() ? dispatch(setNovoContratoVagaGaragemFazParteNegociacao(true)) : dispatch(setNovoContratoVagaGaragemFazParteNegociacao(false))
   }
 
   return (
     <StyledDivWrapper ref={refIsVisibleVagasGaragem}>
       <H2 ref={refSidebarVagasGaragem}>Vagas de garagem</H2>
 
-      <H3>Cidade onde o imóvel está localizado:</H3>
-      <OutlinedInput
-        className={classes.outlinedInputSmall}
-        id='imovci'
-        required
-        fullWidth={true}
-        value={novoContratoImovelCidade ? novoContratoImovelCidade : ''}
-        autoComplete='off'
-        onChange={(e) => { dispatch(setNovoContratoImovelCidade(e.target.value)) }}
-      />
+      <H3>Vaga(s) de garagem faz(em) parte da negociação?</H3>
+      <FormControl >
+        <RadioGroup row value={novoContratoVagaGaragemFazParteNegociacao} onChange={handleOnChangeRadio}>
+          <FormControlLabel value={true} control={<Radio color='primary' />} label="Sim" />
+          <FormControlLabel value={false} control={<Radio color='primary' />} label="Não" />
+        </RadioGroup>
+      </FormControl>
+
+      {novoContratoVagaGaragemFazParteNegociacao ?
+        <>
+          <H3>Número de vagas garagem escrituradas:</H3>
+          <OutlinedInput
+            className={classes.outlinedInputSmall}
+            id='vagasEscrituradas'
+            required
+            value={novoContratoVagaGaragemEscrituradas ? novoContratoVagaGaragemEscrituradas : ''}
+            autoComplete='off'
+            onChange={(e) => { dispatch(setNovoContratoVagaGaragemEscrituradas(+e.target.value)) }}
+            inputComponent={NumberFormatCustom as any}
+            inputProps={{
+              thousandSeparator: '.',
+              decimalScale: 0,
+              fixedDecimalScale: false,
+            } as NumberFormatProps}
+          />
+
+          <H3>Número de vagas garagem vinculadas à matrícula do imóvel:</H3>
+          <OutlinedInput
+            className={classes.outlinedInputSmall}
+            id='vagasVinculadas'
+            required
+            value={novoContratoVagaGaragemVinculadas ? novoContratoVagaGaragemVinculadas : ''}
+            autoComplete='off'
+            onChange={(e) => { dispatch(setNovoContratoVagaGaragemVinculadas(+e.target.value)) }}
+            inputComponent={NumberFormatCustom as any}
+            inputProps={{
+              thousandSeparator: '.',
+              decimalScale: 0,
+              fixedDecimalScale: false,
+            } as NumberFormatProps}
+          />
+        </>
+        :
+        null
+      }
 
     </StyledDivWrapper>
   )

@@ -15,14 +15,19 @@ import {
   SET_NOVO_CONTRATO_OUTRA_ORIGEM_CAPTACAO,
   SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
   //DADOS IMÓVEL
+  SET_NOVO_CONTRATO_IMOVEL_TIPO,
   SET_NOVO_CONTRATO_IMOVEL_CIDADE,
   SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
   SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
   SET_NOVO_CONTRATO_IMOVEL_NUMERO,
   SET_NOVO_CONTRATO_IMOVEL_COMPLEMENTO,
-  SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,  
+  SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,
   SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO,
   SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
+  //VAGAS DE GARAGEM
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO,
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS,
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS,
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
   //RESET
@@ -45,7 +50,8 @@ const initialState: NovoContratoState = {
   novoContratoOrigemCaptacao: null,
   novoContratoOutraOrigemCaptacao: null,
   novoContratoOrigemCaptacaoPortal: null,
-  //DADOS IMÓVEL
+  //DADOS IMÓVEL  
+  novoContratoImovelTipo: null,
   novoContratoImovelCidade: null,
   novoContratoImovelBairro: null,
   novoContratoImovelLogradouro: null,
@@ -54,6 +60,10 @@ const initialState: NovoContratoState = {
   novoContratoImovelEmCondominio: null,
   novoContratoImovelAdmCondominio: null,
   novoContratoImovelInscricaoIptu: null,
+  //VAGAS DE GARAGEM
+  novoContratoVagaGaragemFazParteNegociacao: null,
+  novoContratoVagaGaragemEscrituradas: null,
+  novoContratoVagaGaragemVinculadas: null,
 };
 
 function NovoContratoReducer(
@@ -89,6 +99,8 @@ function NovoContratoReducer(
       return { ...state, novoContratoOrigemCaptacaoPortal: action.payload }
 
     //DADOS IMÓVEL
+    case SET_NOVO_CONTRATO_IMOVEL_TIPO:
+      return { ...state, novoContratoImovelTipo: action.payload }
     case SET_NOVO_CONTRATO_IMOVEL_CIDADE:
       return { ...state, novoContratoImovelCidade: action.payload }
     case SET_NOVO_CONTRATO_IMOVEL_BAIRRO:
@@ -105,6 +117,14 @@ function NovoContratoReducer(
       return { ...state, novoContratoImovelAdmCondominio: action.payload }
     case SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU:
       return { ...state, novoContratoImovelInscricaoIptu: action.payload }
+
+    //VAGA GARAGEM
+    case SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO:
+      return { ...state, novoContratoVagaGaragemFazParteNegociacao: action.payload }
+    case SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS:
+      return { ...state, novoContratoVagaGaragemEscrituradas: action.payload }
+    case SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS:
+      return { ...state, novoContratoVagaGaragemVinculadas: action.payload }    
 
     case ADD_NOVO_CONTRATO_VENDEDORES:
       return { ...state, novoContratoVendedores: [...state.novoContratoVendedores, action.payload] }

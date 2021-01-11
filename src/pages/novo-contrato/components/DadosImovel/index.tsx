@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../../../store/reducers'
 //NOVO CONTRATO ACTIONS
 import {
+  setNovoContratoImovelTipo,
   setNovoContratoImovelCidade,
   setNovoContratoImovelBairro,
   setNovoContratoImovelLogradouro,
@@ -21,7 +22,7 @@ import { useStyles } from '../../styles'
 import { INovoContratoSidebarDadosImovel } from '../../../../types'
 import { NumberFormatProps } from '../../../../components/NumberFormatCustom'
 //CONSTANTS
-import { } from '../../../../constants'
+import { tipoImovel } from '../../../../constants'
 //LOADABLE/COMPONENT
 import loadable from '@loadable/component'
 
@@ -43,6 +44,7 @@ const DadosImovel = ({ refIsVisibleDadosImovel, refSidebarDadosImovel }: INovoCo
   const dispatch = useDispatch()
 
   const {
+    novoContratoImovelTipo,
     novoContratoImovelCidade,
     novoContratoImovelBairro,
     novoContratoImovelLogradouro,
@@ -60,6 +62,18 @@ const DadosImovel = ({ refIsVisibleDadosImovel, refSidebarDadosImovel }: INovoCo
   return (
     <StyledDivWrapper ref={refIsVisibleDadosImovel}>
       <H2 ref={refSidebarDadosImovel}>Dados do Imóvel</H2>
+
+      <H3>Tipo do imóvel:</H3>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <Select
+          id="selectOptionsTipoImovel"
+          value={novoContratoImovelTipo ? novoContratoImovelTipo : ''}
+          onChange={(e) => dispatch(setNovoContratoImovelTipo(e.target.value.toString()))}
+        >
+
+          {Object.values(tipoImovel).map((opcao, index) => <MenuItem key={index} value={opcao}>{opcao}</MenuItem>)}
+        </Select>
+      </FormControl>
 
       <H3>Cidade onde o imóvel está localizado:</H3>
       <OutlinedInput

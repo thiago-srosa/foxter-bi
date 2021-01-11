@@ -14,7 +14,8 @@ import {
   SET_NOVO_CONTRATO_ORIGEM_CAPTACAO_PORTAL,
   //DADOS VENDEDORES
   ADD_NOVO_CONTRATO_VENDEDORES,
-  //DADOS IMÓVEL
+  //DADOS IMÓVEL  
+  SET_NOVO_CONTRATO_IMOVEL_TIPO,
   SET_NOVO_CONTRATO_IMOVEL_CIDADE,
   SET_NOVO_CONTRATO_IMOVEL_BAIRRO,
   SET_NOVO_CONTRATO_IMOVEL_LOGRADOURO,
@@ -23,6 +24,10 @@ import {
   SET_NOVO_CONTRATO_IMOVEL_EM_CONDOMINIO,
   SET_NOVO_CONTRATO_IMOVEL_ADM_CONDOMINIO,
   SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
+  //VAGA GARAGEM
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO,
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS,
+  SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS,
   //RESET
   RESET_NOVO_CONTRATO,
   NovoContratoActionTypes
@@ -31,6 +36,34 @@ import {
 import { NovoVendedorPFState } from './novoVendedorPF/types'
 
 // TypeScript infers that this function is returning 
+export function setNovoContratoVagaGaragemVinculadas(vagaGaragemVinculadas: number): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_VAGA_GARAGEM_VINCULADAS,
+    payload: vagaGaragemVinculadas
+  }
+}
+
+export function setNovoContratoVagaGaragemEscrituradas(vagaGaragemEscrituradas: number): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_VAGA_GARAGEM_ESCRITURADAS,
+    payload: vagaGaragemEscrituradas
+  }
+}
+
+export function setNovoContratoVagaGaragemFazParteNegociacao(vagaGaragemFazParteNegociacao: boolean): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_VAGA_GARAGEM_FAZ_PARTE_NEGOCIACAO,
+    payload: vagaGaragemFazParteNegociacao
+  }
+}
+
+export function setNovoContratoImovelTipo(tipo: string): NovoContratoActionTypes {
+  return {
+    type: SET_NOVO_CONTRATO_IMOVEL_TIPO,
+    payload: tipo
+  }
+}
+
 export function setNovoContratoImovelInscricaoIptu(inscricaoIptu: number): NovoContratoActionTypes {
   return {
     type: SET_NOVO_CONTRATO_IMOVEL_INSCRICAO_IPTU,
